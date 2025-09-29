@@ -1,0 +1,200 @@
+[gd_scene load_steps=13 format=3 uid="uid://cedxxe83p4h5b"]
+
+[ext_resource type="Texture2D" uid="uid://bytk1wmfhot8y" path="res://texture/desk.png" id="1_gtin0"]
+[ext_resource type="Script" path="res://script/ui/game.gd" id="1_vpg1n"]
+[ext_resource type="Texture2D" uid="uid://cl3eefab5v8xt" path="res://texture/bundle.png" id="2_yrwgx"]
+[ext_resource type="Script" path="res://script/ui/hand_container.gd" id="3_nxnkk"]
+[ext_resource type="Script" path="res://script/ui/inventory.gd" id="3_sdtsb"]
+[ext_resource type="Script" path="res://addons/richtext2/richer_text_label.gd" id="4_v7f8y"]
+[ext_resource type="FontFile" uid="uid://becar0jugmwip" path="res://font/Amarante-Regular.ttf" id="6_ygiry"]
+[ext_resource type="Texture2D" uid="uid://b87uidrpughil" path="res://texture/bubble.png" id="7_6natp"]
+[ext_resource type="Texture2D" uid="uid://cqxh27jcy6smk" path="res://texture/parchment.png" id="8_84xgp"]
+
+[sub_resource type="Gradient" id="Gradient_wf0cr"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xo2xn"]
+gradient = SubResource("Gradient_wf0cr")
+width = 16
+height = 16
+fill = 1
+fill_from = Vector2(0.53211, 0.513761)
+fill_to = Vector2(0.504587, 0.105505)
+
+[sub_resource type="LabelSettings" id="LabelSettings_14qgj"]
+font = ExtResource("6_ygiry")
+font_color = Color(0.59748, 0.00866435, 2.88785e-07, 1)
+
+[node name="Root" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vpg1n")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1155.0
+offset_bottom = 655.0
+texture = ExtResource("1_gtin0")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 788.0
+offset_top = 95.0
+offset_right = 1026.0
+offset_bottom = 333.0
+texture = SubResource("GradientTexture2D_xo2xn")
+
+[node name="Mission" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 539.0
+offset_bottom = 369.0
+texture = ExtResource("8_84xgp")
+expand_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Mission"]
+custom_minimum_size = Vector2(0, 19)
+layout_mode = 0
+offset_left = 38.0
+offset_top = 40.0
+offset_right = 491.0
+offset_bottom = 344.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+script = ExtResource("4_v7f8y")
+bbcode = "jaklsjdklasjdklaskldasl"
+effects = 2
+alignment = 0
+color = Color(0, 0, 0, 1)
+emoji_scale = 1.0
+font = "Amarante"
+font_auto_setup = true
+font_size = 16
+font_bold_weight = 1.5
+font_italics_slant = 0.25
+font_italics_weight = -0.25
+shadow_enabled = false
+shadow_offset = 0.08
+shadow_alpha = 0.25
+shadow_outline_size = 0.1
+outline_size = 0
+outline_mode = 1
+outline_adjust = 0.8
+outline_hue_adjust = 0.0125
+nicer_quotes_enabled = true
+nicer_quotes_format = "“%s”"
+markdown_enabled = true
+markdown_format_bold = "[b]%s[]"
+markdown_format_italics = "[i]%s[]"
+markdown_format_bold_italics = "[bi]%s[]"
+markdown_format_highlight = "[green;sin]%s[]"
+markdown_format_bold2 = "[b]*%s*[]"
+markdown_format_italics2 = "[i;gray]*%s*[]"
+markdown_format_bold_italics2 = "%s"
+context_enabled = true
+context_path = NodePath("/root/State")
+context_state = {}
+context_rich_objects = true
+context_rich_ints = true
+context_rich_array = true
+autostyle_numbers = true
+autostyle_numbers_tag = "[salmon]%s[]"
+autostyle_numbers_pad_decimals = true
+autostyle_numbers_decimals = 2
+autostyle_emojis = true
+effect_weight = 1.0
+image_path = "res://"
+image_resize_to_font_size = true
+image_scale = 1.0
+meta_auto_https = true
+meta_cursor = 2
+override_bbcodeEnabled = true
+override_clipContents = false
+override_fitContent = true
+
+[node name="Hand" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 694.0
+offset_top = 348.0
+offset_right = 694.0
+offset_bottom = 348.0
+
+[node name="HandContainer" type="Control" parent="Hand"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 399.0
+offset_bottom = 210.0
+script = ExtResource("3_nxnkk")
+
+[node name="Inventory" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 486.0
+offset_top = 377.0
+offset_right = 646.0
+offset_bottom = 537.0
+texture = ExtResource("2_yrwgx")
+script = ExtResource("3_sdtsb")
+
+[node name="ItemHere" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(894, 220)
+
+[node name="PotionHere" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(834, 127)
+rotation = 2.52898
+
+[node name="TransformButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 997.0
+offset_top = 196.0
+offset_right = 1138.0
+offset_bottom = 235.0
+theme_override_fonts/font = ExtResource("6_ygiry")
+theme_override_font_sizes/font_size = 24
+text = "Transform!!!"
+
+[node name="RichTextLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -37.0
+offset_top = -249.0
+offset_right = -36.0
+offset_bottom = -228.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "I am going to fuck you!!!"
+label_settings = SubResource("LabelSettings_14qgj")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Bubble" type="NinePatchRect" parent="RichTextLabel"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -22.0
+offset_top = -10.0
+offset_right = 13.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_6natp")
+patch_margin_left = 15
+patch_margin_top = 10
+patch_margin_right = 15
+patch_margin_bottom = 10
+
+[connection signal="child_order_changed" from="Hand/HandContainer" to="Hand/HandContainer" method="_on_child_order_changed"]
+[connection signal="gui_input" from="Inventory" to="Inventory" method="_on_gui_input"]
+[connection signal="pressed" from="TransformButton" to="." method="_on_transform_button_pressed"]
