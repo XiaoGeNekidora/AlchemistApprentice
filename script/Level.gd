@@ -2,7 +2,7 @@
 class_name Level
 
 var name="Test Level"
-var win=Item.new(Item.ItemType.UNIT,"ERROR")
+var win=Item.u("stone")
 
 var desc="This is a test level"
 

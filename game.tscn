@@ -1,0 +1,301 @@
+[gd_scene load_steps=18 format=3 uid="uid://cedxxe83p4h5b"]
+
+[ext_resource type="Script" path="res://script/ui/game.gd" id="1_4n42x"]
+[ext_resource type="Texture2D" uid="uid://bytk1wmfhot8y" path="res://texture/desk.png" id="2_ypp00"]
+[ext_resource type="Texture2D" uid="uid://cqxh27jcy6smk" path="res://texture/parchment.png" id="3_sbn22"]
+[ext_resource type="Script" path="res://addons/richtext2/richer_text_label.gd" id="4_yfbj6"]
+[ext_resource type="Script" path="res://script/ui/hand_container.gd" id="5_mr6rn"]
+[ext_resource type="Texture2D" uid="uid://cl3eefab5v8xt" path="res://texture/bundle.png" id="6_66ksx"]
+[ext_resource type="Script" path="res://script/ui/inventory.gd" id="7_7i4ak"]
+[ext_resource type="FontFile" uid="uid://becar0jugmwip" path="res://font/Amarante-Regular.ttf" id="8_f61ct"]
+[ext_resource type="Texture2D" uid="uid://b87uidrpughil" path="res://texture/bubble.png" id="9_32jkm"]
+[ext_resource type="Texture2D" uid="uid://c46vfjlaljuv1" path="res://texture/seal.png" id="10_4ryrp"]
+[ext_resource type="Texture2D" uid="uid://tv8tj71o408c" path="res://texture/back.png" id="11_s6xxb"]
+[ext_resource type="Texture2D" uid="uid://dwvhgk1md1phx" path="res://texture/retry.png" id="12_kqucy"]
+[ext_resource type="Texture2D" uid="uid://il5gr7mtfhat" path="res://texture/flower.png" id="13_cgngr"]
+
+[sub_resource type="Gradient" id="Gradient_wf0cr"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xo2xn"]
+gradient = SubResource("Gradient_wf0cr")
+width = 16
+height = 16
+fill = 1
+fill_from = Vector2(0.53211, 0.513761)
+fill_to = Vector2(0.504587, 0.105505)
+
+[sub_resource type="LabelSettings" id="LabelSettings_14qgj"]
+font = ExtResource("8_f61ct")
+font_color = Color(0.59748, 0.00866435, 2.88785e-07, 1)
+
+[sub_resource type="Gradient" id="Gradient_5tid0"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="Root" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4n42x")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1155.0
+offset_bottom = 655.0
+texture = ExtResource("2_ypp00")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 788.0
+offset_top = 95.0
+offset_right = 1026.0
+offset_bottom = 333.0
+texture = SubResource("GradientTexture2D_xo2xn")
+
+[node name="Mission" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 539.0
+offset_bottom = 369.0
+texture = ExtResource("3_sbn22")
+expand_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Mission"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 21)
+layout_mode = 0
+offset_left = 38.0
+offset_top = 40.0
+offset_right = 491.0
+offset_bottom = 344.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/bold_italics_font_size = 16
+theme_override_font_sizes/italics_font_size = 16
+theme_override_font_sizes/mono_font_size = 16
+theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/bold_font_size = 16
+bbcode_enabled = true
+fit_content = true
+script = ExtResource("4_yfbj6")
+bbcode = "jaklsjdklasjdklaskldasl"
+effects = 2
+alignment = 0
+color = Color(0, 0, 0, 1)
+emoji_scale = 1.0
+font = "Amarante"
+font_auto_setup = true
+font_size = 16
+font_bold_weight = 1.5
+font_italics_slant = 0.25
+font_italics_weight = -0.25
+shadow_enabled = false
+shadow_offset = 0.08
+shadow_alpha = 0.25
+shadow_outline_size = 0.1
+outline_size = 0
+outline_mode = 1
+outline_adjust = 0.8
+outline_hue_adjust = 0.0125
+nicer_quotes_enabled = true
+nicer_quotes_format = "“%s”"
+markdown_enabled = true
+markdown_format_bold = "[b]%s[]"
+markdown_format_italics = "[i]%s[]"
+markdown_format_bold_italics = "[bi]%s[]"
+markdown_format_highlight = "[green;sin]%s[]"
+markdown_format_bold2 = "[b]*%s*[]"
+markdown_format_italics2 = "[i;gray]*%s*[]"
+markdown_format_bold_italics2 = "%s"
+context_enabled = true
+context_path = NodePath("/root/State")
+context_state = {}
+context_rich_objects = true
+context_rich_ints = true
+context_rich_array = true
+autostyle_numbers = true
+autostyle_numbers_tag = "[salmon]%s[]"
+autostyle_numbers_pad_decimals = true
+autostyle_numbers_decimals = 2
+autostyle_emojis = true
+effect_weight = 1.0
+image_path = "res://"
+image_resize_to_font_size = true
+image_scale = 1.0
+meta_auto_https = true
+meta_cursor = 2
+override_bbcodeEnabled = true
+override_clipContents = false
+override_fitContent = true
+
+[node name="Hand" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 694.0
+offset_top = 348.0
+offset_right = 694.0
+offset_bottom = 348.0
+
+[node name="HandContainer" type="Control" parent="Hand"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 399.0
+offset_bottom = 210.0
+script = ExtResource("5_mr6rn")
+
+[node name="Inventory" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 539.0
+offset_top = 394.0
+offset_right = 699.0
+offset_bottom = 554.0
+texture = ExtResource("6_66ksx")
+script = ExtResource("7_7i4ak")
+
+[node name="ItemHere" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(916, 220)
+
+[node name="PotionHere" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(834, 127)
+rotation = 2.52898
+
+[node name="UpInv" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TransformButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 997.0
+offset_top = 196.0
+offset_right = 1138.0
+offset_bottom = 235.0
+theme_override_fonts/font = ExtResource("8_f61ct")
+theme_override_font_sizes/font_size = 24
+text = "Transform!!!"
+
+[node name="HintText" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -37.0
+offset_top = -249.0
+offset_right = -36.0
+offset_bottom = -228.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "Welcome!"
+label_settings = SubResource("LabelSettings_14qgj")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Bubble" type="NinePatchRect" parent="HintText"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -22.0
+offset_top = -10.0
+offset_right = 13.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_32jkm")
+patch_margin_left = 15
+patch_margin_top = 10
+patch_margin_right = 15
+patch_margin_bottom = 10
+
+[node name="Seal" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 369.0
+offset_top = 227.0
+offset_right = 497.0
+offset_bottom = 355.0
+rotation = -0.270526
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("10_4ryrp")
+expand_mode = 1
+
+[node name="ButtonList" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_top = 472.0
+offset_right = 531.0
+offset_bottom = 512.0
+alignment = 1
+
+[node name="BackBtn" type="Button" parent="ButtonList"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.529412, 0.45098, 0.513726, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("8_f61ct")
+text = "Back"
+icon = ExtResource("11_s6xxb")
+
+[node name="RetryBtn" type="Button" parent="ButtonList"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.529412, 0.45098, 0.513726, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("8_f61ct")
+text = "Retry"
+icon = ExtResource("12_kqucy")
+
+[node name="WinParticle" type="CPUParticles2D" parent="."]
+position = Vector2(597, -89)
+emitting = false
+amount = 150
+lifetime = 1.5
+one_shot = true
+preprocess = 0.1
+texture = ExtResource("13_cgngr")
+emission_shape = 3
+emission_rect_extents = Vector2(800, 0)
+angular_velocity_min = -50.0
+angular_velocity_max = 50.0
+angle_min = -20.0
+angle_max = 20.0
+
+[node name="OutParticle" type="CPUParticles2D" parent="."]
+position = Vector2(916, 220)
+emitting = false
+amount = 1800
+lifetime = 1.5
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 200.0
+damping_max = 100.0
+color_ramp = SubResource("Gradient_5tid0")
+
+[node name="InParticle" type="CPUParticles2D" parent="."]
+position = Vector2(916, 220)
+emitting = false
+amount = 1800
+one_shot = true
+emission_shape = 1
+emission_sphere_radius = 128.0
+spread = 180.0
+gravity = Vector2(0, 0)
+radial_accel_min = -1200.0
+radial_accel_max = -600.0
+damping_max = 100.0
+color_ramp = SubResource("Gradient_5tid0")
+
+[connection signal="child_order_changed" from="Hand/HandContainer" to="Hand/HandContainer" method="_on_child_order_changed"]
+[connection signal="gui_input" from="Inventory" to="Inventory" method="_on_gui_input"]
+[connection signal="pressed" from="TransformButton" to="." method="_on_transform_button_pressed"]
+[connection signal="pressed" from="ButtonList/RetryBtn" to="." method="_on_retry_btn_pressed"]

@@ -12,6 +12,10 @@ func _process(delta: float) -> void:
 
 
 func _on_child_order_changed() -> void:
+	
+	if get_tree()==null:
+		return
+	
 	var now=0
 	for i in get_children():
 		var tween=get_tree().create_tween().set_trans(Tween.TRANS_EXPO).set_parallel()

@@ -8,9 +8,12 @@ enum ItemType{
 }
 
 var type: ItemType
-var left: String
+
+var name: String
+
+var left: Item
 ## If UNIT, this could be undefined
-var right: String
+var right: Item
 ## 0 means no tag
 var tag: int
 
@@ -25,59 +28,35 @@ static var hash_name_candidate=["Transubstantiation",
 
 ## Generate a fake hash name based on left and right
 func hash_name() -> String:
-	var hsh=(left.hash()*97+right.hash())%len(hash_name_candidate)
+	var hsh=(type_str().hash())%len(hash_name_candidate)
 	return hash_name_candidate[hsh]
 
 func type_str() -> String:
 	if type==ItemType.UNIT:
-		return left
+		return name
 	elif type==ItemType.TRANSFORM:
-		return "(%s -> %s)"%[left,right]
+		return "( %s -> %s )"%[left.type_str(),right.type_str()]
 	elif type==ItemType.AND:
-		return "(%s & %s)"%[left,right]
+		return "( %s & %s )"%[left.type_str(),right.type_str()]
 	elif type==ItemType.OR:
-		return "(%s | %s)"%[left,right]
+		return "( %s | %s )"%[left.type_str(),right.type_str()]
 	return "?"
 
-static func from_str(s: String) -> Item:
-	if s[0]!="(":
-		return Item.new(ItemType.UNIT,s)
-		
-	var ly=0
-	var left=null
-	var right=null
-	
-	for i in range(len(s)):
-		var c=s[i]
-		if c=="(":
-			ly+=1
-		elif c==")":
-			ly-=1
-		if ly==0:
-			left=s.substr(0,i+1)
-			break
-	for i in range(len(s)-1,0,-1):
-		var c=s[i]
-		if c==")":
-			ly+=1
-		elif c=="(":
-			ly-=1
-		if ly==0:
-			right=s.substr(i)
-			break
-	var op=s.substr(len(left),len(s)-len(left)-len(right)).strip_edges()
-	
-	if op=="->":
-		return Item.new(ItemType.TRANSFORM,left,right)
-	elif op=="&":
-		return Item.new(ItemType.AND,left,right)
-	elif op=="|":
-		return Item.new(ItemType.OR,left,right)
-	else:
-		return null
+static func u(name: String) -> Item:
+	return Item.new(ItemType.UNIT, name, null, null)
 
-func _init(type: ItemType, left: String, right: String = "", tag: int=0):
+static func t2(left: String, right: String, name: String = "") -> Item:
+	return Item.new(ItemType.TRANSFORM,name,Item.u(left),Item.u(right))
+
+static func t(left: Item, right: Item, name: String = "")->Item:
+	return Item.new(ItemType.TRANSFORM,name,left,right)
+
+func equals(o: Item) -> bool:
+	return o.type_str()==self.type_str()
+
+func _init(type: ItemType,  name: String, left: Item, right: Item , tag: int=0):
 	self.type=type
+	self.name=name
 	self.left=left
 	self.right=right
 	self.tag=tag

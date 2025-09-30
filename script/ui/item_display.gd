@@ -28,16 +28,16 @@ func c(s:String, c: String) -> String:
 func build_tooltip():
 	var ttp=""
 	if item.type==Item.ItemType.UNIT:
-		ttp+="[font size=9]"+c(item.left.capitalize(),"red")+"[/font]\n"
-		ttp+="[i]"+Globals.desc[item.left]+"[/i]\n"
+		ttp+="[font size=9]"+c(item.name.capitalize(),"red")+"[/font]\n"
+		ttp+="[i]"+Globals.desc.get(item.name,"MISSING DESCRIPTION")+"[/i]\n"
 	elif item.type==Item.ItemType.TRANSFORM:
-		ttp+="[font size=9]"+c("Catalyst","purple")+" "+c(item.hash_name(),"red")+"[/font]\n"
-		ttp+="[i]Transforms "+c(item.left,"green")+" into "+c(item.right,"blue")+"[/i]\n"
+		ttp+="[font size=9]"+c("Catalyst","purple")+" "+c(item.name.capitalize(),"red")+"[/font]\n"
+		ttp+="[i]Transforms "+c(item.left.type_str().capitalize(),"green")+" into "+c(item.right.type_str().capitalize(),"blue")+"[/i]\n"
 	elif item.type==Item.ItemType.AND:
-		ttp+="[font size=9]"+c("Mixture","purple")+" of "+c(item.left,"green")+" and "+c(item.right,"blue")+"[/font]\n"
+		ttp+="[font size=9]"+c("Mixture","purple")+" of "+c(item.left.type_str().capitalize(),"green")+" and "+c(item.right.type_str().capitalize(),"blue")+"[/font]\n"
 		ttp+="[i]A mixture of two substances. Maybe there is a way to separate them?[/i]\n"
 	elif item.type==Item.ItemType.OR:
-		ttp+="[font size=9]"+c("Entanglement","purple")+" of "+c(item.left,"green")+" and "+c(item.right,"blue")+"[/font]\n"
+		ttp+="[font size=9]"+c("Entanglement","purple")+" of "+c(item.left.type_str().capitalize(),"green")+" and "+c(item.right.type_str().capitalize(),"blue")+"[/font]\n"
 		ttp+="[i]An entanglement mixture of two substances. Maybe there is a way to separate them?[/i]\n"
 		
 		
@@ -52,7 +52,7 @@ func on_transform():
 func set_item(item: Item):
 	self.item=item
 	if item.type==Item.ItemType.UNIT:
-		self.texture=load("res://texture/item/"+item.left+".png")
+		self.texture=load("res://texture/item/"+item.name+".png")
 	elif item.type==Item.ItemType.TRANSFORM:
 		self.texture=load("res://texture/potion_red.png")
 		
@@ -90,7 +90,7 @@ func _on_gui_input(event: InputEvent) -> void:
 				
 				clickable=false
 				var tw=get_tree().create_tween().set_trans(Tween.TRANS_EXPO).set_parallel()
-				tw.tween_property(self,"position",mk.position,0.5)
+				tw.tween_property(self,"position",mk.position-self.size/2,0.5)
 				tw.tween_property(self,"rotation",mk.rotation,0.5)
 				tw.tween_property(self,"scale",Vector2(4,4),0.5)
 				tw.tween_callback(func(): clickable=true)
