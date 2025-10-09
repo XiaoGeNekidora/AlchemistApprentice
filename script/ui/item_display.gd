@@ -19,31 +19,15 @@ static var mki: Marker2D
 static var mkp: Marker2D
 static var callback: Callable
 
-func _on_mouse_entered() -> void:
-	build_tooltip()
-	$Tooltip.visible=true
+signal mouse_in(i:Item)
+signal mouse_out(i:Item)
 
-func c(s:String, c: String) -> String:
-	return "[color=%s]%s[/color]"%[c,s]
-func build_tooltip():
-	var ttp=""
-	if item.type==Item.ItemType.UNIT:
-		ttp+="[font size=9]"+c(item.name.capitalize(),"red")+"[/font]\n"
-		ttp+="[i]"+Globals.desc.get(item.name,"MISSING DESCRIPTION")+"[/i]\n"
-	elif item.type==Item.ItemType.TRANSFORM:
-		ttp+="[font size=9]"+c("Catalyst","purple")+" "+c(item.name.capitalize(),"red")+"[/font]\n"
-		ttp+="[i]Transforms "+c(item.left.type_str().capitalize(),"green")+" into "+c(item.right.type_str().capitalize(),"blue")+"[/i]\n"
-	elif item.type==Item.ItemType.AND:
-		ttp+="[font size=9]"+c("Mixture","purple")+" of "+c(item.left.type_str().capitalize(),"green")+" and "+c(item.right.type_str().capitalize(),"blue")+"[/font]\n"
-		ttp+="[i]A mixture of two substances. Maybe there is a way to separate them?[/i]\n"
-	elif item.type==Item.ItemType.OR:
-		ttp+="[font size=9]"+c("Entanglement","purple")+" of "+c(item.left.type_str().capitalize(),"green")+" and "+c(item.right.type_str().capitalize(),"blue")+"[/font]\n"
-		ttp+="[i]An entanglement mixture of two substances. Maybe there is a way to separate them?[/i]\n"
-		
-		
-	$Tooltip.text=ttp
+func _on_mouse_entered() -> void:
+	mouse_in.emit(self.item)
+	
 
 func _on_mouse_exited() -> void:
+	mouse_out.emit(self.item)
 	$Tooltip.visible=false
 
 func on_transform():

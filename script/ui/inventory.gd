@@ -26,6 +26,7 @@ func gen_item(list:Array[Item]):
 		var new_item:ItemDisplay=item_prefab.instantiate()
 		new_item.set_item(item)
 		$"..".signal_transform.connect(new_item.on_transform)
+		%Tooltip.bind(new_item)
 		
 		#var tw=get_tree().create_tween().set_trans(Tween.TRANS_QUAD)
 		#tw.tween_property(%PathFollow2D,"progress_ratio",1,)

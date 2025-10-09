@@ -11,9 +11,10 @@ func on_restock() -> Array[Item]:
 	return []
 
 func _init():
+	self.name="First Glance"
+	self.level_no="F-1" #Fundamentals
 	self.win=Item.u("gold")
-	self.desc="""Lesson U-1
-Welcome to the ~School of Alchemy~! Here you will be mastering the [sin]ART[] of transformation.
+	self.desc="""Welcome to the ~School of Alchemy~! Here you will be mastering the [sin]ART[] of transformation.
 Today is your first lesson? Do not worry! We have prepared your starter kit for you. Just [wack]click[] that bag over there!
 
 Transformation is just about applying the right catalyst on the right base material. Easy, right?

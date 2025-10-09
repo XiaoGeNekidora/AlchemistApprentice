@@ -16,6 +16,10 @@ func _ready() -> void:
 	
 	buttonInPos = $TransformButton.position
 	$TransformButton.position=buttonInPos+Vector2(500,0)
+	
+	$TargetItem.set_item(Globals.current_level.win)
+	$LevelName.text="Level %s %s\nTarget:"%[Globals.current_level.level_no,Globals.current_level.name]
+	%Tooltip.bind($TargetItem)
 
 ## perform "can transform"?
 func on_potion_update():

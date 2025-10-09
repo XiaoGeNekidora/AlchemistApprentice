@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dbuvvt13wy0lx"]
 
 [ext_resource type="Texture2D" uid="uid://chkmbtm6iaagy" path="res://texture/unknown.png" id="1_7iwyf"]
-[ext_resource type="Script" path="res://script/ui/item_display.gd" id="2_hb84n"]
+[ext_resource type="Script" uid="uid://dee7x8ewkmohc" path="res://script/ui/item_display.gd" id="2_hb84n"]
 [ext_resource type="FontFile" uid="uid://becar0jugmwip" path="res://font/Amarante-Regular.ttf" id="3_srfad"]
 
 [sub_resource type="Gradient" id="Gradient_n10do"]
@@ -40,14 +40,14 @@ grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("3_srfad")
-theme_override_fonts/italics_font = ExtResource("3_srfad")
-theme_override_fonts/bold_italics_font = ExtResource("3_srfad")
 theme_override_fonts/bold_font = ExtResource("3_srfad")
+theme_override_fonts/bold_italics_font = ExtResource("3_srfad")
+theme_override_fonts/italics_font = ExtResource("3_srfad")
+theme_override_font_sizes/normal_font_size = 6
+theme_override_font_sizes/bold_font_size = 6
 theme_override_font_sizes/bold_italics_font_size = 6
 theme_override_font_sizes/italics_font_size = 6
 theme_override_font_sizes/mono_font_size = 6
-theme_override_font_sizes/normal_font_size = 6
-theme_override_font_sizes/bold_font_size = 6
 bbcode_enabled = true
 text = "555565656"
 fit_content = true

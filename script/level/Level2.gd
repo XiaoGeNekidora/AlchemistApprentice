@@ -12,6 +12,8 @@ func on_restock() -> Array[Item]:
 	return [Item.u("stone")]
 
 func _init():
+	self.name="Understanding Chains"
+	self.level_no="F-2"
 	self.win=Item.u("gold")
 	self.desc="""
 

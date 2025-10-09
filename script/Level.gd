@@ -2,6 +2,7 @@
 class_name Level
 
 var name="Test Level"
+var level_no="T-1"
 var win=Item.u("stone")
 
 var desc="This is a test level"
