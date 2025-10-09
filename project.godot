@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="AlchemistApprentice"
-run/main_scene="res://game.tscn"
+run/main_scene="uid://dp1bsw5ma15q3"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Globals="*res://script/Globals.gd"
+EventBus="*res://script/EventBus.gd"
 
 [display]
 
@@ -35,8 +36,8 @@ renderer/rendering_method.mobile="gl_compatibility"
 [richer_text_label]
 
 fonts={
-"Amarante": "res://font/Amarante-Regular.ttf",
-"MedievalSharp": "res://font/MedievalSharp-Regular.ttf"
+&"Amarante": "res://font/Amarante-Regular.ttf",
+&"MedievalSharp": "res://font/MedievalSharp-Regular.ttf"
 }
 user_effects_dir="res://assets/text_effects"
 colors={}

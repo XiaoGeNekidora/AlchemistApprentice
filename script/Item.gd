@@ -31,6 +31,10 @@ func hash_name() -> String:
 	var hsh=(type_str().hash())%len(hash_name_candidate)
 	return hash_name_candidate[hsh]
 
+## Return a hash of the type str
+func hash() -> int:
+	return type_str().hash()
+
 func type_str() -> String:
 	if type==ItemType.UNIT:
 		return name

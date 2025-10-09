@@ -1,4 +1,30 @@
-[gd_scene format=3 uid="uid://dp1bsw5ma15q3"]
+[gd_scene load_steps=9 format=3 uid="uid://dp1bsw5ma15q3"]
+
+[ext_resource type="Texture2D" uid="uid://etb0q6dhhw6l" path="res://texture/level_bg/I.jpg" id="1_bv7n5"]
+[ext_resource type="FontFile" uid="uid://q0yu2gl6ai7a" path="res://font/MedievalSharp-Regular.ttf" id="1_il3u1"]
+[ext_resource type="Script" uid="uid://bsmw7rg0y1tka" path="res://script/ui/level_select_label.gd" id="2_vomi7"]
+[ext_resource type="FontFile" uid="uid://becar0jugmwip" path="res://font/Amarante-Regular.ttf" id="3_apu6u"]
+[ext_resource type="Script" uid="uid://cstxj42u02ypo" path="res://script/ui/level_select_button.gd" id="4_bv7n5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lmhjs"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="Gradient" id="Gradient_vomi7"]
+offsets = PackedFloat32Array(0, 0.44, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0.23529412, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wevku"]
+gradient = SubResource("Gradient_vomi7")
+width = 128
 
 [node name="LevelSelect" type="Control"]
 layout_mode = 3
@@ -7,3 +33,134 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="panel" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="I" type="Control" parent="panel"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="bg" type="TextureRect" parent="panel/I"]
+self_modulate = Color(1, 1, 1, 0.33333334)
+layout_mode = 0
+offset_right = 1385.0
+offset_bottom = 996.0
+texture = ExtResource("1_bv7n5")
+expand_mode = 2
+
+[node name="Line2D" type="Line2D" parent="panel/I"]
+points = PackedVector2Array(317, 209, 494, 62, 870, 161, 980, 413, 612, 577)
+width = 4.0
+
+[node name="Button" type="Button" parent="panel/I"]
+layout_mode = 0
+offset_left = 292.0
+offset_top = 183.0
+offset_right = 345.0
+offset_bottom = 232.0
+theme_override_fonts/font = ExtResource("3_apu6u")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_lmhjs")
+text = "U-1"
+script = ExtResource("4_bv7n5")
+level = "1"
+
+[node name="Button2" type="Button" parent="panel/I"]
+layout_mode = 0
+offset_left = 463.0
+offset_top = 40.0
+offset_right = 516.0
+offset_bottom = 89.0
+theme_override_fonts/font = ExtResource("3_apu6u")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_lmhjs")
+text = "U-2"
+script = ExtResource("4_bv7n5")
+level = "2"
+
+[node name="Button3" type="Button" parent="panel/I"]
+layout_mode = 0
+offset_left = 829.0
+offset_top = 132.0
+offset_right = 887.0
+offset_bottom = 181.0
+theme_override_fonts/font = ExtResource("3_apu6u")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_lmhjs")
+text = "U-3"
+script = ExtResource("4_bv7n5")
+level = "3"
+
+[node name="Button4" type="Button" parent="panel/I"]
+layout_mode = 0
+offset_left = 946.0
+offset_top = 382.0
+offset_right = 1004.0
+offset_bottom = 431.0
+theme_override_fonts/font = ExtResource("3_apu6u")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_lmhjs")
+text = "U-4"
+script = ExtResource("4_bv7n5")
+level = "4"
+
+[node name="Button5" type="Button" parent="panel/I"]
+layout_mode = 0
+offset_left = 586.0
+offset_top = 549.0
+offset_right = 646.0
+offset_bottom = 598.0
+theme_override_fonts/font = ExtResource("3_apu6u")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_lmhjs")
+text = "U-5"
+script = ExtResource("4_bv7n5")
+level = "5"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 648.0
+texture = SubResource("GradientTexture1D_wevku")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect"]
+layout_mode = 0
+offset_right = 79.0
+offset_bottom = 648.0
+
+[node name="I" type="Label" parent="TextureRect/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 0
+theme_override_fonts/font = ExtResource("1_il3u1")
+theme_override_font_sizes/font_size = 64
+text = "I"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_vomi7")
+
+[node name="II" type="Label" parent="TextureRect/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 0
+theme_override_fonts/font = ExtResource("1_il3u1")
+theme_override_font_sizes/font_size = 64
+text = "II"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_vomi7")
+
+[connection signal="pressed" from="panel/I/Button" to="panel/I/Button" method="_on_pressed"]
+[connection signal="pressed" from="panel/I/Button2" to="panel/I/Button2" method="_on_pressed"]
+[connection signal="pressed" from="panel/I/Button3" to="panel/I/Button3" method="_on_pressed"]
+[connection signal="pressed" from="panel/I/Button4" to="panel/I/Button4" method="_on_pressed"]
+[connection signal="pressed" from="panel/I/Button5" to="panel/I/Button5" method="_on_pressed"]
+[connection signal="gui_input" from="TextureRect/VBoxContainer/I" to="TextureRect/VBoxContainer/I" method="_on_gui_input"]
+[connection signal="mouse_entered" from="TextureRect/VBoxContainer/I" to="TextureRect/VBoxContainer/I" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="TextureRect/VBoxContainer/I" to="TextureRect/VBoxContainer/I" method="_on_mouse_exited"]
+[connection signal="gui_input" from="TextureRect/VBoxContainer/II" to="TextureRect/VBoxContainer/II" method="_on_gui_input"]
+[connection signal="mouse_entered" from="TextureRect/VBoxContainer/II" to="TextureRect/VBoxContainer/II" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="TextureRect/VBoxContainer/II" to="TextureRect/VBoxContainer/II" method="_on_mouse_exited"]

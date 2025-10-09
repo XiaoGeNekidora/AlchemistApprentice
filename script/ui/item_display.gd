@@ -38,7 +38,8 @@ func set_item(item: Item):
 	if item.type==Item.ItemType.UNIT:
 		self.texture=load("res://texture/item/"+item.name+".png")
 	elif item.type==Item.ItemType.TRANSFORM:
-		self.texture=load("res://texture/potion_red.png")
+		var id=["red","blue","white","pink","red2","blue2","greenb","redb"][item.hash()%8]
+		self.texture=load("res://texture/potion_%s.png"%id)
 		
 	if self.texture==null:
 		self.texture=load("res://texture/unknown.png")

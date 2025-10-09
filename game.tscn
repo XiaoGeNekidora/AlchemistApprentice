@@ -231,9 +231,10 @@ expand_mode = 1
 
 [node name="ButtonList" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_top = 554.0
-offset_right = 531.0
-offset_bottom = 594.0
+offset_left = 22.0
+offset_top = 578.0
+offset_right = 630.0
+offset_bottom = 618.0
 alignment = 1
 
 [node name="BackBtn" type="Button" parent="ButtonList"]
@@ -254,6 +255,16 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("8_f61ct")
 text = "Retry"
+icon = ExtResource("12_kqucy")
+
+[node name="NextButton" type="Button" parent="ButtonList"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.529412, 0.45098, 0.513726, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("8_f61ct")
+text = "Next"
 icon = ExtResource("12_kqucy")
 
 [node name="WinParticle" type="CPUParticles2D" parent="."]
@@ -353,4 +364,5 @@ patch_margin_bottom = 9
 [connection signal="child_order_changed" from="Hand/HandContainer" to="Hand/HandContainer" method="_on_child_order_changed"]
 [connection signal="gui_input" from="Inventory" to="Inventory" method="_on_gui_input"]
 [connection signal="pressed" from="TransformButton" to="." method="_on_transform_button_pressed"]
+[connection signal="pressed" from="ButtonList/BackBtn" to="." method="_on_back_btn_pressed"]
 [connection signal="pressed" from="ButtonList/RetryBtn" to="." method="_on_retry_btn_pressed"]

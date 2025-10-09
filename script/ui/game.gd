@@ -106,7 +106,13 @@ func _on_transform_button_pressed() -> void:
 	ma.slot=ItemDisplay.SLOT_BELOW
 	pa.reparent(%HandContainer)
 	ma.reparent(%HandContainer)
+	pa.size=Vector2(24,24)
+	ma.size=Vector2(24,24)
 	
 
 func _on_retry_btn_pressed() -> void:
 	get_tree().change_scene_to_file("res://game.tscn")
+
+
+func _on_back_btn_pressed() -> void:
+	get_tree().change_scene_to_file("res://level_select.tscn")
