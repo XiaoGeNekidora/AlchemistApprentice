@@ -4,6 +4,10 @@ class_name GameRoot
 signal signal_transform
 
 var buttonInPos:Vector2
+
+## 相邻两个按钮的距离
+const BTN_DIS=50
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	ItemDisplay.inv=%HandContainer
@@ -16,7 +20,7 @@ func _ready() -> void:
 	
 	buttonInPos = $TransformButton.position
 	$TransformButton.position=buttonInPos+Vector2(500,0)
-	$BreakButton.position=buttonInPos+Vector2(500,30)
+	$BreakButton.position=buttonInPos+Vector2(500,BTN_DIS)
 	
 	$TargetItem.set_item(Globals.current_level.win)
 	$TargetItem.clickable=false
@@ -38,11 +42,11 @@ func on_potion_update():
 	elif not p.left.equals(m):
 		err_msg="The catalyst does not seem to apply to that thing..."
 	
-	var tw=get_tree().create_tween().set_trans(Tween.TRANS_EXPO)
+	var tw=get_tree().create_tween().set_trans(Tween.TRANS_EXPO).set_parallel()
 	$TransformButton.disabled=err_msg!=null
 	$BreakButton.disabled= m==null or m.type!=Item.ItemType.AND
 	
-	if not $BreakButton.disabled:
+	if not $BreakButton.disabled and err_msg!=null:
 		err_msg+="... or break it"
 		
 	if not $TransformButton.disabled:
@@ -53,9 +57,9 @@ func on_potion_update():
 		$HintText.text=err_msg
 	
 	if not $BreakButton.disabled:
-		tw.tween_property($BreakButton,"position",buttonInPos+Vector2(0,30),0.5)
+		tw.tween_property($BreakButton,"position",buttonInPos+Vector2(0,BTN_DIS),0.5)
 	else:
-		tw.tween_property($BreakButton,"position",buttonInPos+Vector2(300,30),0.5)
+		tw.tween_property($BreakButton,"position",buttonInPos+Vector2(300,BTN_DIS),0.5)
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

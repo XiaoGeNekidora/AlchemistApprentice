@@ -62,6 +62,10 @@ static func t(left: Item, right: Item, name: String = "")->Item:
 static func ta(a: Item, b: Item, name: String = "")->Item:
 	return Item.t(a,Item.t(b,Item.a(a,b,name),name.capitalize()+" Mixer B"),name.capitalize()+" Mixer A")
 
+## Create a mixture transformer by name (a&b->(a&b))
+static func ta2(a: String, b: String, name: String = "")->Item:
+	return Item.t(Item.u(a),Item.t(Item.u(b),Item.a2(a,b,name),name.capitalize()+" Mixer B"),name.capitalize()+" Mixer A")
+
 ## Create a mixture
 static func a(left: Item, right: Item, name: String = "") -> Item:
 	return Item.new(ItemType.AND,name,left,right)
