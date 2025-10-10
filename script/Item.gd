@@ -46,14 +46,29 @@ func type_str() -> String:
 		return "( %s | %s )"%[left.type_str(),right.type_str()]
 	return "?"
 
+## Create a unit item with given name
 static func u(name: String) -> Item:
 	return Item.new(ItemType.UNIT, name, null, null)
 
+## Create a transform item with name
 static func t2(left: String, right: String, name: String = "") -> Item:
 	return Item.new(ItemType.TRANSFORM,name,Item.u(left),Item.u(right))
 
+## Create a transform item
 static func t(left: Item, right: Item, name: String = "")->Item:
 	return Item.new(ItemType.TRANSFORM,name,left,right)
+
+## Create a mixture transformer  (a&b->(a&b))
+static func ta(a: Item, b: Item, name: String = "")->Item:
+	return Item.t(a,Item.t(b,Item.a(a,b,name),name.capitalize()+" Mixer B"),name.capitalize()+" Mixer A")
+
+## Create a mixture
+static func a(left: Item, right: Item, name: String = "") -> Item:
+	return Item.new(ItemType.AND,name,left,right)
+
+## Create a mixture by name
+static func a2(left: String, right: String, name: String = "") -> Item:
+	return Item.new(ItemType.AND,name,Item.u(left),Item.u(right))
 
 func equals(o: Item) -> bool:
 	return o.type_str()==self.type_str()

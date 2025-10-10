@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://bw8ub5fnda214"]
+
+[ext_resource type="Texture2D" uid="uid://bytk1wmfhot8y" path="res://texture/desk.png" id="1_y7k74"]
+[ext_resource type="Texture2D" uid="uid://btwdwva6m7g1a" path="res://texture/logo.png" id="2_oyqm6"]
+
+[sub_resource type="Gradient" id="Gradient_kpexm"]
+colors = PackedColorArray(0.82499254, 0.6062876, 1.1551381e-06, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3xoar"]
+gradient = SubResource("Gradient_kpexm")
+
+[node name="Title" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="bg" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1155.0
+offset_bottom = 655.0
+texture = ExtResource("1_y7k74")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -134.0
+offset_top = 20.00003
+offset_right = 162.8424
+offset_bottom = 784.0239
+rotation = -0.20943952
+texture = SubResource("GradientTexture1D_3xoar")
+
+[node name="logo" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 444.7361
+offset_bottom = 250.0
+texture = ExtResource("2_oyqm6")
+expand_mode = 1

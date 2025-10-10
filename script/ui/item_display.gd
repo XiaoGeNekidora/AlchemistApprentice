@@ -40,7 +40,9 @@ func set_item(item: Item):
 	elif item.type==Item.ItemType.TRANSFORM:
 		var id=["red","blue","white","pink","red2","blue2","greenb","redb"][item.hash()%8]
 		self.texture=load("res://texture/potion_%s.png"%id)
-		
+	elif item.type==Item.ItemType.AND:
+		self.texture=load("res://texture/mixture.png")
+	
 	if self.texture==null:
 		self.texture=load("res://texture/unknown.png")
 func _on_gui_input(event: InputEvent) -> void:

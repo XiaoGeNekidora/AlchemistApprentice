@@ -122,6 +122,88 @@ text = "U-5"
 script = ExtResource("4_bv7n5")
 level = "5"
 
+[node name="II" type="Control" parent="panel"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="bg" type="TextureRect" parent="panel/II"]
+self_modulate = Color(1, 1, 1, 0.33333334)
+layout_mode = 0
+offset_right = 1385.0
+offset_bottom = 996.0
+texture = ExtResource("1_bv7n5")
+expand_mode = 2
+
+[node name="Line2D" type="Line2D" parent="panel/II"]
+points = PackedVector2Array(365, 111, 365, 527, 1021, 543, 1019, 113, 691, 334)
+width = 4.0
+
+[node name="Button" type="Button" parent="panel/II"]
+layout_mode = 0
+offset_left = 345.0
+offset_top = 89.0
+offset_right = 398.0
+offset_bottom = 138.0
+theme_override_fonts/font = ExtResource("3_apu6u")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_lmhjs")
+text = "U-1"
+script = ExtResource("4_bv7n5")
+level = "11"
+
+[node name="Button2" type="Button" parent="panel/II"]
+layout_mode = 0
+offset_left = 345.0
+offset_top = 495.0
+offset_right = 403.0
+offset_bottom = 544.0
+theme_override_fonts/font = ExtResource("3_apu6u")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_lmhjs")
+text = "U-2"
+script = ExtResource("4_bv7n5")
+level = "12"
+
+[node name="Button3" type="Button" parent="panel/II"]
+layout_mode = 0
+offset_left = 984.0
+offset_top = 519.0
+offset_right = 1042.0
+offset_bottom = 568.0
+theme_override_fonts/font = ExtResource("3_apu6u")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_lmhjs")
+text = "U-3"
+script = ExtResource("4_bv7n5")
+level = "13"
+
+[node name="Button4" type="Button" parent="panel/II"]
+layout_mode = 0
+offset_left = 984.0
+offset_top = 89.0
+offset_right = 1044.0
+offset_bottom = 138.0
+theme_override_fonts/font = ExtResource("3_apu6u")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_lmhjs")
+text = "U-4"
+script = ExtResource("4_bv7n5")
+level = "14"
+
+[node name="Button5" type="Button" parent="panel/II"]
+layout_mode = 0
+offset_left = 671.0
+offset_top = 303.0
+offset_right = 731.0
+offset_bottom = 352.0
+theme_override_fonts/font = ExtResource("3_apu6u")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_lmhjs")
+text = "U-5"
+script = ExtResource("4_bv7n5")
+level = "15"
+
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
 offset_right = 128.0
@@ -158,6 +240,11 @@ script = ExtResource("2_vomi7")
 [connection signal="pressed" from="panel/I/Button3" to="panel/I/Button3" method="_on_pressed"]
 [connection signal="pressed" from="panel/I/Button4" to="panel/I/Button4" method="_on_pressed"]
 [connection signal="pressed" from="panel/I/Button5" to="panel/I/Button5" method="_on_pressed"]
+[connection signal="pressed" from="panel/II/Button" to="panel/II/Button" method="_on_pressed"]
+[connection signal="pressed" from="panel/II/Button2" to="panel/II/Button2" method="_on_pressed"]
+[connection signal="pressed" from="panel/II/Button3" to="panel/II/Button3" method="_on_pressed"]
+[connection signal="pressed" from="panel/II/Button4" to="panel/II/Button4" method="_on_pressed"]
+[connection signal="pressed" from="panel/II/Button5" to="panel/II/Button5" method="_on_pressed"]
 [connection signal="gui_input" from="TextureRect/VBoxContainer/I" to="TextureRect/VBoxContainer/I" method="_on_gui_input"]
 [connection signal="mouse_entered" from="TextureRect/VBoxContainer/I" to="TextureRect/VBoxContainer/I" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="TextureRect/VBoxContainer/I" to="TextureRect/VBoxContainer/I" method="_on_mouse_exited"]

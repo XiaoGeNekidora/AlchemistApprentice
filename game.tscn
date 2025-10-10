@@ -44,7 +44,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4n42x")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="bg" type="TextureRect" parent="."]
 layout_mode = 0
 offset_right = 1155.0
 offset_bottom = 655.0
@@ -179,6 +179,16 @@ offset_bottom = 235.0
 theme_override_fonts/font = ExtResource("8_f61ct")
 theme_override_font_sizes/font_size = 24
 text = "Transform!!!"
+
+[node name="BreakButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 997.0
+offset_top = 246.0
+offset_right = 1138.0
+offset_bottom = 285.0
+theme_override_fonts/font = ExtResource("8_f61ct")
+theme_override_font_sizes/font_size = 24
+text = "Break!!!"
 
 [node name="HintText" type="Label" parent="."]
 layout_mode = 1
@@ -364,5 +374,6 @@ patch_margin_bottom = 9
 [connection signal="child_order_changed" from="Hand/HandContainer" to="Hand/HandContainer" method="_on_child_order_changed"]
 [connection signal="gui_input" from="Inventory" to="Inventory" method="_on_gui_input"]
 [connection signal="pressed" from="TransformButton" to="." method="_on_transform_button_pressed"]
+[connection signal="pressed" from="BreakButton" to="." method="_on_break_button_pressed"]
 [connection signal="pressed" from="ButtonList/BackBtn" to="." method="_on_back_btn_pressed"]
 [connection signal="pressed" from="ButtonList/RetryBtn" to="." method="_on_retry_btn_pressed"]

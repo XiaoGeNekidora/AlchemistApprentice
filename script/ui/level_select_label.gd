@@ -33,7 +33,9 @@ func _on_gui_input(event: InputEvent) -> void:
 				if i.name!=self.name:
 					var tw=get_tree().create_tween()
 					tw.tween_property(i,"modulate",Color(1,1,1,0),0.5)
+					tw.tween_callback(func(): i.visible=false)
 				else:
 					var tw=get_tree().create_tween()
+					tw.tween_callback(func(): i.visible=true)
 					tw.tween_property(i,"modulate",Color(1,1,1,1),0.5)
 	

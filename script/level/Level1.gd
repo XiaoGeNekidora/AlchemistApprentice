@@ -4,7 +4,7 @@ class_name Level1
 func on_initial() -> Array[Item]:
 	return [
 		Item.u("stone"),
-		Item.t2("stone","gold","X")
+		Item.t2("stone","gold","X"),
 	]
 
 func on_restock() -> Array[Item]:

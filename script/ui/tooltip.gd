@@ -20,8 +20,8 @@ func build_tooltip(item: Item):
 		ttp+="[font size=24]"+c("Catalyst","pink")+" "+c(item.name.capitalize(),"red")+"[/font]\n"
 		ttp+="[i]Transforms "+c(item.left.type_str().capitalize(),"green")+" into "+c(item.right.type_str().capitalize(),"cyan")+"[/i]\n"
 	elif item.type==Item.ItemType.AND:
-		ttp+="[font size=24]"+c("Mixture","purple")+" of "+c(item.left.type_str().capitalize(),"green")+" and "+c(item.right.type_str().capitalize(),"blue")+"[/font]\n"
-		ttp+="[i]A mixture of two substances. Maybe there is a way to separate them?[/i]\n"
+		ttp+="[font size=24]"+c("Mixture","pink")+" "+c(item.name.capitalize(),"red")+"[/font]\n"
+		ttp+="[i]A mixture of "+c(item.left.type_str().capitalize(),"green")+" and "+c(item.right.type_str().capitalize(),"cyan")+". Put it on the table to separate them.[/i]\n"
 	elif item.type==Item.ItemType.OR:
 		ttp+="[font size=24]"+c("Entanglement","purple")+" of "+c(item.left.type_str().capitalize(),"green")+" and "+c(item.right.type_str().capitalize(),"blue")+"[/font]\n"
 		ttp+="[i]An entanglement mixture of two substances. Maybe there is a way to separate them?[/i]\n"
