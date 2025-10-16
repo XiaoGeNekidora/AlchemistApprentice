@@ -1,7 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://bw8ub5fnda214"]
+[gd_scene load_steps=14 format=3 uid="uid://bw8ub5fnda214"]
 
+[ext_resource type="Script" uid="uid://b0ybipifv38p7" path="res://script/ui/title.gd" id="1_nuqgq"]
 [ext_resource type="Texture2D" uid="uid://bytk1wmfhot8y" path="res://texture/desk.png" id="1_y7k74"]
 [ext_resource type="Texture2D" uid="uid://btwdwva6m7g1a" path="res://texture/logo.png" id="2_oyqm6"]
+[ext_resource type="Texture2D" uid="uid://cf6o1xb344pnr" path="res://texture/potion_red.png" id="3_3xoar"]
+[ext_resource type="Texture2D" uid="uid://beg272erg3ih6" path="res://texture/item/gold.png" id="4_7lgly"]
+[ext_resource type="FontFile" uid="uid://q0yu2gl6ai7a" path="res://font/MedievalSharp-Regular.ttf" id="4_mom7w"]
+[ext_resource type="Texture2D" uid="uid://dh15g3uadx6l6" path="res://texture/item/stone.png" id="5_0824t"]
+[ext_resource type="Script" uid="uid://46wrjq843pix" path="res://script/ui/label_btn.gd" id="7_0824t"]
 
 [sub_resource type="Gradient" id="Gradient_kpexm"]
 colors = PackedColorArray(0.82499254, 0.6062876, 1.1551381e-06, 1, 1, 1, 1, 0)
@@ -9,9 +15,28 @@ colors = PackedColorArray(0.82499254, 0.6062876, 1.1551381e-06, 1, 1, 1, 1, 0)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_3xoar"]
 gradient = SubResource("Gradient_kpexm")
 
+[sub_resource type="LabelSettings" id="LabelSettings_0824t"]
+font = ExtResource("4_mom7w")
+font_size = 48
+outline_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_nuqgq"]
+font = ExtResource("4_mom7w")
+font_size = 48
+outline_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_lx2ly"]
+font = ExtResource("4_mom7w")
+font_size = 48
+outline_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 1)
+
 [node name="Title" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("1_nuqgq")
 
 [node name="bg" type="TextureRect" parent="."]
 layout_mode = 0
@@ -34,3 +59,82 @@ offset_right = 444.7361
 offset_bottom = 250.0
 texture = ExtResource("2_oyqm6")
 expand_mode = 1
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(1174, 323)
+amount = 20
+texture = ExtResource("3_3xoar")
+lifetime = 5.0
+emission_shape = 3
+emission_rect_extents = Vector2(1, 500)
+direction = Vector2(-1, -1)
+spread = 25.0
+initial_velocity_min = 250.0
+initial_velocity_max = 750.0
+angle_min = -100.0
+angle_max = 100.0
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
+position = Vector2(1174, 323)
+amount = 20
+texture = ExtResource("4_7lgly")
+lifetime = 5.0
+emission_shape = 3
+emission_rect_extents = Vector2(1, 500)
+direction = Vector2(-1, -1)
+spread = 25.0
+initial_velocity_min = 250.0
+initial_velocity_max = 750.0
+angle_min = -100.0
+angle_max = 100.0
+
+[node name="CPUParticles2D3" type="CPUParticles2D" parent="."]
+position = Vector2(1174, 323)
+amount = 20
+texture = ExtResource("5_0824t")
+lifetime = 5.0
+emission_shape = 3
+emission_rect_extents = Vector2(1, 500)
+direction = Vector2(-1, -1)
+spread = 25.0
+initial_velocity_min = 250.0
+initial_velocity_max = 750.0
+angle_min = -100.0
+angle_max = 100.0
+
+[node name="Start" type="Label" parent="."]
+layout_mode = 0
+offset_left = 124.0
+offset_top = 323.0
+offset_right = 376.0
+offset_bottom = 386.0
+mouse_filter = 0
+text = "Start Game"
+label_settings = SubResource("LabelSettings_0824t")
+script = ExtResource("7_0824t")
+
+[node name="Credits" type="Label" parent="."]
+layout_mode = 0
+offset_left = 172.0
+offset_top = 386.0
+offset_right = 327.0
+offset_bottom = 449.0
+mouse_filter = 0
+text = "Credits"
+label_settings = SubResource("LabelSettings_nuqgq")
+script = ExtResource("7_0824t")
+
+[node name="Exit" type="Label" parent="."]
+layout_mode = 0
+offset_left = 205.0
+offset_top = 449.0
+offset_right = 457.0
+offset_bottom = 512.0
+mouse_filter = 0
+text = "Exit"
+label_settings = SubResource("LabelSettings_lx2ly")
+script = ExtResource("7_0824t")
+
+[connection signal="clicked" from="Start" to="." method="_on_start_clicked"]
+[connection signal="clicked" from="Credits" to="." method="_on_credits_clicked"]
+[connection signal="clicked" from="Exit" to="." method="_on_exit_clicked"]

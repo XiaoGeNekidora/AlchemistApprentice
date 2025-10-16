@@ -2,6 +2,9 @@ extends Node
 
 var current_level: Level = Level1.new()
 
+## Used in UI only
+var last_visited_chapter = "I"
+
 var active_material: Item = null
 var active_potion: Item = null
 
@@ -21,7 +24,8 @@ var all_levels={
 	"11":Level11,
 	"12":Level12,
 	"13":Level13,
-	"14":Level14
+	"14":Level14,
+	"15":Level15
 }
 
 var desc:Dictionary = {

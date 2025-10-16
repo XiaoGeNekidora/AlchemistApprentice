@@ -17,7 +17,7 @@ func _init():
 	self.level_no="3"
 	self.win=Item.u("gold")
 	self.desc="""
-Maybe you have noticed, in last class we have seen the notation of [blue](A > B)[]. It is a shorthand notation and simply means any potion that is able to transform A into B. You will be seeing them a lot in this class.
+Maybe you have noticed, in last class we have seen the notation of [blue](A > B)[]. It is a shorthand notation and simply means any catalyst that is able to transform A into B. You will be seeing them a lot in this class.
 
 There are no extra items this time. Considering the tuition fee, that's more than enough.
 """

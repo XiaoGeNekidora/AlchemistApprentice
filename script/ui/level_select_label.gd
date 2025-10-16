@@ -19,14 +19,15 @@ func on_select(who: String):
 		var tween=get_tree().create_tween()
 		tween.tween_property(self,"modulate",Color.WHITE,0.5)
 		col=Color.WHITE
+	else:
+		col=Color.PURPLE
+		
+		var tween=get_tree().create_tween()
+		tween.tween_property(self,"modulate",col,0.5)
 
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.is_pressed() and event.button_index==MOUSE_BUTTON_LEFT:
-			col=Color.PURPLE
-			
-			var tween=get_tree().create_tween()
-			tween.tween_property(self,"modulate",col,0.5)
 			EventBus.select.emit(self.name)
 			
 			for i in %panel.get_children():

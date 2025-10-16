@@ -1,10 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://dp1bsw5ma15q3"]
+[gd_scene load_steps=14 format=3 uid="uid://dp1bsw5ma15q3"]
 
 [ext_resource type="Texture2D" uid="uid://etb0q6dhhw6l" path="res://texture/level_bg/I.jpg" id="1_bv7n5"]
 [ext_resource type="FontFile" uid="uid://q0yu2gl6ai7a" path="res://font/MedievalSharp-Regular.ttf" id="1_il3u1"]
+[ext_resource type="Script" uid="uid://g425c14bw0lk" path="res://script/ui/level_select.gd" id="1_lmhjs"]
+[ext_resource type="Script" uid="uid://1itgsoqrku7t" path="res://script/ui/level_select_panel.gd" id="2_1iyaf"]
 [ext_resource type="Script" uid="uid://bsmw7rg0y1tka" path="res://script/ui/level_select_label.gd" id="2_vomi7"]
 [ext_resource type="FontFile" uid="uid://becar0jugmwip" path="res://font/Amarante-Regular.ttf" id="3_apu6u"]
 [ext_resource type="Script" uid="uid://cstxj42u02ypo" path="res://script/ui/level_select_button.gd" id="4_bv7n5"]
+[ext_resource type="Texture2D" uid="uid://bm24wf7l731sl" path="res://texture/level_bg/II.png" id="6_8qr5y"]
+[ext_resource type="Script" uid="uid://46wrjq843pix" path="res://script/ui/label_btn.gd" id="8_1wnlg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lmhjs"]
 content_margin_left = 4.0
@@ -26,6 +30,11 @@ colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0.23529412, 0, 0, 0, 0)
 gradient = SubResource("Gradient_vomi7")
 width = 128
 
+[sub_resource type="LabelSettings" id="LabelSettings_1iyaf"]
+font = ExtResource("3_apu6u")
+font_size = 24
+shadow_color = Color(0, 0, 0, 1)
+
 [node name="LevelSelect" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -33,6 +42,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_lmhjs")
 
 [node name="panel" type="Control" parent="."]
 unique_name_in_owner = true
@@ -41,9 +51,11 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="I" type="Control" parent="panel"]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("2_1iyaf")
 
 [node name="bg" type="TextureRect" parent="panel/I"]
 self_modulate = Color(1, 1, 1, 0.33333334)
@@ -123,16 +135,20 @@ script = ExtResource("4_bv7n5")
 level = "5"
 
 [node name="II" type="Control" parent="panel"]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("2_1iyaf")
 
 [node name="bg" type="TextureRect" parent="panel/II"]
 self_modulate = Color(1, 1, 1, 0.33333334)
 layout_mode = 0
-offset_right = 1385.0
-offset_bottom = 996.0
-texture = ExtResource("1_bv7n5")
+offset_left = -137.0
+offset_top = -196.0
+offset_right = 1248.0
+offset_bottom = 800.0
+texture = ExtResource("6_8qr5y")
 expand_mode = 2
 
 [node name="Line2D" type="Line2D" parent="panel/II"]
@@ -235,6 +251,17 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("2_vomi7")
 
+[node name="Label" type="Label" parent="TextureRect"]
+layout_mode = 0
+offset_top = 615.0
+offset_right = 131.0
+offset_bottom = 646.0
+mouse_filter = 0
+text = "<<Back"
+label_settings = SubResource("LabelSettings_1iyaf")
+horizontal_alignment = 1
+script = ExtResource("8_1wnlg")
+
 [connection signal="pressed" from="panel/I/Button" to="panel/I/Button" method="_on_pressed"]
 [connection signal="pressed" from="panel/I/Button2" to="panel/I/Button2" method="_on_pressed"]
 [connection signal="pressed" from="panel/I/Button3" to="panel/I/Button3" method="_on_pressed"]
@@ -251,3 +278,4 @@ script = ExtResource("2_vomi7")
 [connection signal="gui_input" from="TextureRect/VBoxContainer/II" to="TextureRect/VBoxContainer/II" method="_on_gui_input"]
 [connection signal="mouse_entered" from="TextureRect/VBoxContainer/II" to="TextureRect/VBoxContainer/II" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="TextureRect/VBoxContainer/II" to="TextureRect/VBoxContainer/II" method="_on_mouse_exited"]
+[connection signal="clicked" from="TextureRect/Label" to="." method="_on_label_clicked"]
