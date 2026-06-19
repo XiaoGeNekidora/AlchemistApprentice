@@ -12,7 +12,9 @@ const BTN_DIS: int=50
 enum OperationMode{
 	TRANSFORM,
 	PACKAGE,
-	UNPACKAGE
+	UNPACKAGE,
+	ENTANGLE,
+	DISENTANGLE
 }
 
 var mode := OperationMode.TRANSFORM;
@@ -59,6 +61,12 @@ func on_mode_change(new_mode: OperationMode):
 	elif new_mode==OperationMode.UNPACKAGE:
 		$TransformButton.text="Break!"
 		$HintText.text="Let's see if we can unpackage something..."
+	elif new_mode==OperationMode.ENTANGLE:
+		$TransformButton.text="Entangle!"
+		$HintText.text="Let's see if we can entangle something..."
+	elif new_mode==OperationMode.DISENTANGLE:
+		$TransformButton.text="Disentangle!"
+		$HintText.text="Place two potions with the same output to disentangle..."
 	mode = new_mode
 	
 	put_down(Globals.active_potion_actor)
@@ -81,6 +89,10 @@ func on_potion_update():
 		package_update(m,p)
 	elif mode==OperationMode.UNPACKAGE:
 		unpackage_update(m)
+	elif mode==OperationMode.ENTANGLE:
+		entangle_update(m,p)
+	elif mode==OperationMode.DISENTANGLE:
+		disentangle_update(m,p)
 	
 
 func transform_update(m: Item, p: Item):
@@ -139,6 +151,42 @@ func package_update(m: Item, p: Item):
 		tw.tween_property($TransformButton,"position",buttonInPos+Vector2(300,0),0.5)
 		$HintText.text=err_msg
 
+func entangle_update(m: Item, p: Item):
+	# TODO: Implement entangle validation logic
+	# TODO: Validate that both inputs are suitable for entanglement
+	# TODO: Show appropriate hint text for valid/invalid combinations
+	var err_msg = "Entangle is not yet implemented"
+	
+	var tw:=get_tree().create_tween().set_trans(Tween.TRANS_EXPO).set_parallel()
+	$TransformButton.disabled=true
+	tw.tween_property($TransformButton,"position",buttonInPos+Vector2(300,0),0.5)
+	$HintText.text=err_msg
+
+func disentangle_update(m: Item, p: Item):
+	# Validate: both inputs must be TRANSFORM potions, and their outputs must match
+	var err_msg = null
+	if m == null:
+		err_msg = "Please add the first potion (A->C) in the material slot"
+	elif m.type != Item.ItemType.TRANSFORM:
+		err_msg = "The first item (material slot) does not look like a potion"
+	elif p == null:
+		err_msg = "Please add the second potion (B->C) in the catalyst slot"
+	elif p.type != Item.ItemType.TRANSFORM:
+		err_msg = "The second item (catalyst slot) does not look like a potion"
+	elif not m.right.equals(p.right):
+		err_msg = "The two potions must have the same output! Got: " + m.right.type_str() + " and " + p.right.type_str()
+	
+	var tw:=get_tree().create_tween().set_trans(Tween.TRANS_EXPO).set_parallel()
+	$TransformButton.disabled = err_msg != null
+	
+	if not $TransformButton.disabled:
+		var result := Item.t(Item.o(m.left, p.left), m.right)
+		tw.tween_property($TransformButton,"position",buttonInPos,0.5)
+		$HintText.text = "Can disentangle! Yield: " + result.type_str() + " :>"
+	else:
+		tw.tween_property($TransformButton,"position",buttonInPos+Vector2(300,0),0.5)
+		$HintText.text = err_msg
+		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
@@ -152,6 +200,10 @@ func _on_transform_button_pressed() -> void:
 		package()
 	elif mode==OperationMode.UNPACKAGE:
 		unpackage()
+	elif mode==OperationMode.ENTANGLE:
+		entangle()
+	elif mode==OperationMode.DISENTANGLE:
+		disentangle()
 
 func transform() -> void:
 	var p=Globals.active_potion
@@ -285,6 +337,63 @@ func package() -> void:
 		# Game Won
 		win_game()
 			
+	put_down(ma)
+
+func entangle() -> void:
+	# TODO: Implement entangle operation
+	# TODO: Get the two input items from active_material and active_potion
+	# TODO: Validate inputs
+	# TODO: Create the entangled item
+	# TODO: Play animation
+	# TODO: Check win condition
+	pass
+
+func disentangle() -> void:
+	var p = Globals.active_potion
+	var m = Globals.active_material
+	var pa = Globals.active_potion_actor
+	var ma = Globals.active_material_actor
+	
+	if m == null:
+		return
+	elif p == null:
+		return
+	elif m.type != Item.ItemType.TRANSFORM:
+		return
+	elif p.type != Item.ItemType.TRANSFORM:
+		return
+	elif not m.right.equals(p.right):
+		return
+	
+	# Close Button
+	Globals.active_material = null
+	Globals.active_potion = null
+	Globals.active_material_actor = null
+	Globals.active_potion_actor = null
+	on_potion_update()
+	
+	# Create the unified potion: (A|B)->C where A=m.left, B=p.left, C=m.right
+	var result := Item.t(Item.o(m.left, p.left), m.right)
+	
+	# Start disentangle animation
+	$InParticle.emitting = true
+	var tw = get_tree().create_tween()
+	tw.tween_interval(0.5)
+	tw.tween_property(ma, "scale", Vector2(0, 0), 0.5)
+	tw.parallel().tween_property(pa, "scale", Vector2(0, 0), 0.5)
+	tw.tween_callback(func():
+		ma.set_item(result)
+		$OutParticle.emitting = true
+		pa.queue_free()
+	)
+	tw.tween_property(ma, "scale", Vector2(4, 4), 0.5)
+	tw.tween_interval(1)
+	await tw.finished
+	
+	if Globals.current_level.win.equals(result):
+		# Game Won
+		win_game()
+	
 	put_down(ma)
 
 func put_down(item: ItemDisplay):

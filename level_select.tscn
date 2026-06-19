@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dp1bsw5ma15q3"]
+[gd_scene format=3 uid="uid://dp1bsw5ma15q3"]
 
 [ext_resource type="Texture2D" uid="uid://etb0q6dhhw6l" path="res://texture/level_bg/I.jpg" id="1_bv7n5"]
 [ext_resource type="FontFile" uid="uid://q0yu2gl6ai7a" path="res://font/MedievalSharp-Regular.ttf" id="1_il3u1"]
@@ -8,6 +8,7 @@
 [ext_resource type="FontFile" uid="uid://becar0jugmwip" path="res://font/Amarante-Regular.ttf" id="3_apu6u"]
 [ext_resource type="Script" uid="uid://cstxj42u02ypo" path="res://script/ui/level_select_button.gd" id="4_bv7n5"]
 [ext_resource type="Texture2D" uid="uid://bm24wf7l731sl" path="res://texture/level_bg/II.png" id="6_8qr5y"]
+[ext_resource type="Texture2D" uid="uid://b6x76k6m5jpjx" path="res://texture/level_bg/III.png" id="7_05pd3"]
 [ext_resource type="Script" uid="uid://46wrjq843pix" path="res://script/ui/label_btn.gd" id="8_1wnlg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lmhjs"]
@@ -35,7 +36,7 @@ font = ExtResource("3_apu6u")
 font_size = 24
 shadow_color = Color(0, 0, 0, 1)
 
-[node name="LevelSelect" type="Control"]
+[node name="LevelSelect" type="Control" unique_id=1883418187]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -44,20 +45,20 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_lmhjs")
 
-[node name="panel" type="Control" parent="."]
+[node name="panel" type="Control" parent="." unique_id=168159132]
 unique_name_in_owner = true
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="I" type="Control" parent="panel"]
+[node name="I" type="Control" parent="panel" unique_id=147192471]
 visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("2_1iyaf")
 
-[node name="bg" type="TextureRect" parent="panel/I"]
+[node name="bg" type="TextureRect" parent="panel/I" unique_id=6083203]
 self_modulate = Color(1, 1, 1, 0.33333334)
 layout_mode = 0
 offset_right = 1385.0
@@ -65,11 +66,11 @@ offset_bottom = 996.0
 texture = ExtResource("1_bv7n5")
 expand_mode = 2
 
-[node name="Line2D" type="Line2D" parent="panel/I"]
+[node name="Line2D" type="Line2D" parent="panel/I" unique_id=2061259232]
 points = PackedVector2Array(317, 209, 494, 62, 870, 161, 980, 413, 612, 577)
 width = 4.0
 
-[node name="Button" type="Button" parent="panel/I"]
+[node name="Button" type="Button" parent="panel/I" unique_id=451137116]
 layout_mode = 0
 offset_left = 292.0
 offset_top = 183.0
@@ -82,7 +83,7 @@ text = "U-1"
 script = ExtResource("4_bv7n5")
 level = "1"
 
-[node name="Button2" type="Button" parent="panel/I"]
+[node name="Button2" type="Button" parent="panel/I" unique_id=1989555144]
 layout_mode = 0
 offset_left = 463.0
 offset_top = 40.0
@@ -95,7 +96,7 @@ text = "U-2"
 script = ExtResource("4_bv7n5")
 level = "2"
 
-[node name="Button3" type="Button" parent="panel/I"]
+[node name="Button3" type="Button" parent="panel/I" unique_id=438999406]
 layout_mode = 0
 offset_left = 829.0
 offset_top = 132.0
@@ -108,7 +109,7 @@ text = "U-3"
 script = ExtResource("4_bv7n5")
 level = "3"
 
-[node name="Button4" type="Button" parent="panel/I"]
+[node name="Button4" type="Button" parent="panel/I" unique_id=58432080]
 layout_mode = 0
 offset_left = 946.0
 offset_top = 382.0
@@ -121,7 +122,7 @@ text = "U-4"
 script = ExtResource("4_bv7n5")
 level = "4"
 
-[node name="Button5" type="Button" parent="panel/I"]
+[node name="Button5" type="Button" parent="panel/I" unique_id=1543090775]
 layout_mode = 0
 offset_left = 586.0
 offset_top = 549.0
@@ -134,14 +135,14 @@ text = "U-5"
 script = ExtResource("4_bv7n5")
 level = "5"
 
-[node name="II" type="Control" parent="panel"]
+[node name="II" type="Control" parent="panel" unique_id=1220479328]
 visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("2_1iyaf")
 
-[node name="bg" type="TextureRect" parent="panel/II"]
+[node name="bg" type="TextureRect" parent="panel/II" unique_id=517757503]
 self_modulate = Color(1, 1, 1, 0.33333334)
 layout_mode = 0
 offset_left = -137.0
@@ -151,11 +152,11 @@ offset_bottom = 800.0
 texture = ExtResource("6_8qr5y")
 expand_mode = 2
 
-[node name="Line2D" type="Line2D" parent="panel/II"]
+[node name="Line2D" type="Line2D" parent="panel/II" unique_id=2139613273]
 points = PackedVector2Array(365, 111, 365, 527, 1021, 543, 1019, 113, 691, 334)
 width = 4.0
 
-[node name="Button" type="Button" parent="panel/II"]
+[node name="Button" type="Button" parent="panel/II" unique_id=1636241833]
 layout_mode = 0
 offset_left = 345.0
 offset_top = 89.0
@@ -168,7 +169,7 @@ text = "U-1"
 script = ExtResource("4_bv7n5")
 level = "11"
 
-[node name="Button2" type="Button" parent="panel/II"]
+[node name="Button2" type="Button" parent="panel/II" unique_id=1938494638]
 layout_mode = 0
 offset_left = 345.0
 offset_top = 495.0
@@ -181,7 +182,7 @@ text = "U-2"
 script = ExtResource("4_bv7n5")
 level = "12"
 
-[node name="Button3" type="Button" parent="panel/II"]
+[node name="Button3" type="Button" parent="panel/II" unique_id=1945635944]
 layout_mode = 0
 offset_left = 984.0
 offset_top = 519.0
@@ -194,7 +195,7 @@ text = "U-3"
 script = ExtResource("4_bv7n5")
 level = "13"
 
-[node name="Button4" type="Button" parent="panel/II"]
+[node name="Button4" type="Button" parent="panel/II" unique_id=1179762237]
 layout_mode = 0
 offset_left = 984.0
 offset_top = 89.0
@@ -207,7 +208,7 @@ text = "U-4"
 script = ExtResource("4_bv7n5")
 level = "14"
 
-[node name="Button5" type="Button" parent="panel/II"]
+[node name="Button5" type="Button" parent="panel/II" unique_id=89196553]
 layout_mode = 0
 offset_left = 671.0
 offset_top = 303.0
@@ -220,18 +221,103 @@ text = "U-5"
 script = ExtResource("4_bv7n5")
 level = "15"
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="III" type="Control" parent="panel" unique_id=1833883549]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_1iyaf")
+
+[node name="bg" type="TextureRect" parent="panel/III" unique_id=647416433]
+self_modulate = Color(1, 1, 1, 0.33333334)
+layout_mode = 0
+offset_left = -137.0
+offset_top = -39.0
+offset_right = 1248.0
+offset_bottom = 800.0
+texture = ExtResource("7_05pd3")
+expand_mode = 2
+
+[node name="Line2D" type="Line2D" parent="panel/III" unique_id=1452022415]
+points = PackedVector2Array(365, 111, 365, 527, 1021, 543, 1019, 113, 691, 334)
+width = 4.0
+
+[node name="Button" type="Button" parent="panel/III" unique_id=1407342811]
+layout_mode = 0
+offset_left = 345.0
+offset_top = 89.0
+offset_right = 398.0
+offset_bottom = 138.0
+theme_override_fonts/font = ExtResource("3_apu6u")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_lmhjs")
+text = "U-1"
+script = ExtResource("4_bv7n5")
+level = "21"
+
+[node name="Button2" type="Button" parent="panel/III" unique_id=54057342]
+layout_mode = 0
+offset_left = 345.0
+offset_top = 495.0
+offset_right = 403.0
+offset_bottom = 544.0
+theme_override_fonts/font = ExtResource("3_apu6u")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_lmhjs")
+text = "U-2"
+script = ExtResource("4_bv7n5")
+level = "22"
+
+[node name="Button3" type="Button" parent="panel/III" unique_id=1421530878]
+layout_mode = 0
+offset_left = 984.0
+offset_top = 519.0
+offset_right = 1042.0
+offset_bottom = 568.0
+theme_override_fonts/font = ExtResource("3_apu6u")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_lmhjs")
+text = "U-3"
+script = ExtResource("4_bv7n5")
+level = "23"
+
+[node name="Button4" type="Button" parent="panel/III" unique_id=1549689051]
+layout_mode = 0
+offset_left = 984.0
+offset_top = 89.0
+offset_right = 1044.0
+offset_bottom = 138.0
+theme_override_fonts/font = ExtResource("3_apu6u")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_lmhjs")
+text = "U-4"
+script = ExtResource("4_bv7n5")
+level = "24"
+
+[node name="Button5" type="Button" parent="panel/III" unique_id=884544150]
+layout_mode = 0
+offset_left = 671.0
+offset_top = 303.0
+offset_right = 731.0
+offset_bottom = 352.0
+theme_override_fonts/font = ExtResource("3_apu6u")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_lmhjs")
+text = "U-5"
+script = ExtResource("4_bv7n5")
+level = "25"
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=824734179]
 layout_mode = 0
 offset_right = 128.0
 offset_bottom = 648.0
 texture = SubResource("GradientTexture1D_wevku")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect" unique_id=1178157118]
 layout_mode = 0
 offset_right = 79.0
 offset_bottom = 648.0
 
-[node name="I" type="Label" parent="TextureRect/VBoxContainer"]
+[node name="I" type="Label" parent="TextureRect/VBoxContainer" unique_id=63533643]
 layout_mode = 2
 mouse_filter = 0
 theme_override_fonts/font = ExtResource("1_il3u1")
@@ -241,7 +327,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("2_vomi7")
 
-[node name="II" type="Label" parent="TextureRect/VBoxContainer"]
+[node name="II" type="Label" parent="TextureRect/VBoxContainer" unique_id=68881202]
 layout_mode = 2
 mouse_filter = 0
 theme_override_fonts/font = ExtResource("1_il3u1")
@@ -251,7 +337,17 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("2_vomi7")
 
-[node name="Label" type="Label" parent="TextureRect"]
+[node name="III" type="Label" parent="TextureRect/VBoxContainer" unique_id=1452545623]
+layout_mode = 2
+mouse_filter = 0
+theme_override_fonts/font = ExtResource("1_il3u1")
+theme_override_font_sizes/font_size = 64
+text = "III"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_vomi7")
+
+[node name="Label" type="Label" parent="TextureRect" unique_id=1731921256]
 layout_mode = 0
 offset_top = 615.0
 offset_right = 131.0
@@ -272,10 +368,18 @@ script = ExtResource("8_1wnlg")
 [connection signal="pressed" from="panel/II/Button3" to="panel/II/Button3" method="_on_pressed"]
 [connection signal="pressed" from="panel/II/Button4" to="panel/II/Button4" method="_on_pressed"]
 [connection signal="pressed" from="panel/II/Button5" to="panel/II/Button5" method="_on_pressed"]
+[connection signal="pressed" from="panel/III/Button" to="panel/III/Button" method="_on_pressed"]
+[connection signal="pressed" from="panel/III/Button2" to="panel/III/Button2" method="_on_pressed"]
+[connection signal="pressed" from="panel/III/Button3" to="panel/III/Button3" method="_on_pressed"]
+[connection signal="pressed" from="panel/III/Button4" to="panel/III/Button4" method="_on_pressed"]
+[connection signal="pressed" from="panel/III/Button5" to="panel/III/Button5" method="_on_pressed"]
 [connection signal="gui_input" from="TextureRect/VBoxContainer/I" to="TextureRect/VBoxContainer/I" method="_on_gui_input"]
 [connection signal="mouse_entered" from="TextureRect/VBoxContainer/I" to="TextureRect/VBoxContainer/I" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="TextureRect/VBoxContainer/I" to="TextureRect/VBoxContainer/I" method="_on_mouse_exited"]
 [connection signal="gui_input" from="TextureRect/VBoxContainer/II" to="TextureRect/VBoxContainer/II" method="_on_gui_input"]
 [connection signal="mouse_entered" from="TextureRect/VBoxContainer/II" to="TextureRect/VBoxContainer/II" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="TextureRect/VBoxContainer/II" to="TextureRect/VBoxContainer/II" method="_on_mouse_exited"]
+[connection signal="gui_input" from="TextureRect/VBoxContainer/III" to="TextureRect/VBoxContainer/III" method="_on_gui_input"]
+[connection signal="mouse_entered" from="TextureRect/VBoxContainer/III" to="TextureRect/VBoxContainer/III" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="TextureRect/VBoxContainer/III" to="TextureRect/VBoxContainer/III" method="_on_mouse_exited"]
 [connection signal="clicked" from="TextureRect/Label" to="." method="_on_label_clicked"]

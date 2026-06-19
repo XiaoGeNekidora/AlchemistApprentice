@@ -19,7 +19,9 @@
 [ext_resource type="Texture2D" uid="uid://cjceatgbu760v" path="res://texture/method/unpackage.png" id="12_qhcbd"]
 [ext_resource type="Texture2D" uid="uid://il5gr7mtfhat" path="res://texture/flower.png" id="13_cgngr"]
 [ext_resource type="PackedScene" uid="uid://dbuvvt13wy0lx" path="res://partial/item_display.tscn" id="14_215e1"]
+[ext_resource type="Texture2D" uid="uid://iikol2ku0po8" path="res://texture/method/entangle.png" id="14_x5p1p"]
 [ext_resource type="Script" uid="uid://cuxsuj5am8667" path="res://script/ui/tooltip.gd" id="15_7sc4i"]
+[ext_resource type="Texture2D" uid="uid://dhrksqpjyihs8" path="res://texture/method/disentangle.png" id="15_qhcbd"]
 [ext_resource type="Texture2D" uid="uid://b2l30uvjq8f4q" path="res://texture/dialog.png" id="16_80cx4"]
 
 [sub_resource type="Gradient" id="Gradient_wf0cr"]
@@ -218,6 +220,22 @@ texture = ExtResource("12_qhcbd")
 expand_mode = 2
 script = ExtResource("11_hb5m1")
 mode = 2
+
+[node name="Entangle" type="TextureRect" parent="Methods" unique_id=1402594320]
+layout_mode = 2
+tooltip_text = "Entangle"
+texture = ExtResource("14_x5p1p")
+expand_mode = 2
+script = ExtResource("11_hb5m1")
+mode = 3
+
+[node name="Disentangle" type="TextureRect" parent="Methods" unique_id=1547684427]
+layout_mode = 2
+tooltip_text = "Disentangle"
+texture = ExtResource("15_qhcbd")
+expand_mode = 2
+script = ExtResource("11_hb5m1")
+mode = 4
 
 [node name="HintText" type="Label" parent="." unique_id=1919324247]
 layout_mode = 1

@@ -42,7 +42,9 @@ func set_item(item: Item):
 		self.texture=load("res://texture/potion_%s.png"%id)
 	elif item.type==Item.ItemType.AND:
 		self.texture=load("res://texture/mixture.png")
-	
+	elif item.type==Item.ItemType.OR:
+		self.texture=load("res://texture/entanglement.png")
+		
 	if self.texture==null:
 		self.texture=load("res://texture/unknown.png")
 
