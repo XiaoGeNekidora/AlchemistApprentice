@@ -28,7 +28,8 @@ func build_tooltip(item: Item):
 	elif item.type==Item.ItemType.NOT:
 		ttp+="[font size=24]"+c("Corrupted","47110b")+" "+c(item.left.name.capitalize(),"red")+"[/font]\n"
 		ttp+="[i]The inversion of "+c(item.left.type_str().capitalize(),"green")+". DO NOT TOUCH.[/i]\n"
-		
+	
+	ttp+="[color=gray][font size=12]"+item.type_str().capitalize()+"[/font][/color]"
 	self.text=ttp
 
 func mouse_out(i: Item):

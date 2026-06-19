@@ -209,14 +209,18 @@ script = ExtResource("9_e36ub")
 
 [node name="Transform" type="TextureRect" parent="Methods" unique_id=904503707]
 layout_mode = 2
-tooltip_text = "Transform"
+tooltip_text = "Transform
+Input: A, A->B
+Yield: B"
 texture = ExtResource("10_hb5m1")
 expand_mode = 2
 script = ExtResource("11_hb5m1")
 
 [node name="Package" type="TextureRect" parent="Methods" unique_id=461565169]
 layout_mode = 2
-tooltip_text = "Package"
+tooltip_text = "Package
+Input: A, B
+Output: A&B"
 texture = ExtResource("11_x5p1p")
 expand_mode = 2
 script = ExtResource("11_hb5m1")
@@ -224,7 +228,9 @@ mode = 1
 
 [node name="Unpackage" type="TextureRect" parent="Methods" unique_id=1214733406]
 layout_mode = 2
-tooltip_text = "Unpackage"
+tooltip_text = "Unpackage
+Input: A&B
+Output: A, B"
 texture = ExtResource("12_qhcbd")
 expand_mode = 2
 script = ExtResource("11_hb5m1")
@@ -232,7 +238,9 @@ mode = 2
 
 [node name="Entangle" type="TextureRect" parent="Methods" unique_id=1402594320]
 layout_mode = 2
-tooltip_text = "Entangle"
+tooltip_text = "Entangle
+Input: (A|B)->C
+Output: A->(A|B), B->(A|B)"
 texture = ExtResource("14_x5p1p")
 expand_mode = 2
 script = ExtResource("11_hb5m1")
@@ -240,7 +248,9 @@ mode = 3
 
 [node name="Disentangle" type="TextureRect" parent="Methods" unique_id=1547684427]
 layout_mode = 2
-tooltip_text = "Disentangle"
+tooltip_text = "Disentangle
+Input: A->C, B->C
+Output: (A|B)->C"
 texture = ExtResource("15_qhcbd")
 expand_mode = 2
 script = ExtResource("11_hb5m1")
@@ -248,7 +258,9 @@ mode = 4
 
 [node name="DarkInfuse" type="TextureRect" parent="Methods" unique_id=1063209604]
 layout_mode = 2
-tooltip_text = "Dark Infuse"
+tooltip_text = "Dark Infuse
+Input: A->B
+Output: !B->!A"
 texture = ExtResource("17_i2p71")
 expand_mode = 2
 script = ExtResource("11_hb5m1")

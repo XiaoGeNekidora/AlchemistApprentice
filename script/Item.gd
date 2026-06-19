@@ -47,7 +47,7 @@ func type_str() -> String:
 	elif type==ItemType.OR:
 		return "( %s | %s )"%[left.type_str(),right.type_str()]
 	elif type==ItemType.NOT:
-		return "!%s"%[left.type_str()]
+		return "! %s"%[left.type_str()]
 	return "?"
 
 ## Create a unit item with given name
