@@ -15,6 +15,7 @@ func _init():
 	self.name="Introduction to Mixture"
 	self.level_no="2-1"
 	self.win=Item.a2("iron","gold","Ig")
+	self.import_packages()
 	self.desc="""
 Welcome to the second year of your alchemy lessons! Luckily you did not blow yourself up in the first year.
 In this year we will be learning two new types of matter: ~Mixture~ and ~Entanglement~.

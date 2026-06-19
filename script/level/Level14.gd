@@ -21,6 +21,7 @@ func _init():
 	self.name="Sorting"
 	self.level_no="2-4"
 	self.win=Item.a(Item.a2("iron","silver"),Item.a2("gold","diamond"),"Isgd")
+	self.import_packages()
 	self.desc="""
 Wow! A rare displaced four-element mixture! This is uncommon because usually the elements should be ~sorted~.
 We can infer that some sort of distortion may have happened (like a dragon outbreak) at where this compound is taken.

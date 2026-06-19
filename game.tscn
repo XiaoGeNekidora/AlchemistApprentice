@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cedxxe83p4h5b"]
+[gd_scene format=3 uid="uid://cedxxe83p4h5b"]
 
 [ext_resource type="Script" uid="uid://crswn7o0gajkv" path="res://script/ui/game.gd" id="1_4n42x"]
 [ext_resource type="Texture2D" uid="uid://bytk1wmfhot8y" path="res://texture/desk.png" id="2_ypp00"]
@@ -9,9 +9,14 @@
 [ext_resource type="Script" uid="uid://da3i4jh5jlthy" path="res://script/ui/inventory.gd" id="7_7i4ak"]
 [ext_resource type="FontFile" uid="uid://becar0jugmwip" path="res://font/Amarante-Regular.ttf" id="8_f61ct"]
 [ext_resource type="Texture2D" uid="uid://b87uidrpughil" path="res://texture/bubble.png" id="9_32jkm"]
+[ext_resource type="Script" uid="uid://ykq2u8obasxn" path="res://script/ui/methods.gd" id="9_e36ub"]
 [ext_resource type="Texture2D" uid="uid://c46vfjlaljuv1" path="res://texture/seal.png" id="10_4ryrp"]
+[ext_resource type="Texture2D" uid="uid://b3dtmekdcqqsm" path="res://texture/method/transform.png" id="10_hb5m1"]
+[ext_resource type="Script" uid="uid://svr1m5p4klqi" path="res://script/ui/single_method.gd" id="11_hb5m1"]
 [ext_resource type="Texture2D" uid="uid://tv8tj71o408c" path="res://texture/back.png" id="11_s6xxb"]
+[ext_resource type="Texture2D" uid="uid://dei7mmvkn1y0p" path="res://texture/method/package.png" id="11_x5p1p"]
 [ext_resource type="Texture2D" uid="uid://dwvhgk1md1phx" path="res://texture/retry.png" id="12_kqucy"]
+[ext_resource type="Texture2D" uid="uid://cjceatgbu760v" path="res://texture/method/unpackage.png" id="12_qhcbd"]
 [ext_resource type="Texture2D" uid="uid://il5gr7mtfhat" path="res://texture/flower.png" id="13_cgngr"]
 [ext_resource type="PackedScene" uid="uid://dbuvvt13wy0lx" path="res://partial/item_display.tscn" id="14_215e1"]
 [ext_resource type="Script" uid="uid://cuxsuj5am8667" path="res://script/ui/tooltip.gd" id="15_7sc4i"]
@@ -35,7 +40,7 @@ font_color = Color(0.59748, 0.00866435, 2.88785e-07, 1)
 [sub_resource type="Gradient" id="Gradient_5tid0"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[node name="Root" type="Control"]
+[node name="Root" type="Control" unique_id=825873091]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -44,13 +49,13 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4n42x")
 
-[node name="bg" type="TextureRect" parent="."]
+[node name="bg" type="TextureRect" parent="." unique_id=1668415226]
 layout_mode = 0
 offset_right = 1155.0
 offset_bottom = 655.0
 texture = ExtResource("2_ypp00")
 
-[node name="TextureRect2" type="TextureRect" parent="."]
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=1940129241]
 layout_mode = 0
 offset_left = 788.0
 offset_top = 95.0
@@ -58,14 +63,14 @@ offset_right = 1026.0
 offset_bottom = 333.0
 texture = SubResource("GradientTexture2D_xo2xn")
 
-[node name="Mission" type="TextureRect" parent="."]
+[node name="Mission" type="TextureRect" parent="." unique_id=294261829]
 layout_mode = 0
 offset_right = 539.0
 offset_bottom = 369.0
 texture = ExtResource("3_sbn22")
 expand_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Mission"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Mission" unique_id=1372593449]
 clip_contents = false
 custom_minimum_size = Vector2(0, 21)
 layout_mode = 0
@@ -133,21 +138,21 @@ override_bbcodeEnabled = true
 override_clipContents = false
 override_fitContent = true
 
-[node name="Hand" type="Control" parent="."]
+[node name="Hand" type="Control" parent="." unique_id=427409353]
 anchors_preset = 0
 offset_left = 694.0
 offset_top = 348.0
 offset_right = 694.0
 offset_bottom = 348.0
 
-[node name="HandContainer" type="Control" parent="Hand"]
+[node name="HandContainer" type="Control" parent="Hand" unique_id=1282190951]
 unique_name_in_owner = true
 anchors_preset = 0
 offset_right = 399.0
 offset_bottom = 210.0
 script = ExtResource("5_mr6rn")
 
-[node name="Inventory" type="TextureRect" parent="."]
+[node name="Inventory" type="TextureRect" parent="." unique_id=140652666]
 layout_mode = 0
 offset_left = 539.0
 offset_top = 394.0
@@ -156,21 +161,21 @@ offset_bottom = 554.0
 texture = ExtResource("6_66ksx")
 script = ExtResource("7_7i4ak")
 
-[node name="ItemHere" type="Marker2D" parent="."]
+[node name="ItemHere" type="Marker2D" parent="." unique_id=1200891478]
 unique_name_in_owner = true
 position = Vector2(916, 220)
 
-[node name="PotionHere" type="Marker2D" parent="."]
+[node name="PotionHere" type="Marker2D" parent="." unique_id=59408880]
 unique_name_in_owner = true
 position = Vector2(834, 127)
 rotation = 2.52898
 
-[node name="UpInv" type="Control" parent="."]
+[node name="UpInv" type="Control" parent="." unique_id=1621191017]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="TransformButton" type="Button" parent="."]
+[node name="TransformButton" type="Button" parent="." unique_id=1417194163]
 layout_mode = 0
 offset_left = 997.0
 offset_top = 196.0
@@ -180,17 +185,39 @@ theme_override_fonts/font = ExtResource("8_f61ct")
 theme_override_font_sizes/font_size = 24
 text = "Transform!!!"
 
-[node name="BreakButton" type="Button" parent="."]
+[node name="Methods" type="HBoxContainer" parent="." unique_id=759569406]
 layout_mode = 0
-offset_left = 997.0
-offset_top = 246.0
-offset_right = 1138.0
-offset_bottom = 285.0
-theme_override_fonts/font = ExtResource("8_f61ct")
-theme_override_font_sizes/font_size = 24
-text = "Break!!!"
+offset_left = 828.0
+offset_top = 316.0
+offset_right = 997.0
+offset_bottom = 356.0
+alignment = 1
+script = ExtResource("9_e36ub")
 
-[node name="HintText" type="Label" parent="."]
+[node name="Transform" type="TextureRect" parent="Methods" unique_id=904503707]
+layout_mode = 2
+tooltip_text = "Transform"
+texture = ExtResource("10_hb5m1")
+expand_mode = 2
+script = ExtResource("11_hb5m1")
+
+[node name="Package" type="TextureRect" parent="Methods" unique_id=461565169]
+layout_mode = 2
+tooltip_text = "Package"
+texture = ExtResource("11_x5p1p")
+expand_mode = 2
+script = ExtResource("11_hb5m1")
+mode = 1
+
+[node name="Unpackage" type="TextureRect" parent="Methods" unique_id=1214733406]
+layout_mode = 2
+tooltip_text = "Unpackage"
+texture = ExtResource("12_qhcbd")
+expand_mode = 2
+script = ExtResource("11_hb5m1")
+mode = 2
+
+[node name="HintText" type="Label" parent="." unique_id=1919324247]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -209,7 +236,7 @@ label_settings = SubResource("LabelSettings_14qgj")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Bubble" type="NinePatchRect" parent="HintText"]
+[node name="Bubble" type="NinePatchRect" parent="HintText" unique_id=1360227035]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -227,7 +254,7 @@ patch_margin_top = 10
 patch_margin_right = 15
 patch_margin_bottom = 10
 
-[node name="Seal" type="TextureRect" parent="."]
+[node name="Seal" type="TextureRect" parent="." unique_id=1974456632]
 visible = false
 layout_mode = 0
 offset_left = 369.0
@@ -239,7 +266,7 @@ pivot_offset = Vector2(64, 64)
 texture = ExtResource("10_4ryrp")
 expand_mode = 1
 
-[node name="ButtonList" type="HBoxContainer" parent="."]
+[node name="ButtonList" type="HBoxContainer" parent="." unique_id=100673749]
 layout_mode = 0
 offset_left = 22.0
 offset_top = 578.0
@@ -247,7 +274,7 @@ offset_right = 630.0
 offset_bottom = 618.0
 alignment = 1
 
-[node name="BackBtn" type="Button" parent="ButtonList"]
+[node name="BackBtn" type="Button" parent="ButtonList" unique_id=1569438844]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.529412, 0.45098, 0.513726, 1)
@@ -257,7 +284,7 @@ theme_override_fonts/font = ExtResource("8_f61ct")
 text = "Back"
 icon = ExtResource("11_s6xxb")
 
-[node name="RetryBtn" type="Button" parent="ButtonList"]
+[node name="RetryBtn" type="Button" parent="ButtonList" unique_id=1953186696]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.529412, 0.45098, 0.513726, 1)
@@ -267,7 +294,7 @@ theme_override_fonts/font = ExtResource("8_f61ct")
 text = "Retry"
 icon = ExtResource("12_kqucy")
 
-[node name="NextButton" type="Button" parent="ButtonList"]
+[node name="NextButton" type="Button" parent="ButtonList" unique_id=1485939408]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.529412, 0.45098, 0.513726, 1)
@@ -277,7 +304,7 @@ theme_override_fonts/font = ExtResource("8_f61ct")
 text = "Next"
 icon = ExtResource("12_kqucy")
 
-[node name="WinParticle" type="CPUParticles2D" parent="."]
+[node name="WinParticle" type="CPUParticles2D" parent="." unique_id=785121379]
 position = Vector2(597, -89)
 emitting = false
 amount = 150
@@ -292,7 +319,7 @@ angular_velocity_max = 50.0
 angle_min = -20.0
 angle_max = 20.0
 
-[node name="OutParticle" type="CPUParticles2D" parent="."]
+[node name="OutParticle" type="CPUParticles2D" parent="." unique_id=594019903]
 position = Vector2(916, 220)
 emitting = false
 amount = 1800
@@ -305,7 +332,7 @@ initial_velocity_max = 200.0
 damping_max = 100.0
 color_ramp = SubResource("Gradient_5tid0")
 
-[node name="InParticle" type="CPUParticles2D" parent="."]
+[node name="InParticle" type="CPUParticles2D" parent="." unique_id=1634115364]
 position = Vector2(916, 220)
 emitting = false
 amount = 1800
@@ -319,14 +346,14 @@ radial_accel_max = -600.0
 damping_max = 100.0
 color_ramp = SubResource("Gradient_5tid0")
 
-[node name="TargetItem" parent="." instance=ExtResource("14_215e1")]
+[node name="TargetItem" parent="." unique_id=288911990 instance=ExtResource("14_215e1")]
 layout_mode = 1
 offset_left = 108.0
 offset_top = 437.0
 offset_right = -1001.0
 offset_bottom = -168.0
 
-[node name="LevelName" type="Label" parent="."]
+[node name="LevelName" type="Label" parent="." unique_id=1468239882]
 layout_mode = 0
 offset_left = 38.0
 offset_top = 394.0
@@ -336,7 +363,7 @@ theme_override_fonts/font = ExtResource("8_f61ct")
 text = "Level 1-1 891023890183091839381312
 Target:"
 
-[node name="Tooltip" type="RichTextLabel" parent="."]
+[node name="Tooltip" type="RichTextLabel" parent="." unique_id=1875772983]
 unique_name_in_owner = true
 visible = false
 clip_contents = false
@@ -353,7 +380,7 @@ fit_content = true
 scroll_active = false
 script = ExtResource("15_7sc4i")
 
-[node name="TextureRect" type="NinePatchRect" parent="Tooltip"]
+[node name="TextureRect" type="NinePatchRect" parent="Tooltip" unique_id=1200449040]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = -1
@@ -374,6 +401,5 @@ patch_margin_bottom = 9
 [connection signal="child_order_changed" from="Hand/HandContainer" to="Hand/HandContainer" method="_on_child_order_changed"]
 [connection signal="gui_input" from="Inventory" to="Inventory" method="_on_gui_input"]
 [connection signal="pressed" from="TransformButton" to="." method="_on_transform_button_pressed"]
-[connection signal="pressed" from="BreakButton" to="." method="_on_break_button_pressed"]
 [connection signal="pressed" from="ButtonList/BackBtn" to="." method="_on_back_btn_pressed"]
 [connection signal="pressed" from="ButtonList/RetryBtn" to="." method="_on_retry_btn_pressed"]

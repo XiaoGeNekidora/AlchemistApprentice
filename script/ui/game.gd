@@ -2,36 +2,88 @@ extends Control
 class_name GameRoot
 
 signal signal_transform
-
+## Emit this to change mode.
+signal mode_change(mode: OperationMode)
 var buttonInPos:Vector2
 
 ## 相邻两个按钮的距离
-const BTN_DIS=50
+const BTN_DIS: int=50
+
+enum OperationMode{
+	TRANSFORM,
+	PACKAGE,
+	UNPACKAGE
+}
+
+var mode := OperationMode.TRANSFORM;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# Setup where to go
 	ItemDisplay.inv=%HandContainer
 	ItemDisplay.mki=%ItemHere
 	ItemDisplay.mkp=%PotionHere
 	ItemDisplay.up=$UpInv
 	ItemDisplay.callback=on_potion_update
 	
+	# Set up available modes
+	$Methods.set_modes(Globals.current_level.allowed_methods)
+	mode_change.emit(OperationMode.TRANSFORM)
+	mode_change.connect(on_mode_change)
+	
+	# Set up mission text
 	$Mission/RichTextLabel.bbcode=Globals.current_level.desc
 	
+	# Set up button position outside screen
 	buttonInPos = $TransformButton.position
 	$TransformButton.position=buttonInPos+Vector2(500,0)
-	$BreakButton.position=buttonInPos+Vector2(500,BTN_DIS)
 	
+	# Set up level description
 	$TargetItem.set_item(Globals.current_level.win)
 	$TargetItem.clickable=false
 	$LevelName.text="Level %s %s\nTarget:"%[Globals.current_level.level_no,Globals.current_level.name]
 	%Tooltip.bind($TargetItem)
 
+func on_mode_change(new_mode: OperationMode):
+	print(new_mode,"<-",mode)
+	
+	if new_mode==mode:
+		return
+	
+	if new_mode==OperationMode.TRANSFORM:
+		$TransformButton.text="Transform!"
+		$HintText.text="Let's see if we can transform something..."
+	elif new_mode==OperationMode.PACKAGE:
+		$TransformButton.text="Package!"
+		$HintText.text="Let's see if we can package something..."
+	elif new_mode==OperationMode.UNPACKAGE:
+		$TransformButton.text="Break!"
+		$HintText.text="Let's see if we can unpackage something..."
+	mode = new_mode
+	
+	put_down(Globals.active_potion_actor)
+	put_down(Globals.active_material_actor)
+	Globals.active_material=null
+	Globals.active_potion=null
+	Globals.active_material_actor=null
+	Globals.active_potion_actor=null
+	on_potion_update()
+	
 ## perform "can transform"?
 func on_potion_update():
-	var p=Globals.active_potion
-	var m=Globals.active_material
+
+	var p: Item=Globals.active_potion
+	var m: Item=Globals.active_material
 	
+	if mode==OperationMode.TRANSFORM:
+		transform_update(m,p)
+	elif mode==OperationMode.PACKAGE:
+		pass
+	elif mode==OperationMode.UNPACKAGE:
+		unpackage_update(m)
+	
+
+func transform_update(m: Item, p: Item):
 	var err_msg=null
 	if m==null:
 		err_msg="Please add a base material"
@@ -42,33 +94,48 @@ func on_potion_update():
 	elif not p.left.equals(m):
 		err_msg="The catalyst does not seem to apply to that thing..."
 	
-	var tw=get_tree().create_tween().set_trans(Tween.TRANS_EXPO).set_parallel()
+	var tw:=get_tree().create_tween().set_trans(Tween.TRANS_EXPO).set_parallel()
 	$TransformButton.disabled=err_msg!=null
-	$BreakButton.disabled= m==null or m.type!=Item.ItemType.AND
 	
-	if not $BreakButton.disabled and err_msg!=null:
-		err_msg+="... or break it"
-		
 	if not $TransformButton.disabled:
 		tw.tween_property($TransformButton,"position",buttonInPos,0.5)
 		$HintText.text="LGTM. Yield: "+p.right.type_str().capitalize()+" :>"
 	else:
 		tw.tween_property($TransformButton,"position",buttonInPos+Vector2(300,0),0.5)
 		$HintText.text=err_msg
-	
-	if not $BreakButton.disabled:
-		tw.tween_property($BreakButton,"position",buttonInPos+Vector2(0,BTN_DIS),0.5)
-	else:
-		tw.tween_property($BreakButton,"position",buttonInPos+Vector2(300,BTN_DIS),0.5)
+
+func unpackage_update(m: Item):
+	var err_msg=null
+	if m==null:
+		err_msg="Please add a package"
+	elif m.type!=Item.ItemType.AND:
+		err_msg="That is not a package"
 		
+	var tw:=get_tree().create_tween().set_trans(Tween.TRANS_EXPO).set_parallel()
+	$TransformButton.disabled=err_msg!=null
+	
+	if not $TransformButton.disabled:
+		tw.tween_property($TransformButton,"position",buttonInPos,0.5)
+		$HintText.text="Can unpackage! Into: "+m.left.type_str().capitalize()+" and "+m.right.type_str().capitalize()+" :>"
+	else:
+		tw.tween_property($TransformButton,"position",buttonInPos+Vector2(300,0),0.5)
+		$HintText.text=err_msg
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
-
-var won = false
+var won := false
 
 func _on_transform_button_pressed() -> void:
+	if mode==OperationMode.TRANSFORM:
+		transform()
+	elif mode==OperationMode.PACKAGE:
+		pass
+	elif mode==OperationMode.UNPACKAGE:
+		unpackage()
+
+func transform() -> void:
 	var p=Globals.active_potion
 	var m=Globals.active_material
 	var pa=Globals.active_potion_actor
@@ -109,25 +176,10 @@ func _on_transform_button_pressed() -> void:
 		# Game Won
 		win_game()
 			
-	pa.slot=ItemDisplay.SLOT_BELOW
-	ma.slot=ItemDisplay.SLOT_BELOW
-	pa.reparent(%HandContainer)
-	ma.reparent(%HandContainer)
-	pa.size=Vector2(24,24)
-	ma.size=Vector2(24,24)
-	
-func win_game():
-	if not won:
-		won=true
-		$Seal.visible=true
-		var tw=get_tree().create_tween().set_parallel()
-		tw.tween_property($Seal,"position",$Seal.position,0.2).from($Seal.position+Vector2(30,-30))
-		tw.tween_property($Seal,"self_modulate",Color.WHITE,0.2).from(Color(Color.WHITE,0))
-		$WinParticle.emitting=true
+	put_down(pa)
+	put_down(ma)
 
-var id=preload("res://partial/item_display.tscn")
-
-func _on_break_button_pressed() -> void:
+func unpackage() -> void:
 	var m=Globals.active_material
 	var ma=Globals.active_material_actor
 	var pa=null
@@ -171,13 +223,28 @@ func _on_break_button_pressed() -> void:
 	if Globals.current_level.win.equals(m.left) or Globals.current_level.win.equals(m.right):
 		# Game Won
 		win_game()
-			
-	pa.slot=ItemDisplay.SLOT_BELOW
-	ma.slot=ItemDisplay.SLOT_BELOW
-	pa.reparent(%HandContainer)
-	ma.reparent(%HandContainer)
-	pa.size=Vector2(24,24)
-	ma.size=Vector2(24,24)
+		
+	put_down(pa)
+	put_down(ma)
+
+func put_down(item: ItemDisplay):
+	if item==null:
+		return
+	item.slot = ItemDisplay.SLOT_BELOW
+	item.reparent(%HandContainer)
+	item.size=Vector2(24,24)
+	
+func win_game():
+	if not won:
+		won=true
+		$Seal.visible=true
+		var tw=get_tree().create_tween().set_parallel()
+		tw.tween_property($Seal,"position",$Seal.position,0.2).from($Seal.position+Vector2(30,-30))
+		tw.tween_property($Seal,"self_modulate",Color.WHITE,0.2).from(Color(Color.WHITE,0))
+		$WinParticle.emitting=true
+
+var id=preload("res://partial/item_display.tscn")
+
 	
 func _on_retry_btn_pressed() -> void:
 	get_tree().change_scene_to_file("res://game.tscn")

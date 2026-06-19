@@ -45,10 +45,14 @@ func set_item(item: Item):
 	
 	if self.texture==null:
 		self.texture=load("res://texture/unknown.png")
+
 func _on_gui_input(event: InputEvent) -> void:
 	if not clickable:
 		return
-		
+	
+	var root:GameRoot=get_tree().current_scene
+	var mode:GameRoot.OperationMode=root.mode
+	
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index==MOUSE_BUTTON_LEFT:
 			if slot==SLOT_BELOW:
@@ -59,7 +63,7 @@ func _on_gui_input(event: InputEvent) -> void:
 					Globals.active_material_actor=self
 					self.slot=SLOT_UP
 					mk=mki
-				elif Globals.active_potion==null:
+				elif mode!=GameRoot.OperationMode.UNPACKAGE and Globals.active_potion==null:
 					Globals.active_potion=self.item
 					Globals.active_potion_actor=self
 					self.slot=SLOT_POTION

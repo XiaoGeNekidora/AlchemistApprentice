@@ -29,6 +29,7 @@ func _init():
 	self.name="Union Exam"
 	self.level_no="2-5"
 	self.win=Item.a2("gold","diamond","God")
+	self.import_packages()
 	self.desc="""
 This is the final exam of Chapter 2. Can you do it?
 """

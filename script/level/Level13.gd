@@ -17,6 +17,7 @@ func _init():
 	self.name="Swapping Places"
 	self.level_no="2-3"
 	self.win=Item.a(Item.a(Item.u("iron"),Item.u("gold"),"Ig"),Item.a(Item.u("gold"),Item.u("iron"),"Gi"),"Iggi")
+	self.import_packages()
 	self.desc="""
 When a [red]Mixture[] contains two items, there are ALSO two different possible formations: AB and BA!
 In your materialmagicology lessons you have learnt that there is always a DM-ELS material based on the MPP of the EL that forms the materials.

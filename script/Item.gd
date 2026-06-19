@@ -11,8 +11,9 @@ var type: ItemType
 
 var name: String
 
+## Represents the input for catalysts. the first component in AND/OR. If UNIT, this could be undefined
 var left: Item
-## If UNIT, this could be undefined
+## Represents the output for catalysts. the second component in AND/OR. If UNIT, this could be undefined
 var right: Item
 ## 0 means no tag
 var tag: int
