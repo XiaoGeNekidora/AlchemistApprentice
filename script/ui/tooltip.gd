@@ -25,6 +25,10 @@ func build_tooltip(item: Item):
 	elif item.type==Item.ItemType.OR:
 		ttp+="[font size=24]"+c("Entanglement","purple")+" "+c(item.name.capitalize(),"red")+"[/font]\n"
 		ttp+="[i]An entanglement of "+c(item.left.type_str().capitalize(),"green")+" and "+c(item.right.type_str().capitalize(),"blue")+". Use the disentangler to craft potions that can transform it.[/i]\n"
+	elif item.type==Item.ItemType.NOT:
+		ttp+="[font size=24]"+c("Corrupted","47110b")+" "+c(item.left.name.capitalize(),"red")+"[/font]\n"
+		ttp+="[i]The inversion of "+c(item.left.type_str().capitalize(),"green")+". DO NOT TOUCH.[/i]\n"
+		
 	self.text=ttp
 
 func mouse_out(i: Item):

@@ -4,16 +4,17 @@ enum ItemType{
 	UNIT=0,
 	TRANSFORM=1,
 	AND=2,
-	OR=3
+	OR=3,
+	NOT=4
 }
 
 var type: ItemType
 
 var name: String
 
-## Represents the input for catalysts. the first component in AND/OR. If UNIT, this could be undefined
+## Represents the input for catalysts. the first component in AND/OR. Or the component in NOT. If UNIT, this could be undefined
 var left: Item
-## Represents the output for catalysts. the second component in AND/OR. If UNIT, this could be undefined
+## Represents the output for catalysts. the second component in AND/OR. If UNIT/NOT, this could be undefined
 var right: Item
 ## 0 means no tag
 var tag: int
@@ -45,6 +46,8 @@ func type_str() -> String:
 		return "( %s & %s )"%[left.type_str(),right.type_str()]
 	elif type==ItemType.OR:
 		return "( %s | %s )"%[left.type_str(),right.type_str()]
+	elif type==ItemType.NOT:
+		return "!%s"%[left.type_str()]
 	return "?"
 
 ## Create a unit item with given name
@@ -95,6 +98,13 @@ static func chain(a: Item, b: Item, c: Item, name: String = "") -> Item:
 		name+" Chainer A"
 	)
 
+static func n(a: Item) -> Item:
+	return Item.new(ItemType.NOT,a.name,a,null)
+
+static func n2(name:String) -> Item:
+	var x = Item.u(name)
+	return Item.new(ItemType.NOT, x.name, x, null)
+	
 func equals(o: Item) -> bool:
 	return o.type_str()==self.type_str()
 

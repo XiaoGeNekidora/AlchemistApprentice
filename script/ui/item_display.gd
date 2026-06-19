@@ -35,6 +35,7 @@ func on_transform():
 
 func set_item(item: Item):
 	self.item=item
+	self.modulate=Color.WHITE
 	if item.type==Item.ItemType.UNIT:
 		self.texture=load("res://texture/item/"+item.name+".png")
 	elif item.type==Item.ItemType.TRANSFORM:
@@ -44,6 +45,10 @@ func set_item(item: Item):
 		self.texture=load("res://texture/mixture.png")
 	elif item.type==Item.ItemType.OR:
 		self.texture=load("res://texture/entanglement.png")
+	elif item.type==Item.ItemType.NOT:
+		set_item(item.left) 
+		self.item=item #Set it back to the NOT item, but the texture is based on the left item
+		self.modulate=Color.BLACK
 		
 	if self.texture==null:
 		self.texture=load("res://texture/unknown.png")
@@ -65,7 +70,7 @@ func _on_gui_input(event: InputEvent) -> void:
 					Globals.active_material_actor=self
 					self.slot=SLOT_UP
 					mk=mki
-				elif mode!=GameRoot.OperationMode.UNPACKAGE and mode!=GameRoot.OperationMode.ENTANGLE and Globals.active_potion==null:
+				elif mode!=GameRoot.OperationMode.UNPACKAGE and mode!=GameRoot.OperationMode.ENTANGLE and mode!=GameRoot.OperationMode.DARK_INFUSE and Globals.active_potion==null:
 					Globals.active_potion=self.item
 					Globals.active_potion_actor=self
 					self.slot=SLOT_POTION

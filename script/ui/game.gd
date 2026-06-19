@@ -14,7 +14,9 @@ enum OperationMode{
 	PACKAGE,
 	UNPACKAGE,
 	ENTANGLE,
-	DISENTANGLE
+	DISENTANGLE,
+	DARK_INFUSE,
+	PURIFY
 }
 
 var mode := OperationMode.TRANSFORM;
@@ -67,6 +69,9 @@ func on_mode_change(new_mode: OperationMode):
 	elif new_mode==OperationMode.DISENTANGLE:
 		$TransformButton.text="Disentangle!"
 		$HintText.text="Place two potions with the same output to disentangle..."
+	elif new_mode==OperationMode.DARK_INFUSE:
+		$TransformButton.text="Dark Infuse!"
+		$HintText.text="Place a potion A->B to get its dark variant (-B)->(-A)..."
 	mode = new_mode
 	
 	put_down(Globals.active_potion_actor)
@@ -93,6 +98,8 @@ func on_potion_update():
 		entangle_update(m,p)
 	elif mode==OperationMode.DISENTANGLE:
 		disentangle_update(m,p)
+	elif mode==OperationMode.DARK_INFUSE:
+		dark_infuse_update(m,p)
 	
 
 func transform_update(m: Item, p: Item):
@@ -198,6 +205,28 @@ func disentangle_update(m: Item, p: Item):
 	else:
 		tw.tween_property($TransformButton,"position",buttonInPos+Vector2(300,0),0.5)
 		$HintText.text = err_msg
+
+func dark_infuse_update(m: Item, p: Item):
+	# Dark Infuse: input is a potion A->B, output is the dark variant (-B)->(-A)
+	var err_msg = null
+	if m == null:
+		err_msg = "Please add a potion A->B in the material slot"
+	elif m.type != Item.ItemType.TRANSFORM:
+		err_msg = "That does not look like a potion"
+	
+	var tw:=get_tree().create_tween().set_trans(Tween.TRANS_EXPO).set_parallel()
+	$TransformButton.disabled = err_msg != null
+	
+	if not $TransformButton.disabled:
+		# Smart negate: double negation cancels out (¬¬A = A)
+		var neg_right = m.right.left if m.right.type == Item.ItemType.NOT else Item.n(m.right)
+		var neg_left = m.left.left if m.left.type == Item.ItemType.NOT else Item.n(m.left)
+		var result := Item.t(neg_right, neg_left)
+		tw.tween_property($TransformButton,"position",buttonInPos,0.5)
+		$HintText.text = "Can dark infuse! Yield: " + result.type_str() + " :>"
+	else:
+		tw.tween_property($TransformButton,"position",buttonInPos+Vector2(300,0),0.5)
+		$HintText.text = err_msg
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -216,6 +245,8 @@ func _on_transform_button_pressed() -> void:
 		entangle()
 	elif mode==OperationMode.DISENTANGLE:
 		disentangle()
+	elif mode==OperationMode.DARK_INFUSE:
+		dark_infuse()
 
 func transform() -> void:
 	var p=Globals.active_potion
@@ -363,8 +394,8 @@ func entangle() -> void:
 		return
 	
 	# Create the two half-potions: A->(A|B) and B->(A|B)
-	var output_a := Item.t(m.left.left, m.left)
-	var output_b := Item.t(m.left.right, m.left)
+	var output_a := Item.t(m.left.left, m.left,(m.name + " Entangler A").strip_edges())
+	var output_b := Item.t(m.left.right, m.left,(m.name + " Entangler B").strip_edges())
 	
 	# Spawn two new item displays for the outputs (original input is NOT consumed)
 	var pa = id.instantiate()
@@ -434,7 +465,7 @@ func disentangle() -> void:
 	on_potion_update()
 	
 	# Create the unified potion: (A|B)->C where A=m.left, B=p.left, C=m.right
-	var result := Item.t(Item.o(m.left, p.left), m.right)
+	var result := Item.t(Item.o(m.left, p.left), m.right, (m.name + " Disentangler").strip_edges())
 	
 	# Start disentangle animation
 	$InParticle.emitting = true
@@ -446,6 +477,46 @@ func disentangle() -> void:
 		ma.set_item(result)
 		$OutParticle.emitting = true
 		pa.queue_free()
+	)
+	tw.tween_property(ma, "scale", Vector2(4, 4), 0.5)
+	tw.tween_interval(1)
+	await tw.finished
+	
+	if Globals.current_level.win.equals(result):
+		# Game Won
+		win_game()
+	
+	put_down(ma)
+
+func dark_infuse() -> void:
+	var m = Globals.active_material
+	var ma = Globals.active_material_actor
+	
+	if m == null:
+		return
+	elif m.type != Item.ItemType.TRANSFORM:
+		return
+	
+	# Close Button
+	Globals.active_material = null
+	Globals.active_material_actor = null
+	on_potion_update()
+	
+	# Create the dark potion: (-B)->(-A), with double-negation cancellation
+	var neg_right = m.right.left if m.right.type == Item.ItemType.NOT else Item.n(m.right)
+	var neg_left = m.left.left if m.left.type == Item.ItemType.NOT else Item.n(m.left)
+	var result := Item.t(neg_right, neg_left, m.name.reverse())
+	
+	# Start dark infuse animation
+	$InParticle.emitting = true
+	$InParticle.modulate=Color.DARK_RED
+	var tw = get_tree().create_tween()
+	tw.tween_interval(0.5)
+	tw.tween_property(ma, "scale", Vector2(0, 0), 0.5)
+	tw.tween_callback(func():
+		$InParticle.modulate=Color.WHITE
+		ma.set_item(result)
+		$OutParticle.emitting = true
 	)
 	tw.tween_property(ma, "scale", Vector2(4, 4), 0.5)
 	tw.tween_interval(1)

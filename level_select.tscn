@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bm24wf7l731sl" path="res://texture/level_bg/II.png" id="6_8qr5y"]
 [ext_resource type="Texture2D" uid="uid://b6x76k6m5jpjx" path="res://texture/level_bg/III.png" id="7_05pd3"]
 [ext_resource type="Script" uid="uid://46wrjq843pix" path="res://script/ui/label_btn.gd" id="8_1wnlg"]
+[ext_resource type="Texture2D" uid="uid://2xcxppqjjny6" path="res://texture/level_bg/IV.png" id="8_hhsoe"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lmhjs"]
 content_margin_left = 4.0
@@ -153,15 +154,15 @@ texture = ExtResource("6_8qr5y")
 expand_mode = 2
 
 [node name="Line2D" type="Line2D" parent="panel/II" unique_id=2139613273]
-points = PackedVector2Array(365, 111, 365, 527, 1021, 543, 1019, 113, 691, 334)
+points = PackedVector2Array(217, 463, 552, 466, 1021, 472, 1019, 113, 368, 112)
 width = 4.0
 
 [node name="Button" type="Button" parent="panel/II" unique_id=1636241833]
 layout_mode = 0
-offset_left = 345.0
-offset_top = 89.0
-offset_right = 398.0
-offset_bottom = 138.0
+offset_left = 196.0
+offset_top = 431.0
+offset_right = 249.0
+offset_bottom = 480.0
 theme_override_fonts/font = ExtResource("3_apu6u")
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_lmhjs")
@@ -171,10 +172,10 @@ level = "11"
 
 [node name="Button2" type="Button" parent="panel/II" unique_id=1938494638]
 layout_mode = 0
-offset_left = 345.0
-offset_top = 495.0
-offset_right = 403.0
-offset_bottom = 544.0
+offset_left = 551.0
+offset_top = 446.0
+offset_right = 609.0
+offset_bottom = 495.0
 theme_override_fonts/font = ExtResource("3_apu6u")
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_lmhjs")
@@ -185,9 +186,9 @@ level = "12"
 [node name="Button3" type="Button" parent="panel/II" unique_id=1945635944]
 layout_mode = 0
 offset_left = 984.0
-offset_top = 519.0
+offset_top = 446.0
 offset_right = 1042.0
-offset_bottom = 568.0
+offset_bottom = 495.0
 theme_override_fonts/font = ExtResource("3_apu6u")
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_lmhjs")
@@ -210,10 +211,10 @@ level = "14"
 
 [node name="Button5" type="Button" parent="panel/II" unique_id=89196553]
 layout_mode = 0
-offset_left = 671.0
-offset_top = 303.0
-offset_right = 731.0
-offset_bottom = 352.0
+offset_left = 345.0
+offset_top = 89.0
+offset_right = 405.0
+offset_bottom = 138.0
 theme_override_fonts/font = ExtResource("3_apu6u")
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_lmhjs")
@@ -222,6 +223,7 @@ script = ExtResource("4_bv7n5")
 level = "15"
 
 [node name="III" type="Control" parent="panel" unique_id=1833883549]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -306,6 +308,90 @@ text = "U-5"
 script = ExtResource("4_bv7n5")
 level = "25"
 
+[node name="IV" type="Control" parent="panel" unique_id=543385403]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_1iyaf")
+
+[node name="bg" type="TextureRect" parent="panel/IV" unique_id=1989893035]
+self_modulate = Color(1, 1, 1, 0.33333334)
+layout_mode = 0
+offset_top = -81.0
+offset_right = 1167.8297
+offset_bottom = 731.0
+texture = ExtResource("8_hhsoe")
+expand_mode = 2
+
+[node name="Line2D" type="Line2D" parent="panel/IV" unique_id=1653730883]
+points = PackedVector2Array(365, 111, 886, 126, 610, 313, 917, 602, 716, 50)
+width = 4.0
+
+[node name="Button" type="Button" parent="panel/IV" unique_id=600662562]
+layout_mode = 0
+offset_left = 345.0
+offset_top = 89.0
+offset_right = 398.0
+offset_bottom = 138.0
+theme_override_fonts/font = ExtResource("3_apu6u")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_lmhjs")
+text = "U-1"
+script = ExtResource("4_bv7n5")
+level = "31"
+
+[node name="Button2" type="Button" parent="panel/IV" unique_id=1159960758]
+layout_mode = 0
+offset_left = 850.0
+offset_top = 108.0
+offset_right = 908.0
+offset_bottom = 157.0
+theme_override_fonts/font = ExtResource("3_apu6u")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_lmhjs")
+text = "U-2"
+script = ExtResource("4_bv7n5")
+level = "32"
+
+[node name="Button3" type="Button" parent="panel/IV" unique_id=1089094866]
+layout_mode = 0
+offset_left = 586.0
+offset_top = 287.0
+offset_right = 644.0
+offset_bottom = 336.0
+theme_override_fonts/font = ExtResource("3_apu6u")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_lmhjs")
+text = "U-3"
+script = ExtResource("4_bv7n5")
+level = "33"
+
+[node name="Button4" type="Button" parent="panel/IV" unique_id=395524120]
+layout_mode = 0
+offset_left = 887.0
+offset_top = 568.0
+offset_right = 947.0
+offset_bottom = 617.0
+theme_override_fonts/font = ExtResource("3_apu6u")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_lmhjs")
+text = "U-4"
+script = ExtResource("4_bv7n5")
+level = "34"
+
+[node name="Button5" type="Button" parent="panel/IV" unique_id=102522096]
+layout_mode = 0
+offset_left = 691.0
+offset_top = 40.0
+offset_right = 751.0
+offset_bottom = 89.0
+theme_override_fonts/font = ExtResource("3_apu6u")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_lmhjs")
+text = "U-5"
+script = ExtResource("4_bv7n5")
+level = "35"
+
 [node name="TextureRect" type="TextureRect" parent="." unique_id=824734179]
 layout_mode = 0
 offset_right = 128.0
@@ -347,6 +433,16 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("2_vomi7")
 
+[node name="IV" type="Label" parent="TextureRect/VBoxContainer" unique_id=565230349]
+layout_mode = 2
+mouse_filter = 0
+theme_override_fonts/font = ExtResource("1_il3u1")
+theme_override_font_sizes/font_size = 64
+text = "IV"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_vomi7")
+
 [node name="Label" type="Label" parent="TextureRect" unique_id=1731921256]
 layout_mode = 0
 offset_top = 615.0
@@ -373,6 +469,11 @@ script = ExtResource("8_1wnlg")
 [connection signal="pressed" from="panel/III/Button3" to="panel/III/Button3" method="_on_pressed"]
 [connection signal="pressed" from="panel/III/Button4" to="panel/III/Button4" method="_on_pressed"]
 [connection signal="pressed" from="panel/III/Button5" to="panel/III/Button5" method="_on_pressed"]
+[connection signal="pressed" from="panel/IV/Button" to="panel/IV/Button" method="_on_pressed"]
+[connection signal="pressed" from="panel/IV/Button2" to="panel/IV/Button2" method="_on_pressed"]
+[connection signal="pressed" from="panel/IV/Button3" to="panel/IV/Button3" method="_on_pressed"]
+[connection signal="pressed" from="panel/IV/Button4" to="panel/IV/Button4" method="_on_pressed"]
+[connection signal="pressed" from="panel/IV/Button5" to="panel/IV/Button5" method="_on_pressed"]
 [connection signal="gui_input" from="TextureRect/VBoxContainer/I" to="TextureRect/VBoxContainer/I" method="_on_gui_input"]
 [connection signal="mouse_entered" from="TextureRect/VBoxContainer/I" to="TextureRect/VBoxContainer/I" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="TextureRect/VBoxContainer/I" to="TextureRect/VBoxContainer/I" method="_on_mouse_exited"]
@@ -382,4 +483,7 @@ script = ExtResource("8_1wnlg")
 [connection signal="gui_input" from="TextureRect/VBoxContainer/III" to="TextureRect/VBoxContainer/III" method="_on_gui_input"]
 [connection signal="mouse_entered" from="TextureRect/VBoxContainer/III" to="TextureRect/VBoxContainer/III" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="TextureRect/VBoxContainer/III" to="TextureRect/VBoxContainer/III" method="_on_mouse_exited"]
+[connection signal="gui_input" from="TextureRect/VBoxContainer/IV" to="TextureRect/VBoxContainer/IV" method="_on_gui_input"]
+[connection signal="mouse_entered" from="TextureRect/VBoxContainer/IV" to="TextureRect/VBoxContainer/IV" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="TextureRect/VBoxContainer/IV" to="TextureRect/VBoxContainer/IV" method="_on_mouse_exited"]
 [connection signal="clicked" from="TextureRect/Label" to="." method="_on_label_clicked"]

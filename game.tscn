@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://crswn7o0gajkv" path="res://script/ui/game.gd" id="1_4n42x"]
 [ext_resource type="Texture2D" uid="uid://bytk1wmfhot8y" path="res://texture/desk.png" id="2_ypp00"]
 [ext_resource type="Texture2D" uid="uid://cqxh27jcy6smk" path="res://texture/parchment.png" id="3_sbn22"]
+[ext_resource type="Script" uid="uid://cuyp5kmoygg6s" path="res://addons/richtext2/text_effects/effects/rte_jit2.gd" id="4_f1jbl"]
 [ext_resource type="Script" uid="uid://2f4fi75scxes" path="res://addons/richtext2/richer_text_label.gd" id="4_yfbj6"]
 [ext_resource type="Script" uid="uid://dbkj2736wnmd4" path="res://script/ui/hand_container.gd" id="5_mr6rn"]
 [ext_resource type="Texture2D" uid="uid://cl3eefab5v8xt" path="res://texture/bundle.png" id="6_66ksx"]
@@ -23,6 +24,8 @@
 [ext_resource type="Script" uid="uid://cuxsuj5am8667" path="res://script/ui/tooltip.gd" id="15_7sc4i"]
 [ext_resource type="Texture2D" uid="uid://dhrksqpjyihs8" path="res://texture/method/disentangle.png" id="15_qhcbd"]
 [ext_resource type="Texture2D" uid="uid://b2l30uvjq8f4q" path="res://texture/dialog.png" id="16_80cx4"]
+[ext_resource type="Texture2D" uid="uid://dy8ra1il7otqw" path="res://texture/method/dark_infuse.png" id="17_i2p71"]
+[ext_resource type="Texture2D" uid="uid://b3nr4anasbgha" path="res://texture/method/purify.png" id="18_xa8c5"]
 
 [sub_resource type="Gradient" id="Gradient_wf0cr"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
@@ -34,6 +37,11 @@ height = 16
 fill = 1
 fill_from = Vector2(0.53211, 0.513761)
 fill_to = Vector2(0.504587, 0.105505)
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_5b14r"]
+resource_name = "jit2"
+script = ExtResource("4_f1jbl")
+metadata/rt = 1697837552253
 
 [sub_resource type="LabelSettings" id="LabelSettings_14qgj"]
 font = ExtResource("8_f61ct")
@@ -89,8 +97,9 @@ theme_override_font_sizes/italics_font_size = 16
 theme_override_font_sizes/mono_font_size = 16
 bbcode_enabled = true
 fit_content = true
+custom_effects = [SubResource("RichTextEffect_5b14r")]
 script = ExtResource("4_yfbj6")
-bbcode = "jaklsjdklasjdklaskldasl"
+bbcode = "[jit2]ajsdasdjsadsa[]"
 effects = 2
 alignment = 0
 color = Color(0, 0, 0, 1)
@@ -233,6 +242,22 @@ mode = 3
 layout_mode = 2
 tooltip_text = "Disentangle"
 texture = ExtResource("15_qhcbd")
+expand_mode = 2
+script = ExtResource("11_hb5m1")
+mode = 4
+
+[node name="DarkInfuse" type="TextureRect" parent="Methods" unique_id=1063209604]
+layout_mode = 2
+tooltip_text = "Dark Infuse"
+texture = ExtResource("17_i2p71")
+expand_mode = 2
+script = ExtResource("11_hb5m1")
+mode = 5
+
+[node name="Purify" type="TextureRect" parent="Methods" unique_id=1410960315]
+layout_mode = 2
+tooltip_text = "Purify"
+texture = ExtResource("18_xa8c5")
 expand_mode = 2
 script = ExtResource("11_hb5m1")
 mode = 4
