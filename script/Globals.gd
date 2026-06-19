@@ -28,6 +28,9 @@ var all_levels={
 	"15":Level15,
 	"21":Level21,
 	"22":Level22,
+	"23":Level23,
+	"24":Level24,
+	"25":Level25,
 }
 
 var desc:Dictionary = {

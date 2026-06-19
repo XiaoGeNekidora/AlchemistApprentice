@@ -82,7 +82,19 @@ static func o(left: Item, right: Item, name: String = "") -> Item:
 ## Create an entanglement by name
 static func o2(left: String, right: String, name: String = "") -> Item:
 	return Item.new(ItemType.OR,name,Item.u(left),Item.u(right))
-	
+
+## Generate a potion (A->B)->(B->C)->(A->C)
+static func chain(a: Item, b: Item, c: Item, name: String = "") -> Item:
+	return Item.t(
+		Item.t(a,b),
+		Item.t(
+			Item.t(b,c),
+			Item.t(a,c,name),
+			name+" Chainer B"
+		),
+		name+" Chainer A"
+	)
+
 func equals(o: Item) -> bool:
 	return o.type_str()==self.type_str()
 
