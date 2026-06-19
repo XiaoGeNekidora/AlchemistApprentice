@@ -5,9 +5,6 @@ func on_initial() -> Array[Item]:
 	return [
 		Item.a2("iron","gold","Ig"),
 		Item.a2("iron","gold","Ig"),
-		Item.ta(Item.u("iron"),Item.u("gold"),"Ig"),
-		Item.ta(Item.u("gold"),Item.u("iron"),"Gi"),
-		Item.ta(Item.a(Item.u("iron"),Item.u("gold"),"Ig"),Item.a(Item.u("gold"),Item.u("iron"),"Gi"),"Iggi")
 	]
 
 func on_restock() -> Array[Item]:

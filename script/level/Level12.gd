@@ -16,9 +16,11 @@ func _init():
 	self.name="Lefted and Righted Mixture"
 	self.level_no="2-2"
 	self.win=Item.a(Item.a2("iron","silver","Is"),Item.u("gold"),"Lefted")
-	self.import_packages()
+	self.allowed_methods.append(GameRoot.OperationMode.UNPACKAGE)
 	self.desc="""
 When a [red]Mixture[] contains three items, there are two different possible formations: A(BC) and (AB)C.
 In the nature, which one to form depends on the magic particle density nearby, the relative composing mass of the materials etc.
 But in this class, we show that these two forms are interexchangable. 
+
+Oh, sorry, the packager is under maintenance today :(
 """

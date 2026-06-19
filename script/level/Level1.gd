@@ -20,7 +20,7 @@ Today is your first lesson? Do not worry! We have prepared your starter kit for 
 Transformation is just about applying the right catalyst on the right base material. Easy, right?
 [wack]Click[] the stone to put it as a base material, then [wack]click[] the catalyst. You should be able to see the [sin]Transform Button[] sitting there already! Wait what? Just [wack]click[] it!!
 
-In case you set it up wrong, click the catalyst/base material to put it back.
+In case you set it up wrong, click the catalyst/base material again to put it back.
 
 Target: Get the stuff everyone likes
 """

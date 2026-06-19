@@ -78,7 +78,7 @@ func on_potion_update():
 	if mode==OperationMode.TRANSFORM:
 		transform_update(m,p)
 	elif mode==OperationMode.PACKAGE:
-		pass
+		package_update(m,p)
 	elif mode==OperationMode.UNPACKAGE:
 		unpackage_update(m)
 	
@@ -121,6 +121,24 @@ func unpackage_update(m: Item):
 		tw.tween_property($TransformButton,"position",buttonInPos+Vector2(300,0),0.5)
 		$HintText.text=err_msg
 
+func package_update(m: Item, p: Item):
+	var err_msg=null
+	if m==null:
+		err_msg="Please add a base material"
+	elif p==null:
+		err_msg="Add another item to package"
+	
+	var tw:=get_tree().create_tween().set_trans(Tween.TRANS_EXPO).set_parallel()
+	$TransformButton.disabled=err_msg!=null
+	
+	if not $TransformButton.disabled:
+		var result := Item.a(m, p)
+		tw.tween_property($TransformButton,"position",buttonInPos,0.5)
+		$HintText.text="Can package! Yield: "+result.type_str().capitalize()+" :>"
+	else:
+		tw.tween_property($TransformButton,"position",buttonInPos+Vector2(300,0),0.5)
+		$HintText.text=err_msg
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
@@ -131,7 +149,7 @@ func _on_transform_button_pressed() -> void:
 	if mode==OperationMode.TRANSFORM:
 		transform()
 	elif mode==OperationMode.PACKAGE:
-		pass
+		package()
 	elif mode==OperationMode.UNPACKAGE:
 		unpackage()
 
@@ -225,6 +243,48 @@ func unpackage() -> void:
 		win_game()
 		
 	put_down(pa)
+	put_down(ma)
+
+func package() -> void:
+	var p=Globals.active_potion
+	var m=Globals.active_material
+	var pa=Globals.active_potion_actor
+	var ma=Globals.active_material_actor
+	
+	if m==null:
+		return
+	elif p==null:
+		return
+	
+	# Close Button
+	Globals.active_material=null
+	Globals.active_potion=null
+	Globals.active_material_actor=null
+	Globals.active_potion_actor=null
+	on_potion_update()
+	
+	# Create the package (AND type)
+	var packaged := Item.a(m, p)
+	
+	# Start packaging animation
+	$InParticle.emitting=true
+	var tw=get_tree().create_tween()
+	tw.tween_interval(0.5)
+	tw.tween_property(ma,"scale",Vector2(0,0),0.5)
+	tw.parallel().tween_property(pa,"scale",Vector2(0,0),0.5)
+	tw.tween_callback(func():
+		ma.set_item(packaged)
+		$OutParticle.emitting=true
+		pa.queue_free()
+	)
+	tw.tween_property(ma,"scale",Vector2(4,4),0.5)
+	tw.tween_interval(1)
+	await tw.finished
+	
+	if Globals.current_level.win.equals(packaged):
+		# Game Won
+		win_game()
+			
 	put_down(ma)
 
 func put_down(item: ItemDisplay):

@@ -32,4 +32,6 @@ func _init():
 	self.import_packages()
 	self.desc="""
 This is the final exam of Chapter 2. Can you do it?
+
+Again, this can be done without the packager if you want to challenge yourself.
 """

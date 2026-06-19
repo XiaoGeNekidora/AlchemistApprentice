@@ -26,4 +26,6 @@ func _init():
 Wow! A rare displaced four-element mixture! This is uncommon because usually the elements should be ~sorted~.
 We can infer that some sort of distortion may have happened (like a dragon outbreak) at where this compound is taken.
 Can you help our mother nature to sort it?
+
+Hey, if you want to challenge yourself, try to do what the pioneers have done before packagers are invented: use the packaging potions!
 """

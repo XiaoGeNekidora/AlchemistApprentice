@@ -75,6 +75,14 @@ static func a(left: Item, right: Item, name: String = "") -> Item:
 static func a2(left: String, right: String, name: String = "") -> Item:
 	return Item.new(ItemType.AND,name,Item.u(left),Item.u(right))
 
+## Create an entanglement
+static func o(left: Item, right: Item, name: String = "") -> Item:
+	return Item.new(ItemType.OR,name,left,right)
+
+## Create an entanglement by name
+static func o2(left: String, right: String, name: String = "") -> Item:
+	return Item.new(ItemType.OR,name,Item.u(left),Item.u(right))
+	
 func equals(o: Item) -> bool:
 	return o.type_str()==self.type_str()
 
