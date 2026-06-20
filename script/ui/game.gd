@@ -16,7 +16,8 @@ enum OperationMode{
 	ENTANGLE,
 	DISENTANGLE,
 	DARK_INFUSE,
-	PURIFY
+	PURIFY,
+	TAUTOLOGIZE
 }
 
 var mode := OperationMode.TRANSFORM;
@@ -72,6 +73,9 @@ func on_mode_change(new_mode: OperationMode):
 	elif new_mode==OperationMode.DARK_INFUSE:
 		$TransformButton.text="Dark Infuse!"
 		$HintText.text="Place a potion A->B to get its dark variant (-B)->(-A)..."
+	elif new_mode==OperationMode.TAUTOLOGIZE:
+		$TransformButton.text="Tautologize!"
+		$HintText.text="Place any substance (or nothing) to create its self-implication..."
 	mode = new_mode
 	
 	put_down(Globals.active_potion_actor)
@@ -100,6 +104,8 @@ func on_potion_update():
 		disentangle_update(m,p)
 	elif mode==OperationMode.DARK_INFUSE:
 		dark_infuse_update(m,p)
+	elif mode==OperationMode.TAUTOLOGIZE:
+		tautologize_update(m)
 	
 
 func transform_update(m: Item, p: Item):
@@ -228,6 +234,28 @@ func dark_infuse_update(m: Item, p: Item):
 		tw.tween_property($TransformButton,"position",buttonInPos+Vector2(300,0),0.5)
 		$HintText.text = err_msg
 		
+func tautologize_update(m: Item):
+	# Tautologize: input is any substance A (optional), output is A->A
+	# No input: output is T->T where T = current_level.win
+	var err_msg = null
+	
+	var tw:=get_tree().create_tween().set_trans(Tween.TRANS_EXPO).set_parallel()
+	$TransformButton.disabled = err_msg != null
+	
+	if not $TransformButton.disabled:
+		var result: Item
+		if m == null:
+			var target = Globals.current_level.win
+			result = Item.t(target, target)
+			$HintText.text = "No material? Will create this: " + result.type_str() + " :>"
+		else:
+			result = Item.t(m, m)
+			$HintText.text = "Can tautologize! Yield: " + result.type_str() + " :>"
+		tw.tween_property($TransformButton,"position",buttonInPos,0.5)
+	else:
+		tw.tween_property($TransformButton,"position",buttonInPos+Vector2(300,0),0.5)
+		$HintText.text = err_msg
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
@@ -247,6 +275,8 @@ func _on_transform_button_pressed() -> void:
 		disentangle()
 	elif mode==OperationMode.DARK_INFUSE:
 		dark_infuse()
+	elif mode==OperationMode.TAUTOLOGIZE:
+		tautologize()
 
 func transform() -> void:
 	var p=Globals.active_potion
@@ -528,7 +558,64 @@ func dark_infuse() -> void:
 	
 	put_down(ma)
 
-func put_down(item: ItemDisplay):
+func tautologize() -> void:
+	var m = Globals.active_material
+	var ma = Globals.active_material_actor
+	
+	# Tautologize always succeeds - either with input or without
+	
+	# Determine result
+	var result: Item
+	if m == null:
+		# No input: create T->T where T = current_level.win
+		var target = Globals.current_level.win
+		result = Item.t(target, target, "Tautology")
+	else:
+		# Input given: create A->A, original A is NOT consumed
+		result = Item.t(m, m, "Tautology")
+	
+	# Close Button
+	Globals.active_material = null
+	Globals.active_material_actor = null
+	on_potion_update()
+	
+	# Spawn a new item display for the result
+	var pa = id.instantiate()
+	pa.set_item(result)
+	pa.scale = Vector2.ZERO
+	if ma != null:
+		pa.global_position = ma.global_position
+	else:
+		pa.global_position = $ItemHere.global_position
+	add_child(pa)
+	%Tooltip.bind(pa)
+	pa.size = Vector2(24, 24)
+	
+	# If there was an input, keep it (don't consume it)
+	# The original ma just stays in the hand area
+	
+	# Start tautologize animation
+	$InParticle.emitting = true
+	var tw = get_tree().create_tween()
+	tw.tween_interval(0.5)
+	tw.tween_property(pa, "scale", Vector2(4, 4), 0.5)
+	tw.tween_callback(func():
+		$OutParticle.emitting = true
+	)
+	tw.tween_interval(1)
+	await tw.finished
+	
+	if Globals.current_level.win.equals(result):
+		# Game Won
+		win_game()
+	
+	# Put down the new result and the original input (if any)
+	put_down(pa)
+	if ma != null:
+		put_down(ma)
+
+## Item should be ItemDisplay but somehow it might crash game
+func put_down(item):
 	if item==null:
 		return
 	item.slot = ItemDisplay.SLOT_BELOW

@@ -26,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://b2l30uvjq8f4q" path="res://texture/dialog.png" id="16_80cx4"]
 [ext_resource type="Texture2D" uid="uid://dy8ra1il7otqw" path="res://texture/method/dark_infuse.png" id="17_i2p71"]
 [ext_resource type="Texture2D" uid="uid://b3nr4anasbgha" path="res://texture/method/purify.png" id="18_xa8c5"]
+[ext_resource type="Texture2D" uid="uid://i1kvh7g01fdh" path="res://texture/method/tautologize.png" id="19_xa8c5"]
 
 [sub_resource type="Gradient" id="Gradient_wf0cr"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
@@ -41,7 +42,7 @@ fill_to = Vector2(0.504587, 0.105505)
 [sub_resource type="RichTextEffect" id="RichTextEffect_5b14r"]
 resource_name = "jit2"
 script = ExtResource("4_f1jbl")
-metadata/rt = 1697837552253
+metadata/rt = 4611956087995
 
 [sub_resource type="LabelSettings" id="LabelSettings_14qgj"]
 font = ExtResource("8_f61ct")
@@ -199,11 +200,19 @@ theme_override_font_sizes/font_size = 24
 text = "Transform!!!"
 
 [node name="Methods" type="HBoxContainer" parent="." unique_id=759569406]
-layout_mode = 0
-offset_left = 828.0
-offset_top = 316.0
-offset_right = 997.0
-offset_bottom = 356.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 136.0
+offset_top = -22.0
+offset_right = 556.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(210, 20)
 alignment = 1
 script = ExtResource("9_e36ub")
 
@@ -272,7 +281,18 @@ tooltip_text = "Purify"
 texture = ExtResource("18_xa8c5")
 expand_mode = 2
 script = ExtResource("11_hb5m1")
-mode = 4
+mode = 6
+
+[node name="Tautologize" type="TextureRect" parent="Methods" unique_id=1582333120]
+layout_mode = 2
+tooltip_text = "Tautologize
+Input: A (optional)
+Output: A->A
+(No input yields Target->Target)"
+texture = ExtResource("19_xa8c5")
+expand_mode = 2
+script = ExtResource("11_hb5m1")
+mode = 7
 
 [node name="HintText" type="Label" parent="." unique_id=1919324247]
 layout_mode = 1

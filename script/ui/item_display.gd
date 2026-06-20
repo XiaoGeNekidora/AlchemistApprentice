@@ -70,7 +70,7 @@ func _on_gui_input(event: InputEvent) -> void:
 					Globals.active_material_actor=self
 					self.slot=SLOT_UP
 					mk=mki
-				elif mode!=GameRoot.OperationMode.UNPACKAGE and mode!=GameRoot.OperationMode.ENTANGLE and mode!=GameRoot.OperationMode.DARK_INFUSE and Globals.active_potion==null:
+				elif mode!=GameRoot.OperationMode.UNPACKAGE and mode!=GameRoot.OperationMode.ENTANGLE and mode!=GameRoot.OperationMode.DARK_INFUSE and mode!=GameRoot.OperationMode.TAUTOLOGIZE and Globals.active_potion==null:
 					Globals.active_potion=self.item
 					Globals.active_potion_actor=self
 					self.slot=SLOT_POTION

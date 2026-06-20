@@ -3,9 +3,9 @@ class_name Level21
 
 func on_initial() -> Array[Item]:
 	return [
-		Item.t2("Iron","Diamond","Luxury 3000"),
-		Item.t2("Gold","Diamond","Luxury 2000"),
-		Item.o2("Iron","Gold","Polaris")
+		Item.t2("iron","diamond","Luxury 3000"),
+		Item.t2("gold","diamond","Luxury 2000"),
+		Item.o2("iron","gold","Polaris")
 	]
 
 func on_restock() -> Array[Item]:
