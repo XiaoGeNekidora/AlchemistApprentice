@@ -157,7 +157,7 @@ func build_potion_chain(start: Item, middle: Array, end: Item) -> Item:
 		new_item=Item.t(start,end)
 	else:
 		new_item=Item.t(middle.back(),end)
-		for i in range(len(middle)-2,0,-1):
+		for i in range(len(middle)-2,-1,-1):
 			new_item=Item.t(middle[i],new_item)
 		new_item=Item.t(start,new_item)
 	return new_item
@@ -169,14 +169,6 @@ func end_upb(main_yield: Item) -> Item:
 	print(lost)
 	
 	var new_item := build_potion_chain(last.introduced, lost, main_yield)
-	
-	if lost.is_empty():
-		new_item=Item.t(last.introduced,main_yield)
-	else:
-		new_item=Item.t(lost.back(),main_yield)
-		for i in range(len(lost)-2,0,-1):
-			new_item=Item.t(lost[i],new_item)
-		new_item=Item.t(last.introduced,new_item)
 	
 	for i in %HandContainer.get_children():
 		i.queue_free()

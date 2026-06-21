@@ -38,7 +38,8 @@ var all_levels={
 	"35":Level35,
 	"41":Level41,
 	"42":Level42,
-	"43":Level43
+	"43":Level43,
+	"44":Level44,
 }
 
 var desc:Dictionary = {
