@@ -1,4 +1,5 @@
 extends RichTextLabel
+class_name TooltipWidget
 
 func bind(x:ItemDisplay):
 	x.mouse_in.connect(mouse_in)
