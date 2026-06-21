@@ -27,6 +27,9 @@
 [ext_resource type="Texture2D" uid="uid://dy8ra1il7otqw" path="res://texture/method/dark_infuse.png" id="17_i2p71"]
 [ext_resource type="Texture2D" uid="uid://b3nr4anasbgha" path="res://texture/method/purify.png" id="18_xa8c5"]
 [ext_resource type="Texture2D" uid="uid://i1kvh7g01fdh" path="res://texture/method/tautologize.png" id="19_xa8c5"]
+[ext_resource type="Texture2D" uid="uid://c4pcfnthscjlu" path="res://texture/method/mold.png" id="20_5b14r"]
+[ext_resource type="Texture2D" uid="uid://cew3ku2goct7c" path="res://texture/method/start_upb.png" id="21_36jdj"]
+[ext_resource type="Texture2D" uid="uid://cdd4lq8muv33h" path="res://texture/method/end_upb.png" id="22_xfvwf"]
 
 [sub_resource type="Gradient" id="Gradient_wf0cr"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
@@ -39,10 +42,10 @@ fill = 1
 fill_from = Vector2(0.53211, 0.513761)
 fill_to = Vector2(0.504587, 0.105505)
 
-[sub_resource type="RichTextEffect" id="RichTextEffect_5b14r"]
+[sub_resource type="RichTextEffect" id="RichTextEffect_36jdj"]
 resource_name = "jit2"
 script = ExtResource("4_f1jbl")
-metadata/rt = 4611956087995
+metadata/rt = 1709732598485
 
 [sub_resource type="LabelSettings" id="LabelSettings_14qgj"]
 font = ExtResource("8_f61ct")
@@ -74,6 +77,74 @@ offset_right = 1026.0
 offset_bottom = 333.0
 texture = SubResource("GradientTexture2D_xo2xn")
 
+[node name="UPBInfo" type="RichTextLabel" parent="." unique_id=551879712]
+clip_contents = false
+custom_minimum_size = Vector2(0, 54)
+layout_mode = 0
+offset_left = 574.0
+offset_top = 14.0
+offset_right = 1118.0
+offset_bottom = 65.0
+theme_override_colors/font_outline_color = Color(0.19999999, 0.19999999, 0.19999999, 1)
+theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/bold_font_size = 16
+theme_override_font_sizes/bold_italics_font_size = 16
+theme_override_font_sizes/italics_font_size = 16
+theme_override_font_sizes/mono_font_size = 16
+bbcode_enabled = true
+fit_content = true
+script = ExtResource("4_yfbj6")
+bbcode = "[font size=24][pulse freq=1.0  ease=-2.0]UPB In Action (Layer 1)[][]
+[code]Initializing Potion Preview[]"
+effects = 2
+alignment = 1
+color = Color(1, 1, 1, 1)
+emoji_scale = 1.0
+font = "Amarante"
+font_auto_setup = true
+font_size = 16
+font_bold_weight = 1.5
+font_italics_slant = 0.25
+font_italics_weight = -0.25
+shadow_enabled = false
+shadow_offset = 0.08
+shadow_alpha = 0.25
+shadow_outline_size = 0.1
+outline_size = 0
+outline_mode = 1
+outline_adjust = 0.8
+outline_hue_adjust = 0.0125
+nicer_quotes_enabled = false
+nicer_quotes_format = "“%s”"
+markdown_enabled = true
+markdown_format_bold = "[b]%s[]"
+markdown_format_italics = "[i]%s[]"
+markdown_format_bold_italics = "[bi]%s[]"
+markdown_format_highlight = "[green;sin]%s[]"
+markdown_format_bold2 = "[b]*%s*[]"
+markdown_format_italics2 = "[i;gray]*%s*[]"
+markdown_format_bold_italics2 = "%s"
+context_enabled = true
+context_path = NodePath("/root/State")
+context_state = {}
+context_rich_objects = true
+context_rich_ints = true
+context_rich_array = true
+autostyle_numbers = true
+autostyle_numbers_tag = "[salmon]%s[]"
+autostyle_numbers_pad_decimals = true
+autostyle_numbers_decimals = 2
+autostyle_emojis = true
+effect_weight = 1.0
+image_path = "res://"
+image_resize_to_font_size = true
+image_scale = 1.0
+meta_auto_https = true
+meta_cursor = 2
+override_bbcodeEnabled = true
+override_clipContents = false
+override_fitContent = true
+
 [node name="Mission" type="TextureRect" parent="." unique_id=294261829]
 layout_mode = 0
 offset_right = 539.0
@@ -97,8 +168,7 @@ theme_override_font_sizes/bold_italics_font_size = 16
 theme_override_font_sizes/italics_font_size = 16
 theme_override_font_sizes/mono_font_size = 16
 bbcode_enabled = true
-fit_content = true
-custom_effects = [SubResource("RichTextEffect_5b14r")]
+custom_effects = [SubResource("RichTextEffect_36jdj")]
 script = ExtResource("4_yfbj6")
 bbcode = "[jit2]ajsdasdjsadsa[]"
 effects = 2
@@ -148,7 +218,7 @@ meta_auto_https = true
 meta_cursor = 2
 override_bbcodeEnabled = true
 override_clipContents = false
-override_fitContent = true
+override_fitContent = false
 
 [node name="Hand" type="Control" parent="." unique_id=427409353]
 anchors_preset = 0
@@ -293,6 +363,36 @@ texture = ExtResource("19_xa8c5")
 expand_mode = 2
 script = ExtResource("11_hb5m1")
 mode = 7
+
+[node name="Mold" type="TextureRect" parent="Methods" unique_id=609208069]
+layout_mode = 2
+tooltip_text = "Mold
+Input: Item A (Mold mode)
+Output: Mold $M A
+Input: Mold $M A (Compoent Mode)
+Output: Mold $M <components of A>"
+texture = ExtResource("20_5b14r")
+expand_mode = 2
+script = ExtResource("11_hb5m1")
+mode = 8
+
+[node name="StartUpb" type="TextureRect" parent="Methods" unique_id=1553310443]
+layout_mode = 2
+tooltip_text = "Start UPB
+Item: The mold to start UPB with"
+texture = ExtResource("21_36jdj")
+expand_mode = 2
+script = ExtResource("11_hb5m1")
+mode = 9
+
+[node name="EndUpb" type="TextureRect" parent="Methods" unique_id=853526762]
+layout_mode = 2
+tooltip_text = "End UPB
+Input: The main yield item"
+texture = ExtResource("22_xfvwf")
+expand_mode = 2
+script = ExtResource("11_hb5m1")
+mode = 10
 
 [node name="HintText" type="Label" parent="." unique_id=1919324247]
 layout_mode = 1
@@ -480,3 +580,4 @@ patch_margin_bottom = 9
 [connection signal="pressed" from="TransformButton" to="." method="_on_transform_button_pressed"]
 [connection signal="pressed" from="ButtonList/BackBtn" to="." method="_on_back_btn_pressed"]
 [connection signal="pressed" from="ButtonList/RetryBtn" to="." method="_on_retry_btn_pressed"]
+[connection signal="pressed" from="ButtonList/NextButton" to="." method="_on_next_button_pressed"]

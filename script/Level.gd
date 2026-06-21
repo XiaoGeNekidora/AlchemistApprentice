@@ -12,6 +12,11 @@ func import_packages():
 	allowed_methods.append(GameRoot.OperationMode.PACKAGE)
 	allowed_methods.append(GameRoot.OperationMode.UNPACKAGE)
 
+func import_upb():
+	allowed_methods.append(GameRoot.OperationMode.MOLD)
+	allowed_methods.append(GameRoot.OperationMode.START_UPB)
+	allowed_methods.append(GameRoot.OperationMode.END_UPB)
+
 func on_initial() -> Array[Item]:
 	return []
 

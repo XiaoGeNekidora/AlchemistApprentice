@@ -5,8 +5,10 @@ enum ItemType{
 	TRANSFORM=1,
 	AND=2,
 	OR=3,
-	NOT=4
+	NOT=4,
 }
+
+var is_mold: bool = false
 
 var type: ItemType
 
@@ -19,36 +21,28 @@ var right: Item
 ## 0 means no tag
 var tag: int
 
-static var hash_name_candidate=["Transubstantiation",
-"Perpetuitas",
-"Aequimutation",
-"Omnigenesis",
-"Coruscation",
-"Wyrdweave",
-"Unwending",
-]
-
-## Generate a fake hash name based on left and right
-func hash_name() -> String:
-	var hsh=(type_str().hash())%len(hash_name_candidate)
-	return hash_name_candidate[hsh]
-
 ## Return a hash of the type str
 func hash() -> int:
 	return type_str().hash()
 
 func type_str() -> String:
+	var ans := ""
 	if type==ItemType.UNIT:
-		return name
+		ans=name
 	elif type==ItemType.TRANSFORM:
-		return "( %s -> %s )"%[left.type_str(),right.type_str()]
+		ans="( %s -> %s )"%[left.type_str(),right.type_str()]
 	elif type==ItemType.AND:
-		return "( %s & %s )"%[left.type_str(),right.type_str()]
+		ans="( %s & %s )"%[left.type_str(),right.type_str()]
 	elif type==ItemType.OR:
-		return "( %s | %s )"%[left.type_str(),right.type_str()]
+		ans="( %s | %s )"%[left.type_str(),right.type_str()]
 	elif type==ItemType.NOT:
-		return "! %s"%[left.type_str()]
-	return "?"
+		ans="! %s"%[left.type_str()]
+	else:
+		return "?"
+	if is_mold:
+		ans="$M "+ans
+	
+	return ans
 
 ## Create a unit item with given name
 static func u(name: String) -> Item:
@@ -104,7 +98,11 @@ static func n(a: Item) -> Item:
 static func n2(name:String) -> Item:
 	var x = Item.u(name)
 	return Item.new(ItemType.NOT, x.name, x, null)
-	
+
+func set_mold() -> Item:
+	is_mold = true
+	return self
+
 func equals(o: Item) -> bool:
 	return o.type_str()==self.type_str()
 
@@ -114,3 +112,8 @@ func _init(type: ItemType,  name: String, left: Item, right: Item , tag: int=0):
 	self.left=left
 	self.right=right
 	self.tag=tag
+
+func clone() -> Item:
+	var i:=Item.new(type, name, left, right, tag)
+	i.is_mold=is_mold
+	return i

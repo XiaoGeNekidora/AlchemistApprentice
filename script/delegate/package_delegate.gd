@@ -1,6 +1,9 @@
 extends OperationDelegate
 class_name PackageDelegate
 
+func can_use_mold() -> bool:
+	return true
+	
 func get_operation_name() -> String:
 	return "Package"
 

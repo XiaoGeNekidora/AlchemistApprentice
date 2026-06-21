@@ -14,6 +14,10 @@ func c(s:String, c: String) -> String:
 	
 func build_tooltip(item: Item):
 	var ttp=""
+	
+	if item.is_mold:
+		ttp+="[color=gray]Mold[/color] "
+	
 	if item.type==Item.ItemType.UNIT:
 		ttp+="[font size=24]"+c(item.name.capitalize(),"red")+"[/font]\n"
 		ttp+="[i]"+Globals.desc.get(item.name,"MISSING DESCRIPTION")+"[/i]\n"

@@ -20,7 +20,10 @@ enum OperationMode{
 	DISENTANGLE,
 	DARK_INFUSE,
 	PURIFY,
-	TAUTOLOGIZE
+	TAUTOLOGIZE,
+	MOLD,
+	START_UPB,
+	END_UPB
 }
 
 var operation_delegates:Array[OperationDelegate]=[
@@ -31,10 +34,16 @@ var operation_delegates:Array[OperationDelegate]=[
 	DisentangleDelegate.new(),
 	DarkInfuseDelegate.new(),
 	null,
-	TautologizeDelegate.new()
+	TautologizeDelegate.new(),
+	MoldDelegate.new(),
+	StartUpbDelegate.new(),
+	EndUpbDelegate.new()
 ]
 
 var mode := OperationMode.TRANSFORM;
+
+var upb_stack:Array[UPBLayer] = []
+var upb_result_preview:Item = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -98,6 +107,12 @@ func on_potion_update():
 	var result = operation_delegates[mode].update(m, p)
 	
 	var tw:=get_tree().create_tween().set_trans(Tween.TRANS_EXPO).set_parallel()
+	
+	if (p!=null and p.is_mold) or (m!=null and m.is_mold):
+		if not operation_delegates[mode].can_use_mold():
+			# Force override mold
+			result=[1, "Hey! You cannot use mold in this machine!"]
+	
 	$TransformButton.disabled=result[0]!=0
 	
 	if not $TransformButton.disabled:
@@ -107,15 +122,92 @@ func on_potion_update():
 	
 	$HintText.text=result[1]
 	
+	if not upb_stack.is_empty():
+		var layer:=get_inventory()
+		var lost = layer.get_diff(upb_stack.back())
+		var potion_chain := build_potion_chain(upb_stack.back().introduced,lost,Item.u("?") if upb_result_preview==null else upb_result_preview)
+		print(lost)
+		
+		$UPBInfo.bbcode="""[font size=24][pulse freq=1.0 ease=-2.0]UPB In Action (Layer %d)[][]
+[code]%s[]
+"""%[len(upb_stack),potion_chain.type_str().capitalize()]
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	update_upb_stack()
 
+func update_upb_stack():
+	if upb_stack.is_empty():
+		$UPBInfo.hide()
+		return
+	$UPBInfo.show()
+	
+func start_upb(introduced: Item):
+	var layer := get_inventory()
+	layer.introduced=introduced
+	upb_stack.append(layer)
+	print("Starting UPB with %s!"%[introduced.type_str()])
+	
+func build_potion_chain(start: Item, middle: Array, end: Item) -> Item:
+	var new_item:Item
+	if middle.is_empty():
+		new_item=Item.t(start,end)
+	else:
+		new_item=Item.t(middle.back(),end)
+		for i in range(len(middle)-2,0,-1):
+			new_item=Item.t(middle[i],new_item)
+		new_item=Item.t(start,new_item)
+	return new_item
+
+func end_upb(main_yield: Item) -> Item:
+	var last:UPBLayer=upb_stack.back()
+	var layer:=get_inventory()
+	var lost = layer.get_diff(last)
+	print(lost)
+	
+	var new_item := build_potion_chain(last.introduced, lost, main_yield)
+	
+	if lost.is_empty():
+		new_item=Item.t(last.introduced,main_yield)
+	else:
+		new_item=Item.t(lost.back(),main_yield)
+		for i in range(len(lost)-2,0,-1):
+			new_item=Item.t(lost[i],new_item)
+		new_item=Item.t(last.introduced,new_item)
+	
+	for i in %HandContainer.get_children():
+		i.queue_free()
+	
+	for i in last.items:
+		var display:ItemDisplay = id.instantiate()
+		display.set_item(i)
+		%HandContainer.add_child(display)
+		%Tooltip.bind(display)
+	
+	upb_stack.pop_back()
+	
+	return new_item
+	
+
+#	var new_layer := get_inventory()
+#	print(new_layer.get_diff(upb_stack.back()))
+	
+func get_inventory() -> UPBLayer:
+	var layer := UPBLayer.new()
+	
+	for child in %HandContainer.get_children():
+		if child is ItemDisplay:
+			layer.items.append(child.item)
+	
+	return layer
+			
 var won := false
 
 func _on_transform_button_pressed() -> void:
-	operation_delegates[mode].craft()
+	await operation_delegates[mode].craft()
+	
+	on_potion_update()
 
 ## Item should be ItemDisplay but somehow it might crash game
 func put_down(item):
@@ -141,3 +233,9 @@ func _on_retry_btn_pressed() -> void:
 
 func _on_back_btn_pressed() -> void:
 	get_tree().change_scene_to_file("res://level_select.tscn")
+
+
+func _on_next_button_pressed() -> void:
+	var layer:=get_inventory()
+	var lost = layer.get_diff(upb_stack.back())
+	print(lost)

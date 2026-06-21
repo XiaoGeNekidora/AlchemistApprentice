@@ -8,6 +8,9 @@ static var out_particle: CPUParticles2D
 static var item_here: Marker2D
 static var tooltip: TooltipWidget
 
+func can_use_mold() -> bool:
+	return false
+	
 func get_operation_name() -> String:
 	return "???"
 

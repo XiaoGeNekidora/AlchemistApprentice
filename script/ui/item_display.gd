@@ -49,6 +49,9 @@ func set_item(item: Item):
 		set_item(item.left) 
 		self.item=item #Set it back to the NOT item, but the texture is based on the left item
 		self.modulate=Color.BLACK
+	
+	if item.is_mold:
+		self.modulate.a=0.5
 		
 	if self.texture==null:
 		self.texture=load("res://texture/unknown.png")
@@ -59,6 +62,7 @@ func _on_gui_input(event: InputEvent) -> void:
 	
 	var root:GameRoot=get_tree().current_scene
 	var mode:GameRoot.OperationMode=root.mode
+	var delegate:OperationDelegate = root.operation_delegates[mode]
 	
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index==MOUSE_BUTTON_LEFT:
@@ -70,7 +74,7 @@ func _on_gui_input(event: InputEvent) -> void:
 					Globals.active_material_actor=self
 					self.slot=SLOT_UP
 					mk=mki
-				elif mode!=GameRoot.OperationMode.UNPACKAGE and mode!=GameRoot.OperationMode.ENTANGLE and mode!=GameRoot.OperationMode.DARK_INFUSE and mode!=GameRoot.OperationMode.TAUTOLOGIZE and Globals.active_potion==null:
+				elif delegate.arg_count()>=2 and Globals.active_potion==null:
 					Globals.active_potion=self.item
 					Globals.active_potion_actor=self
 					self.slot=SLOT_POTION
@@ -79,8 +83,6 @@ func _on_gui_input(event: InputEvent) -> void:
 					#TODO animation
 					return
 				
-				# Notify Master
-				callback.call()
 				
 				self.reparent(up)
 				
@@ -93,6 +95,8 @@ func _on_gui_input(event: InputEvent) -> void:
 				tw.tween_property(self,"scale",Vector2(4,4),0.5)
 				tw.tween_callback(func(): clickable=true)
 				
+				# Notify Master
+				callback.call()
 			else:
 				
 				if slot==SLOT_UP:
