@@ -15,6 +15,7 @@ func import_packages():
 func import_upb():
 	allowed_methods.append(GameRoot.OperationMode.MOLD)
 	allowed_methods.append(GameRoot.OperationMode.START_UPB)
+	allowed_methods.append(GameRoot.OperationMode.BALANCE_UPB)
 	allowed_methods.append(GameRoot.OperationMode.END_UPB)
 
 func on_initial() -> Array[Item]:

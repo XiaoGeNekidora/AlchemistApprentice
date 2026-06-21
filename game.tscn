@@ -29,6 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://i1kvh7g01fdh" path="res://texture/method/tautologize.png" id="19_xa8c5"]
 [ext_resource type="Texture2D" uid="uid://c4pcfnthscjlu" path="res://texture/method/mold.png" id="20_5b14r"]
 [ext_resource type="Texture2D" uid="uid://cew3ku2goct7c" path="res://texture/method/start_upb.png" id="21_36jdj"]
+[ext_resource type="Texture2D" uid="uid://dayenjqgac80m" path="res://texture/method/balance_upb.png" id="22_dhpj7"]
 [ext_resource type="Texture2D" uid="uid://cdd4lq8muv33h" path="res://texture/method/end_upb.png" id="22_xfvwf"]
 
 [sub_resource type="Gradient" id="Gradient_wf0cr"]
@@ -42,10 +43,10 @@ fill = 1
 fill_from = Vector2(0.53211, 0.513761)
 fill_to = Vector2(0.504587, 0.105505)
 
-[sub_resource type="RichTextEffect" id="RichTextEffect_36jdj"]
+[sub_resource type="RichTextEffect" id="RichTextEffect_xfvwf"]
 resource_name = "jit2"
 script = ExtResource("4_f1jbl")
-metadata/rt = 1709732598485
+metadata/rt = 1713020932842
 
 [sub_resource type="LabelSettings" id="LabelSettings_14qgj"]
 font = ExtResource("8_f61ct")
@@ -168,7 +169,7 @@ theme_override_font_sizes/bold_italics_font_size = 16
 theme_override_font_sizes/italics_font_size = 16
 theme_override_font_sizes/mono_font_size = 16
 bbcode_enabled = true
-custom_effects = [SubResource("RichTextEffect_36jdj")]
+custom_effects = [SubResource("RichTextEffect_xfvwf")]
 script = ExtResource("4_yfbj6")
 bbcode = "[jit2]ajsdasdjsadsa[]"
 effects = 2
@@ -385,6 +386,15 @@ expand_mode = 2
 script = ExtResource("11_hb5m1")
 mode = 9
 
+[node name="BalanceUpb" type="TextureRect" parent="Methods" unique_id=24034332]
+layout_mode = 2
+tooltip_text = "Balance UPB
+Output: The current UPB Potion Premise"
+texture = ExtResource("22_dhpj7")
+expand_mode = 2
+script = ExtResource("11_hb5m1")
+mode = 10
+
 [node name="EndUpb" type="TextureRect" parent="Methods" unique_id=853526762]
 layout_mode = 2
 tooltip_text = "End UPB
@@ -392,7 +402,7 @@ Input: The main yield item"
 texture = ExtResource("22_xfvwf")
 expand_mode = 2
 script = ExtResource("11_hb5m1")
-mode = 10
+mode = 11
 
 [node name="HintText" type="Label" parent="." unique_id=1919324247]
 layout_mode = 1

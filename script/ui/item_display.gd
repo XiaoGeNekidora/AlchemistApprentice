@@ -69,7 +69,7 @@ func _on_gui_input(event: InputEvent) -> void:
 			if slot==SLOT_BELOW:
 				
 				var mk:Marker2D
-				if Globals.active_material==null:
+				if delegate.arg_count()>=1 and Globals.active_material==null:
 					Globals.active_material=self.item
 					Globals.active_material_actor=self
 					self.slot=SLOT_UP

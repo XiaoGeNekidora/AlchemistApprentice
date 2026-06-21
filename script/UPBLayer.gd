@@ -36,5 +36,5 @@ func get_diff(other:UPBLayer) -> Array:
 	
 	lost.erase(other.introduced.clone().set_mold().type_str())
 	
-	var ans = lost.map(func(x:String): return reverse_lookup.get(x))
+	var ans = lost.map(func(x:String): return reverse_lookup.get(x)).filter(func(it:Item): return not it.is_mold)
 	return ans

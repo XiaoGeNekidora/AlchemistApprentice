@@ -23,6 +23,7 @@ enum OperationMode{
 	TAUTOLOGIZE,
 	MOLD,
 	START_UPB,
+	BALANCE_UPB,
 	END_UPB
 }
 
@@ -37,6 +38,7 @@ var operation_delegates:Array[OperationDelegate]=[
 	TautologizeDelegate.new(),
 	MoldDelegate.new(),
 	StartUpbDelegate.new(),
+	BalanceUpbDelegate.new(),
 	EndUpbDelegate.new()
 ]
 
