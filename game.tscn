@@ -31,6 +31,7 @@
 [ext_resource type="Texture2D" uid="uid://cew3ku2goct7c" path="res://texture/method/start_upb.png" id="21_36jdj"]
 [ext_resource type="Texture2D" uid="uid://dayenjqgac80m" path="res://texture/method/balance_upb.png" id="22_dhpj7"]
 [ext_resource type="Texture2D" uid="uid://cdd4lq8muv33h" path="res://texture/method/end_upb.png" id="22_xfvwf"]
+[ext_resource type="Script" path="res://script/ui/game_animation_director.gd" id="23_animation"]
 
 [sub_resource type="Gradient" id="Gradient_wf0cr"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
@@ -43,10 +44,10 @@ fill = 1
 fill_from = Vector2(0.53211, 0.513761)
 fill_to = Vector2(0.504587, 0.105505)
 
-[sub_resource type="RichTextEffect" id="RichTextEffect_xfvwf"]
+[sub_resource type="RichTextEffect" id="RichTextEffect_dhpj7"]
 resource_name = "jit2"
 script = ExtResource("4_f1jbl")
-metadata/rt = 1713020932842
+metadata/rt = 4574542897041
 
 [sub_resource type="LabelSettings" id="LabelSettings_14qgj"]
 font = ExtResource("8_f61ct")
@@ -79,8 +80,8 @@ offset_bottom = 333.0
 texture = SubResource("GradientTexture2D_xo2xn")
 
 [node name="UPBInfo" type="RichTextLabel" parent="." unique_id=551879712]
-clip_contents = false
 custom_minimum_size = Vector2(0, 54)
+clip_contents = false
 layout_mode = 0
 offset_left = 574.0
 offset_top = 14.0
@@ -154,8 +155,8 @@ texture = ExtResource("3_sbn22")
 expand_mode = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Mission" unique_id=1372593449]
-clip_contents = false
 custom_minimum_size = Vector2(0, 21)
+clip_contents = false
 layout_mode = 0
 offset_left = 38.0
 offset_top = 40.0
@@ -169,7 +170,7 @@ theme_override_font_sizes/bold_italics_font_size = 16
 theme_override_font_sizes/italics_font_size = 16
 theme_override_font_sizes/mono_font_size = 16
 bbcode_enabled = true
-custom_effects = [SubResource("RichTextEffect_xfvwf")]
+custom_effects = [SubResource("RichTextEffect_dhpj7")]
 script = ExtResource("4_yfbj6")
 bbcode = "[jit2]ajsdasdjsadsa[]"
 effects = 2
@@ -584,6 +585,9 @@ patch_margin_left = 9
 patch_margin_top = 9
 patch_margin_right = 9
 patch_margin_bottom = 9
+
+[node name="AnimationDirector" type="Node" parent="." unique_id=1916743349]
+script = ExtResource("23_animation")
 
 [connection signal="child_order_changed" from="Hand/HandContainer" to="Hand/HandContainer" method="_on_child_order_changed"]
 [connection signal="gui_input" from="Inventory" to="Inventory" method="_on_gui_input"]

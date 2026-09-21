@@ -4,7 +4,8 @@ class_name GameRoot
 signal signal_transform
 ## Emit this to change mode.
 signal mode_change(mode: OperationMode)
-var buttonInPos:Vector2
+
+@onready var animations: GameAnimationDirector = $AnimationDirector
 
 ## Item display prefab
 var id=preload("res://partial/item_display.tscn")
@@ -46,6 +47,7 @@ var mode := OperationMode.TRANSFORM;
 
 var upb_stack:Array[UPBLayer] = []
 var upb_result_preview:Item = null
+var _upb_was_active := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -66,21 +68,24 @@ func _ready() -> void:
 	
 	# Set up available modes
 	$Methods.set_modes(Globals.current_level.allowed_methods)
-	mode_change.emit(OperationMode.TRANSFORM)
 	mode_change.connect(on_mode_change)
 	
 	# Set up mission text
 	$Mission/RichTextLabel.bbcode=Globals.current_level.desc
-	
-	# Set up button position outside screen
-	buttonInPos = $TransformButton.position
-	$TransformButton.position=buttonInPos+Vector2(500,0)
 	
 	# Set up level description
 	$TargetItem.set_item(Globals.current_level.win)
 	$TargetItem.clickable=false
 	$LevelName.text="Level %s %s\nTarget:"%[Globals.current_level.level_no,Globals.current_level.name]
 	%Tooltip.bind($TargetItem)
+
+	# Presentation is staged only after all gameplay data is ready. The animation
+	# controller never decides rules; it only receives the resulting UI state.
+	animations.prepare_opening()
+	$TransformButton.text = operation_delegates[mode].transform_button_name()
+	on_potion_update(true)
+	await SceneTransition.wait_for_reveal()
+	await animations.play_opening()
 
 func on_mode_change(new_mode: OperationMode):
 	print(new_mode,"<-",mode)
@@ -89,7 +94,6 @@ func on_mode_change(new_mode: OperationMode):
 		return
 	
 	$TransformButton.text=operation_delegates[new_mode].transform_button_name()
-	$HintText.text=operation_delegates[new_mode].hint_text()
 	mode = new_mode
 	
 	put_down(Globals.active_potion_actor)
@@ -101,14 +105,12 @@ func on_mode_change(new_mode: OperationMode):
 	on_potion_update()
 	
 ## perform "can transform"?
-func on_potion_update():
+func on_potion_update(immediate := false):
 
 	var p: Item=Globals.active_potion
 	var m: Item=Globals.active_material
 	
 	var result = operation_delegates[mode].update(m, p)
-	
-	var tw:=get_tree().create_tween().set_trans(Tween.TRANS_EXPO).set_parallel()
 	
 	if (p!=null and p.is_mold) or (m!=null and m.is_mold):
 		if not operation_delegates[mode].can_use_mold():
@@ -116,13 +118,8 @@ func on_potion_update():
 			result=[1, "Hey! You cannot use mold in this machine!"]
 	
 	$TransformButton.disabled=result[0]!=0
-	
-	if not $TransformButton.disabled:
-		tw.tween_property($TransformButton,"position",buttonInPos,0.5)
-	else:
-		tw.tween_property($TransformButton,"position",buttonInPos+Vector2(300,0),0.5)
-	
-	$HintText.text=result[1]
+	animations.set_action_available(not $TransformButton.disabled, immediate)
+	animations.show_hint(result[1], result[0] != 0, immediate)
 	
 	if not upb_stack.is_empty():
 		var layer:=get_inventory()
@@ -136,14 +133,15 @@ func on_potion_update():
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	update_upb_stack()
 
 func update_upb_stack():
-	if upb_stack.is_empty():
-		$UPBInfo.hide()
+	var active := not upb_stack.is_empty()
+	if active == _upb_was_active:
 		return
-	$UPBInfo.show()
+	_upb_was_active = active
+	animations.show_upb_state(active)
 	
 func start_upb(introduced: Item):
 	var layer := get_inventory()
@@ -214,22 +212,29 @@ func put_down(item):
 func win_game():
 	if not won:
 		won=true
-		$Seal.visible=true
-		var tw=get_tree().create_tween().set_parallel()
-		tw.tween_property($Seal,"position",$Seal.position,0.2).from($Seal.position+Vector2(30,-30))
-		tw.tween_property($Seal,"self_modulate",Color.WHITE,0.2).from(Color(Color.WHITE,0))
-		$WinParticle.emitting=true
+		animations.play_win()
 
 
 func _on_retry_btn_pressed() -> void:
-	get_tree().change_scene_to_file("res://game.tscn")
+	SceneTransition.change_scene("res://game.tscn")
 
 
 func _on_back_btn_pressed() -> void:
-	get_tree().change_scene_to_file("res://level_select.tscn")
+	SceneTransition.change_scene("res://level_select.tscn")
 
 
 func _on_next_button_pressed() -> void:
-	var layer:=get_inventory()
-	var lost = layer.get_diff(upb_stack.back())
-	print(lost)
+	var level_ids := Globals.all_levels.keys()
+	var current_index := -1
+	var current_script: Script = Globals.current_level.get_script()
+	for index in level_ids.size():
+		if Globals.all_levels[level_ids[index]] == current_script:
+			current_index = index
+			break
+
+	if current_index < 0 or current_index + 1 >= level_ids.size():
+		SceneTransition.change_scene("res://level_select.tscn")
+		return
+
+	Globals.current_level = Globals.all_levels[level_ids[current_index + 1]].new()
+	SceneTransition.change_scene("res://game.tscn")
