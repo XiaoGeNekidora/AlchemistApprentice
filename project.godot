@@ -23,6 +23,7 @@ config/icon="res://icon.svg"
 
 Globals="*res://script/Globals.gd"
 EventBus="*res://script/EventBus.gd"
+SceneTransition="*res://script/ui/scene_transition.gd"
 
 [display]
 
