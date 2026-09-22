@@ -22,7 +22,7 @@ func _init():
 	self.allowed_methods.append(GameRoot.OperationMode.UNPACKAGE)
 	self.allowed_methods.append(GameRoot.OperationMode.MOLD)
 	self.desc="""
-Welcome to the ~brand new course~ for your Year 4! In this year we will be learning the latest progress in alchemy: UPB.
+Welcome to the ~brand new course~ for your Year 4! In this year we will be learning the latest progress in alchemy: UPB (Universal Potion Brewer).
 
 Up to now, you only know how to use potions. But, you don't know how to "create" a new potion from scratch. 
 You might think this is a trivial task: "If I have an object A, after some steps I made an object B. I can just pour all the potions used, to create a potion A->B."

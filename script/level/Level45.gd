@@ -63,18 +63,8 @@ func _init():
 	self.desc = """
 This is the final exam of Year 4 and your last lesson on the Universal Potion Brewer.
 
-The only item on the desk is Silver, yet the target asks for a potion whose
-ingredients are themselves potions. No suitable molds are supplied directly.
-Remember that the Tautologizer knows the target, and that a mold of a compound
-can be broken into molds of its components.
-
-The proof needs the same Stone twice. The innermost UPB layer can balance its
-own premise when contraction is required.
-
-Finally, the Silver already on the desk belongs to the outer environment.
-If it is consumed after being recorded by UPB, it will become an unwanted
-premise of the result. Decide when a fresh Silver should enter the workspace.
-
 [red]Tautology, mold decomposition, nested UPB, balance, and timed restocking
 are all part of this exam.[]
+
+Enjoy!
 """

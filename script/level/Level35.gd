@@ -35,7 +35,7 @@ func _init():
 	self.desc="""
 This is the exam for Chapter 4.
 If you have solved all 4-1 to 4-5, you are guaranteed an A already!
-[red]This quest is hard. DO THIS ONLY IF YOU WANT A+[]
+[red]This is a challenging task and are for those who seek A+.[]
 
 Restock is available in this quest.
 """
