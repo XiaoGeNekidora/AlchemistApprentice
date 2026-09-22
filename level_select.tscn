@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://46wrjq843pix" path="res://script/ui/label_btn.gd" id="8_1wnlg"]
 [ext_resource type="Texture2D" uid="uid://2xcxppqjjny6" path="res://texture/level_bg/IV.png" id="8_hhsoe"]
 [ext_resource type="Texture2D" uid="uid://bt06nijqg22lk" path="res://texture/level_bg/V.png" id="9_rtb5x"]
+[ext_resource type="Texture2D" uid="uid://bh40w6t254md2" path="res://texture/level_bg/VI.jpg" id="10_vnx2f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lmhjs"]
 content_margin_left = 4.0
@@ -489,11 +490,12 @@ script = ExtResource("2_1iyaf")
 [node name="bg" type="TextureRect" parent="panel/VI" unique_id=1676071159]
 self_modulate = Color(1, 1, 1, 0.33333334)
 layout_mode = 0
-offset_top = -81.0
-offset_right = 1167.8297
-offset_bottom = 731.0
-texture = ExtResource("9_rtb5x")
+offset_top = -312.0
+offset_right = 1252.0
+offset_bottom = 940.0
+texture = ExtResource("10_vnx2f")
 expand_mode = 2
+stretch_mode = 4
 
 [node name="Line2D" type="Line2D" parent="panel/VI" unique_id=1082607838]
 position = Vector2(56, 14)
