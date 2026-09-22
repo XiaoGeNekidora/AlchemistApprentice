@@ -22,7 +22,7 @@ func update(m:Item, p: Item) -> Array:
 		return [1, "Please add a mold to start UPB"]
 	if not m.is_mold:
 		return [1, "Only a mold can be used to start UPB"]
-	return [0, "Will start UPB recording with the mold. The mold will be consumed."]
+	return [0, "Will start UPB recording with the mold. The mold will NOT be consumed."]
 	
 func craft():
 	var m = Globals.active_material
@@ -58,17 +58,18 @@ func craft():
 	in_particle.emitting = true
 	var tw = root.get_tree().create_tween()
 	tw.tween_interval(0.5)
-	tw.tween_property(ma, "scale", Vector2.ZERO, 0.5)
-	tw.parallel().tween_property(pa, "scale", Vector2(4, 4), 0.5)
+#	tw.tween_property(ma, "scale", Vector2.ZERO, 0.5)
+	tw.tween_property(pa, "scale", Vector2(4, 4), 0.5)
 	tw.tween_callback(func():
 		out_particle.emitting = true
 	)
 	tw.tween_interval(1)
 	await tw.finished
 	
-	# Put down the result, consume the mold actor
+	# Put down the result, now it does not consume the mold
 	root.put_down(pa)
-	ma.queue_free()
+	root.put_down(ma)
+#	ma.queue_free()
 	
 	# Refresh UI
 	root.on_potion_update()

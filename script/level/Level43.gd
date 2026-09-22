@@ -27,7 +27,13 @@ When your next brewing process is finished, the system will automatically return
 You might have noticed that if you are in a potion brewing process, the panel says "Layer 1".
 If you are in a sub-process during a potion brewing process, the panel will say "Layer 2"!
 So if you are in a sub-process during a sub-process during a process, the panel will say "Layer 3"!
+When you are done with the sub-process, the system will automatically return to the previous process, and the panel will say "Layer 2" again.
 This is really handy!
+
+Update on the balance UPB feature:
+In a sub-process you can use the balance UPB to get extra input for the input or the input for the parent process/upper layer process. 
+(But remember, only the inputs!)
+Just by putting the corresponding mold in the balance UPB, you can get extra input for the current process or the parent process!
 
 Hint for this quest:
 Start UPB with "Stone > Iron"(Tautologizer), then start with "Stone" during the brewing process.
