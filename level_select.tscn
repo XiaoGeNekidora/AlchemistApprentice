@@ -395,6 +395,7 @@ script = ExtResource("4_bv7n5")
 level = "35"
 
 [node name="V" type="Control" parent="panel" unique_id=1478979521]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -479,6 +480,91 @@ text = "U-5"
 script = ExtResource("4_bv7n5")
 level = "45"
 
+[node name="VI" type="Control" parent="panel" unique_id=753216312]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_1iyaf")
+
+[node name="bg" type="TextureRect" parent="panel/VI" unique_id=1676071159]
+self_modulate = Color(1, 1, 1, 0.33333334)
+layout_mode = 0
+offset_top = -81.0
+offset_right = 1167.8297
+offset_bottom = 731.0
+texture = ExtResource("9_rtb5x")
+expand_mode = 2
+
+[node name="Line2D" type="Line2D" parent="panel/VI" unique_id=1082607838]
+position = Vector2(56, 14)
+points = PackedVector2Array(159, 577, 364, 562, 570, 474, 677, 349, 792, 38)
+width = 4.0
+
+[node name="Button" type="Button" parent="panel/VI" unique_id=1821875870]
+layout_mode = 0
+offset_left = 188.0
+offset_top = 570.0
+offset_right = 241.0
+offset_bottom = 619.0
+theme_override_fonts/font = ExtResource("3_apu6u")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_lmhjs")
+text = "U-1"
+script = ExtResource("4_bv7n5")
+level = "51"
+
+[node name="Button2" type="Button" parent="panel/VI" unique_id=710630867]
+layout_mode = 0
+offset_left = 393.0
+offset_top = 555.0
+offset_right = 451.0
+offset_bottom = 604.0
+theme_override_fonts/font = ExtResource("3_apu6u")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_lmhjs")
+text = "U-2"
+script = ExtResource("4_bv7n5")
+level = "52"
+
+[node name="Button3" type="Button" parent="panel/VI" unique_id=1822973752]
+layout_mode = 0
+offset_left = 600.0
+offset_top = 463.0
+offset_right = 658.0
+offset_bottom = 512.0
+theme_override_fonts/font = ExtResource("3_apu6u")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_lmhjs")
+text = "U-3"
+script = ExtResource("4_bv7n5")
+level = "53"
+
+[node name="Button4" type="Button" parent="panel/VI" unique_id=941647561]
+layout_mode = 0
+offset_left = 707.0
+offset_top = 334.0
+offset_right = 767.0
+offset_bottom = 383.0
+theme_override_fonts/font = ExtResource("3_apu6u")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_lmhjs")
+text = "U-4"
+script = ExtResource("4_bv7n5")
+level = "54"
+
+[node name="Button5" type="Button" parent="panel/VI" unique_id=1478684003]
+layout_mode = 0
+offset_left = 823.0
+offset_top = 34.0
+offset_right = 883.0
+offset_bottom = 83.0
+theme_override_fonts/font = ExtResource("3_apu6u")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_lmhjs")
+text = "U-5"
+script = ExtResource("4_bv7n5")
+level = "55"
+
 [node name="TextureRect" type="TextureRect" parent="." unique_id=824734179]
 layout_mode = 0
 offset_right = 128.0
@@ -540,6 +626,16 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("2_vomi7")
 
+[node name="VI" type="Label" parent="TextureRect/VBoxContainer" unique_id=1921803898]
+layout_mode = 2
+mouse_filter = 0
+theme_override_fonts/font = ExtResource("1_il3u1")
+theme_override_font_sizes/font_size = 64
+text = "VI"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_vomi7")
+
 [node name="Label" type="Label" parent="TextureRect" unique_id=1731921256]
 layout_mode = 0
 offset_top = 615.0
@@ -576,6 +672,11 @@ script = ExtResource("8_1wnlg")
 [connection signal="pressed" from="panel/V/Button3" to="panel/V/Button3" method="_on_pressed"]
 [connection signal="pressed" from="panel/V/Button4" to="panel/V/Button4" method="_on_pressed"]
 [connection signal="pressed" from="panel/V/Button5" to="panel/V/Button5" method="_on_pressed"]
+[connection signal="pressed" from="panel/VI/Button" to="panel/VI/Button" method="_on_pressed"]
+[connection signal="pressed" from="panel/VI/Button2" to="panel/VI/Button2" method="_on_pressed"]
+[connection signal="pressed" from="panel/VI/Button3" to="panel/VI/Button3" method="_on_pressed"]
+[connection signal="pressed" from="panel/VI/Button4" to="panel/VI/Button4" method="_on_pressed"]
+[connection signal="pressed" from="panel/VI/Button5" to="panel/VI/Button5" method="_on_pressed"]
 [connection signal="gui_input" from="TextureRect/VBoxContainer/I" to="TextureRect/VBoxContainer/I" method="_on_gui_input"]
 [connection signal="mouse_entered" from="TextureRect/VBoxContainer/I" to="TextureRect/VBoxContainer/I" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="TextureRect/VBoxContainer/I" to="TextureRect/VBoxContainer/I" method="_on_mouse_exited"]
@@ -591,4 +692,7 @@ script = ExtResource("8_1wnlg")
 [connection signal="gui_input" from="TextureRect/VBoxContainer/V" to="TextureRect/VBoxContainer/V" method="_on_gui_input"]
 [connection signal="mouse_entered" from="TextureRect/VBoxContainer/V" to="TextureRect/VBoxContainer/V" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="TextureRect/VBoxContainer/V" to="TextureRect/VBoxContainer/V" method="_on_mouse_exited"]
+[connection signal="gui_input" from="TextureRect/VBoxContainer/VI" to="TextureRect/VBoxContainer/VI" method="_on_gui_input"]
+[connection signal="mouse_entered" from="TextureRect/VBoxContainer/VI" to="TextureRect/VBoxContainer/VI" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="TextureRect/VBoxContainer/VI" to="TextureRect/VBoxContainer/VI" method="_on_mouse_exited"]
 [connection signal="clicked" from="TextureRect/Label" to="." method="_on_label_clicked"]

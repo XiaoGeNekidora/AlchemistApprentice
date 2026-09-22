@@ -42,6 +42,9 @@ func gen_item(list:Array[Item]):
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index==MOUSE_BUTTON_LEFT:
+			var root := get_tree().current_scene as GameRoot
+			if root != null and root.operation_in_progress:
+				return
 			if first:
 				gen_item(Globals.current_level.on_initial())
 				first=false

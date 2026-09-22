@@ -5,7 +5,7 @@ func get_operation_name() -> String:
 	return "Disentangle"
 
 func arg_count() -> int:
-	return 1
+	return 2
 
 func transform_button_name() -> String:
 	return "Disentangle!!"

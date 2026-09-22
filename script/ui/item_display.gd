@@ -13,6 +13,12 @@ var slot: int = SLOT_BELOW
 
 var clickable = true
 var _visual_tween: Tween
+var _hover_visual_active := false
+
+## Shared by all item displays while an operation result animation is running.
+## This prevents hover/click tweens from writing scale/rotation at the same time
+## as an operation delegate's tween.
+static var operation_interaction_locked := false
 
 static var up: Control
 static var inv: Control
@@ -23,15 +29,24 @@ static var callback: Callable
 signal mouse_in(i:Item)
 signal mouse_out(i:Item)
 
+
+func _ready() -> void:
+	add_to_group("item_displays")
+
 func _on_mouse_entered() -> void:
+	if operation_interaction_locked:
+		return
 	mouse_in.emit(self.item)
 	if clickable:
+		_hover_visual_active = true
 		_animate_hover(true)
 	
 
 func _on_mouse_exited() -> void:
-	mouse_out.emit(self.item)
 	$Tooltip.visible=false
+	if operation_interaction_locked:
+		return
+	mouse_out.emit(self.item)
 	if clickable:
 		_animate_hover(false)
 
@@ -62,7 +77,7 @@ func set_item(item: Item):
 		self.texture=load("res://texture/unknown.png")
 
 func _on_gui_input(event: InputEvent) -> void:
-	if not clickable:
+	if operation_interaction_locked or not clickable:
 		return
 	
 	var root:GameRoot=get_tree().current_scene
@@ -94,6 +109,7 @@ func _on_gui_input(event: InputEvent) -> void:
 				self.size=Vector2(24,24)
 				
 				clickable=false
+				_hover_visual_active = false
 				_kill_visual_tween()
 				var tw=get_tree().create_tween().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 				tw.set_parallel(true)
@@ -106,6 +122,8 @@ func _on_gui_input(event: InputEvent) -> void:
 				# Notify Master
 				callback.call()
 			else:
+				_hover_visual_active = false
+				_kill_visual_tween()
 				
 				if slot==SLOT_UP:
 					Globals.active_material=null
@@ -125,6 +143,9 @@ func _process(_delta):
 
 
 func _animate_hover(hovered: bool) -> void:
+	if operation_interaction_locked:
+		return
+	_hover_visual_active = true
 	_kill_visual_tween()
 	var rest_scale := Vector2(3.0, 3.0) if slot == SLOT_BELOW else Vector2(4.0, 4.0)
 	var target_scale := rest_scale * (1.09 if hovered else 1.0)
@@ -137,9 +158,16 @@ func _animate_hover(hovered: bool) -> void:
 	_visual_tween.tween_property(self, "scale", target_scale, 0.18 if hovered else 0.28)
 	_visual_tween.tween_property(self, "rotation", target_rotation, 0.18 if hovered else 0.28)
 	_visual_tween.tween_property(self, "self_modulate", Color(0.912, 0.803, 1.056, 1.0) if hovered else Color.WHITE, 0.16)
+	if not hovered:
+		_visual_tween.finished.connect(func() -> void:
+			_hover_visual_active = false
+		)
 
 
 func _play_rejection() -> void:
+	if operation_interaction_locked:
+		return
+	_hover_visual_active = false
 	_kill_visual_tween()
 	var origin := position
 	_visual_tween = create_tween()
@@ -153,6 +181,20 @@ func _play_rejection() -> void:
 func _kill_visual_tween() -> void:
 	if is_instance_valid(_visual_tween):
 		_visual_tween.kill()
+
+
+func cancel_hover_for_operation() -> void:
+	$Tooltip.visible = false
+	# Only reset an ItemDisplay whose hover animation actually owns its visual
+	# transform. TargetItem and items currently moving in the hand use the same
+	# scene, but their scale belongs to their own presentation/layout animation.
+	if not _hover_visual_active:
+		return
+	_hover_visual_active = false
+	_kill_visual_tween()
+	self_modulate = Color.WHITE
+	scale = Vector2(3.0, 3.0) if slot == SLOT_BELOW else Vector2(4.0, 4.0)
+	rotation = _rest_rotation()
 
 
 func _rest_rotation() -> float:

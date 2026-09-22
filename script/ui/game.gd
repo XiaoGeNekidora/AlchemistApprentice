@@ -49,8 +49,16 @@ var upb_stack:Array[UPBLayer] = []
 var upb_result_preview:Item = null
 var _upb_was_active := false
 
+## True while an operation delegate is crafting/playing its result animation.
+## Rules stay in GameRoot; ItemDisplay only reads the shared interaction lock.
+var operation_in_progress := false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# ItemDisplay uses a static lock because operation results can temporarily be
+	# reparented directly under GameRoot. Always reset it when entering a scene.
+	ItemDisplay.operation_interaction_locked = false
+
 	# Setup where to go
 	ItemDisplay.inv=%HandContainer
 	ItemDisplay.mki=%ItemHere
@@ -88,6 +96,9 @@ func _ready() -> void:
 	await animations.play_opening()
 
 func on_mode_change(new_mode: OperationMode):
+	if operation_in_progress:
+		return
+
 	print(new_mode,"<-",mode)
 	
 	if new_mode==mode:
@@ -117,8 +128,9 @@ func on_potion_update(immediate := false):
 			# Force override mold
 			result=[1, "Hey! You cannot use mold in this machine!"]
 	
-	$TransformButton.disabled=result[0]!=0
-	animations.set_action_available(not $TransformButton.disabled, immediate)
+	var action_available: bool = result[0] == 0 and not operation_in_progress
+	$TransformButton.disabled = not action_available
+	animations.set_action_available(action_available, immediate)
 	animations.show_hint(result[1], result[0] != 0, immediate)
 	
 	if not upb_stack.is_empty():
@@ -197,9 +209,40 @@ func get_inventory() -> UPBLayer:
 var won := false
 
 func _on_transform_button_pressed() -> void:
+	# Button signals can enter an async handler again while the previous craft is
+	# awaiting its tween. The guard is the authoritative gameplay lock; disabling
+	# the button below is also immediate visual feedback.
+	if operation_in_progress:
+		return
+
+	operation_in_progress = true
+	_set_operation_interaction_locked(true)
+	$TransformButton.disabled = true
+	animations.set_action_available(false)
+
 	await operation_delegates[mode].craft()
-	
+
+	operation_in_progress = false
+	_set_operation_interaction_locked(false)
 	on_potion_update()
+
+
+func _set_operation_interaction_locked(locked: bool) -> void:
+	ItemDisplay.operation_interaction_locked = locked
+
+	# Stop any hover tween that was already running when the operation started.
+	# Newly spawned ItemDisplays observe the static lock in their input handlers.
+	if locked:
+		%Tooltip.hide()
+		for node in get_tree().get_nodes_in_group("item_displays"):
+			if node is ItemDisplay:
+				node.cancel_hover_for_operation()
+
+
+func _exit_tree() -> void:
+	# Do not leak a busy state into a freshly loaded game scene if the player
+	# leaves while an operation animation is still running.
+	ItemDisplay.operation_interaction_locked = false
 
 ## Item should be ItemDisplay but somehow it might crash game
 func put_down(item):
