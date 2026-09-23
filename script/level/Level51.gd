@@ -18,7 +18,7 @@ func _init():
 	self.win = Item.t(
 		Item.u(a),
 		Item.t2(b,a),
-		"Weird Potion"
+		"Iron Waster"
 	)
 
 	self.allowed_methods.append(GameRoot.OperationMode.TAUTOLOGIZE)
@@ -31,7 +31,6 @@ What is AETHER? It stands for "Atmospheric Elixir Transmutation via Harnessing E
 
 You may ask, what "kind of potions" can be brewed this way? Well, this is an interesting topic. The answer is: I DONT KNOW!
 
-Very unbelievable right?! Me too! But it's true! Use the tautologizer and try yourself!
-
+Very unbelievable right?! Me too! But it's true! Use the tautologizer (very useful!) and try yourself!
 
 """

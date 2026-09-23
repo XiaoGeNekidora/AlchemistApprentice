@@ -116,7 +116,7 @@ func _travel_direction(target: String) -> float:
 
 
 func _chapter_index(chapter: String) -> int:
-	var chapters := ["I", "II", "III", "IV", "V"]
+	var chapters := ["I", "II", "III", "IV", "V", "VI"]
 	return chapters.find(chapter)
 
 

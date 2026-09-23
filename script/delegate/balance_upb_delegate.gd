@@ -22,6 +22,8 @@ func update(m:Item, p: Item) -> Array:
 		return [1, "UPB is not running! Start UPB with a mold first."]
 	if m == null:
 		return [1, "Please put a mold of a certain UPB input to get the potion premise"]
+	if not m.is_mold:
+		return [1, "This is not a mold"]
 		
 	var layer := 1
 	for i in root.upb_stack:
@@ -40,6 +42,11 @@ func craft():
 	
 	var result_item: Item = m.clone()
 	result_item.is_mold=false
+	
+	# Closes button
+	Globals.active_material = null
+	Globals.active_material_actor = null
+	on_potion_update()
 	
 	# Spawn a new item display for the result
 	var pa: ItemDisplay = id.instantiate()
