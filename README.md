@@ -12,3 +12,8 @@ You are given a set of initial items and your goal is to craft the target item.
 Through the 6 chapters, more mechanism are introduced like combination, dark matters, potion brewers etc.
 
 Clever readers may have noticed the game resembles a [Propositional Logic](https://en.wikipedia.org/wiki/Propositional_logic) [Axiomatic System](https://en.wikipedia.org/wiki/Axiomatic_system). Crafting something is similar to *proving* something!
+
+# Building
+The project was created using Godot 4.5 and has been upgraded to Godot 4.7.2.
+
+Most code is human-written but some UI animation logic was assisted by agents.
