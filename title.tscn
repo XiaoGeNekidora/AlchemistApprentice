@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bw8ub5fnda214"]
+[gd_scene format=3 uid="uid://bw8ub5fnda214"]
 
 [ext_resource type="Script" uid="uid://b0ybipifv38p7" path="res://script/ui/title.gd" id="1_nuqgq"]
 [ext_resource type="Texture2D" uid="uid://bytk1wmfhot8y" path="res://texture/desk.png" id="1_y7k74"]
@@ -33,18 +33,18 @@ font_size = 48
 outline_color = Color(0, 0, 0, 1)
 shadow_color = Color(0, 0, 0, 1)
 
-[node name="Title" type="Control"]
+[node name="Title" type="Control" unique_id=1007260877]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_nuqgq")
 
-[node name="bg" type="TextureRect" parent="."]
+[node name="bg" type="TextureRect" parent="." unique_id=776707345]
 layout_mode = 0
 offset_right = 1155.0
 offset_bottom = 655.0
 texture = ExtResource("1_y7k74")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=324618015]
 layout_mode = 0
 offset_left = -134.0
 offset_top = 20.00003
@@ -53,14 +53,14 @@ offset_bottom = 784.0239
 rotation = -0.20943952
 texture = SubResource("GradientTexture1D_3xoar")
 
-[node name="logo" type="TextureRect" parent="."]
+[node name="logo" type="TextureRect" parent="." unique_id=1753642552]
 layout_mode = 0
 offset_right = 444.7361
 offset_bottom = 250.0
 texture = ExtResource("2_oyqm6")
 expand_mode = 1
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1402107950]
 position = Vector2(1174, 323)
 amount = 20
 texture = ExtResource("3_3xoar")
@@ -74,7 +74,7 @@ initial_velocity_max = 750.0
 angle_min = -100.0
 angle_max = 100.0
 
-[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="." unique_id=1472286730]
 position = Vector2(1174, 323)
 amount = 20
 texture = ExtResource("4_7lgly")
@@ -88,7 +88,7 @@ initial_velocity_max = 750.0
 angle_min = -100.0
 angle_max = 100.0
 
-[node name="CPUParticles2D3" type="CPUParticles2D" parent="."]
+[node name="CPUParticles2D3" type="CPUParticles2D" parent="." unique_id=287323197]
 position = Vector2(1174, 323)
 amount = 20
 texture = ExtResource("5_0824t")
@@ -102,7 +102,7 @@ initial_velocity_max = 750.0
 angle_min = -100.0
 angle_max = 100.0
 
-[node name="Start" type="Label" parent="."]
+[node name="Start" type="Label" parent="." unique_id=1439811000]
 layout_mode = 0
 offset_left = 124.0
 offset_top = 323.0
@@ -113,7 +113,7 @@ text = "Start Game"
 label_settings = SubResource("LabelSettings_0824t")
 script = ExtResource("7_0824t")
 
-[node name="Credits" type="Label" parent="."]
+[node name="Credits" type="Label" parent="." unique_id=1452500844]
 layout_mode = 0
 offset_left = 172.0
 offset_top = 386.0
@@ -124,7 +124,7 @@ text = "Credits"
 label_settings = SubResource("LabelSettings_nuqgq")
 script = ExtResource("7_0824t")
 
-[node name="Exit" type="Label" parent="."]
+[node name="Exit" type="Label" parent="." unique_id=1813192172]
 layout_mode = 0
 offset_left = 205.0
 offset_top = 449.0
@@ -134,6 +134,14 @@ mouse_filter = 0
 text = "Exit"
 label_settings = SubResource("LabelSettings_lx2ly")
 script = ExtResource("7_0824t")
+
+[node name="Label" type="Label" parent="." unique_id=628679057]
+layout_mode = 0
+offset_left = 1093.0
+offset_top = 616.0
+offset_right = 1143.0
+offset_bottom = 639.0
+text = "beta 2"
 
 [connection signal="clicked" from="Start" to="." method="_on_start_clicked"]
 [connection signal="clicked" from="Credits" to="." method="_on_credits_clicked"]
