@@ -127,7 +127,13 @@ func _on_start_clicked() -> void:
 
 
 func _on_credits_clicked() -> void:
-	pass
+	if not _intro_finished or _leaving:
+		return
+	_leaving = true
+	_set_menu_input(false)
+	if is_instance_valid(_logo_idle_tween):
+		_logo_idle_tween.kill()
+	SceneTransition.change_scene("res://credits.tscn")
 
 
 func _on_exit_clicked() -> void:

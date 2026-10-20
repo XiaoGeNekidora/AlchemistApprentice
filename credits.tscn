@@ -1,0 +1,142 @@
+[gd_scene format=3 uid="uid://bk0lbkks7oryn"]
+
+[ext_resource type="Script" uid="uid://bo7oxv1iitl1k" path="res://script/ui/credits.gd" id="1_j6beo"]
+[ext_resource type="Texture2D" uid="uid://bytk1wmfhot8y" path="res://texture/desk.png" id="2_3mii5"]
+[ext_resource type="Texture2D" uid="uid://btwdwva6m7g1a" path="res://texture/logo.png" id="3_r4875"]
+[ext_resource type="FontFile" uid="uid://q0yu2gl6ai7a" path="res://font/MedievalSharp-Regular.ttf" id="7_0343s"]
+[ext_resource type="Script" uid="uid://46wrjq843pix" path="res://script/ui/label_btn.gd" id="8_eh8ii"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_lx2ly"]
+font = ExtResource("7_0343s")
+font_size = 48
+outline_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="Credits" type="Control" unique_id=217038170]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_j6beo")
+
+[node name="bg" type="TextureRect" parent="." unique_id=531617242]
+layout_mode = 0
+offset_right = 1155.0
+offset_bottom = 655.0
+texture = ExtResource("2_3mii5")
+
+[node name="logo" type="TextureRect" parent="." unique_id=133510363]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 26.0
+offset_right = 217.46283
+offset_bottom = 137.0
+texture = ExtResource("3_r4875")
+expand_mode = 1
+
+[node name="Exit" type="Label" parent="." unique_id=815763121]
+layout_mode = 0
+offset_left = 1024.0
+offset_top = 574.0
+offset_right = 1137.0
+offset_bottom = 637.0
+mouse_filter = 0
+text = "Back"
+label_settings = SubResource("LabelSettings_lx2ly")
+script = ExtResource("8_eh8ii")
+
+[node name="Credits" type="Label" parent="." unique_id=975873799]
+layout_mode = 0
+offset_left = 217.0
+offset_top = 51.0
+offset_right = 469.0
+offset_bottom = 114.0
+mouse_filter = 0
+text = "Credits"
+label_settings = SubResource("LabelSettings_lx2ly")
+
+[node name="Label" type="RichTextLabel" parent="." unique_id=1300762425]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 152.0
+offset_right = 503.0
+offset_bottom = 637.0
+bbcode_enabled = true
+text = "[b]Game Design[/b]
+XGN
+
+[b]Level Design[/b]
+XGN
+Deepseek
+ChatGPT 
+
+[b]Programming[/b]
+XGN
+ChatGPT via Codex
+Deepseek via Opencode
+
+[b]Art[/b]
+XGN
+neko.moo.jp (Icon)
+OpenGameArts (UI)
+[i]Thanks for the free assets![/i]
+
+Gemini Nanobanana (Level Background)
+"
+
+[node name="License" type="RichTextLabel" parent="." unique_id=383639287]
+layout_mode = 0
+offset_left = 495.0
+offset_top = 152.0
+offset_right = 935.0
+offset_bottom = 606.0
+bbcode_enabled = true
+text = "Copyright (c) 2014-present Godot Engine contributors.
+  Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the \"Software\"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+
+  -- Godot Engine <https://godotengine.org>
+  
+------
+
+https://github.com/chairfull/GodotRichTextLabel2
+
+MIT License
+
+Copyright (c) 2024 chairfull
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the \"Software\"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+"
+
+[connection signal="clicked" from="Exit" to="." method="_on_exit_clicked"]

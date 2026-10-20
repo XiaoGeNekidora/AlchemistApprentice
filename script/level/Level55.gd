@@ -49,7 +49,8 @@ func _init():
 	self.import_packages()
 	self.import_upb()
 	self.desc = """
-This might be one of the most challenging tasks in your school life!
+This might be one of the most challenging tasks in your school life! But it will be the last!
+Hope you have enjoyed the journey of alchemy and hope to see you soon!
 ... Actually we *could* also throw in dark matters but then your operation list will be too long!
 Try your best!
 """
