@@ -1,5 +1,9 @@
 extends Control
 
+## Sprite-only compounds no longer need the spacing of full rectangular cards.
+const COLUMNS := 8
+const CELL_SPACING := 55.0
+
 var _layout_queued := false
 
 
@@ -29,7 +33,7 @@ func _animate_layout() -> void:
 		tween.tween_interval(now * 0.025)
 		tween.set_parallel(true)
 		tween.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
-		tween.tween_property(i,"position", Vector2(now % 8 * 55, floori(float(now) / 8.0) * 55), 0.4)
+		tween.tween_property(i,"position", Vector2(now % COLUMNS * CELL_SPACING, floori(float(now) / COLUMNS) * CELL_SPACING), 0.4)
 		tween.tween_property(i,"scale",Vector2(3,3),0.4)
 		tween.tween_property(i,"rotation",0,0.4)
 		tween.tween_property(i,"self_modulate:a",1.0,0.24)

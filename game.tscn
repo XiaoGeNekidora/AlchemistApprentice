@@ -21,9 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://il5gr7mtfhat" path="res://texture/flower.png" id="13_cgngr"]
 [ext_resource type="PackedScene" uid="uid://dbuvvt13wy0lx" path="res://partial/item_display.tscn" id="14_215e1"]
 [ext_resource type="Texture2D" uid="uid://iikol2ku0po8" path="res://texture/method/entangle.png" id="14_x5p1p"]
-[ext_resource type="Script" uid="uid://cuxsuj5am8667" path="res://script/ui/tooltip.gd" id="15_7sc4i"]
 [ext_resource type="Texture2D" uid="uid://dhrksqpjyihs8" path="res://texture/method/disentangle.png" id="15_qhcbd"]
-[ext_resource type="Texture2D" uid="uid://b2l30uvjq8f4q" path="res://texture/dialog.png" id="16_80cx4"]
 [ext_resource type="Texture2D" uid="uid://dy8ra1il7otqw" path="res://texture/method/dark_infuse.png" id="17_i2p71"]
 [ext_resource type="Texture2D" uid="uid://b3nr4anasbgha" path="res://texture/method/purify.png" id="18_xa8c5"]
 [ext_resource type="Texture2D" uid="uid://i1kvh7g01fdh" path="res://texture/method/tautologize.png" id="19_xa8c5"]
@@ -32,6 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://dayenjqgac80m" path="res://texture/method/balance_upb.png" id="22_dhpj7"]
 [ext_resource type="Texture2D" uid="uid://cdd4lq8muv33h" path="res://texture/method/end_upb.png" id="22_xfvwf"]
 [ext_resource type="Script" path="res://script/ui/game_animation_director.gd" id="23_animation"]
+[ext_resource type="PackedScene" path="res://partial/item_tooltip.tscn" id="24_item_tooltip"]
 
 [sub_resource type="Gradient" id="Gradient_wf0cr"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
@@ -551,40 +550,9 @@ theme_override_fonts/font = ExtResource("8_f61ct")
 text = "Level 1-1 891023890183091839381312
 Target:"
 
-[node name="Tooltip" type="RichTextLabel" parent="." unique_id=1875772983]
+[node name="Tooltip" parent="." unique_id=1875772983 instance=ExtResource("24_item_tooltip")]
 unique_name_in_owner = true
-visible = false
-clip_contents = false
 layout_mode = 0
-offset_right = 274.0
-offset_bottom = 52.0
-mouse_filter = 2
-theme_override_fonts/normal_font = ExtResource("8_f61ct")
-theme_override_fonts/bold_font = ExtResource("8_f61ct")
-theme_override_fonts/bold_italics_font = ExtResource("8_f61ct")
-theme_override_fonts/italics_font = ExtResource("8_f61ct")
-bbcode_enabled = true
-fit_content = true
-scroll_active = false
-script = ExtResource("15_7sc4i")
-
-[node name="TextureRect" type="NinePatchRect" parent="Tooltip" unique_id=1200449040]
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -10.0
-offset_top = -6.7
-offset_right = 7.0
-offset_bottom = 13.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("16_80cx4")
-patch_margin_left = 9
-patch_margin_top = 9
-patch_margin_right = 9
-patch_margin_bottom = 9
 
 [node name="AnimationDirector" type="Node" parent="." unique_id=1916743349]
 script = ExtResource("23_animation")

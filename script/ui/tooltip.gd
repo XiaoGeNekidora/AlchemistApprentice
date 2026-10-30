@@ -2,6 +2,13 @@ extends RichTextLabel
 class_name TooltipWidget
 
 var _motion_tween: Tween
+var _text_style := StyleBoxEmpty.new()
+
+@onready var _preview: ItemRenderer = $Preview
+
+
+func _ready() -> void:
+	add_theme_stylebox_override("normal", _text_style)
 
 func bind(x:ItemDisplay):
 	x.mouse_in.connect(mouse_in)
@@ -25,6 +32,19 @@ func c(s:String, c: String) -> String:
 	return "[color=%s]%s[/color]"%[c,s]
 	
 func build_tooltip(item: Item):
+	# A single non-interactive canvas gives small/collapsed hand icons a readable
+	# inspection view. It uses the same recursive layout, not child item actors.
+	var content := item
+	var depth := 0
+	while content != null and content.type == Item.ItemType.NOT and depth < ItemRenderer.MAX_RENDER_DEPTH:
+		content = content.left
+		depth += 1
+	var show_preview := content != null and content.left != null and content.right != null
+	_preview.visible = show_preview
+	_preview.set_item(item if show_preview else null)
+	_text_style.content_margin_top = _preview.size.y + 12.0 if show_preview else 0.0
+	_preview.position.x = (size.x - _preview.size.x) * 0.5
+
 	var ttp=""
 	
 	if item.is_mold:
@@ -48,6 +68,14 @@ func build_tooltip(item: Item):
 	
 	ttp+="[color=gray][font size=12]"+item.type_str().capitalize()+"[/font][/color]"
 	self.text=ttp
+	# fit_content updates the minimum height, but a freely positioned Control
+	# does not shrink itself when switching back to a shorter/unit tooltip.
+	_fit_content_height.call_deferred()
+
+
+func _fit_content_height() -> void:
+	# Keep the wrapping width; reset_size() would also collapse it to one pixel.
+	size.y = get_combined_minimum_size().y
 
 func mouse_out(_i: Item):
 	_kill_motion()
@@ -59,10 +87,15 @@ func mouse_out(_i: Item):
 
 func _process(_delta: float) -> void:
 	var mp=get_global_mouse_position()
-	if mp.x>get_viewport_rect().size.x/2:
-		self.position=mp-Vector2(25,25)-self.get_rect().size
+	var viewport := get_viewport_rect()
+	if mp.x>viewport.size.x/2:
+		position=mp-Vector2(25,25)-size
 	else:
-		self.position=get_global_mouse_position()+Vector2(25,25)
+		position=mp+Vector2(25,25)
+	# The compound inspection view is taller than a text-only tooltip. Keep its
+	# background and artwork inside the viewport, including at the bottom edge.
+	position.x = clampf(position.x, 16.0, maxf(16.0, viewport.size.x - size.x - 16.0))
+	position.y = clampf(position.y, 16.0, maxf(16.0, viewport.size.y - size.y - 16.0))
 
 
 func _kill_motion() -> void:

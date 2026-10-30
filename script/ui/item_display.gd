@@ -1,4 +1,4 @@
-extends TextureRect
+extends ItemRenderer
 class_name ItemDisplay
 
 enum{
@@ -6,8 +6,6 @@ enum{
 	SLOT_UP,
 	SLOT_POTION
 }
-
-var item: Item
 
 var slot: int = SLOT_BELOW
 
@@ -52,29 +50,6 @@ func _on_mouse_exited() -> void:
 
 func on_transform():
 	pass
-
-func set_item(item: Item):
-	self.item=item
-	self.modulate=Color.WHITE
-	if item.type==Item.ItemType.UNIT:
-		self.texture=load("res://texture/item/"+item.name+".png")
-	elif item.type==Item.ItemType.TRANSFORM:
-		var id=["red","blue","white","pink","red2","blue2","greenb","redb"][item.hash()%8]
-		self.texture=load("res://texture/potion_%s.png"%id)
-	elif item.type==Item.ItemType.AND:
-		self.texture=load("res://texture/mixture.png")
-	elif item.type==Item.ItemType.OR:
-		self.texture=load("res://texture/entanglement.png")
-	elif item.type==Item.ItemType.NOT:
-		set_item(item.left) 
-		self.item=item #Set it back to the NOT item, but the texture is based on the left item
-		self.modulate=Color.BLACK
-	
-	if item.is_mold:
-		self.modulate.a=0.5
-		
-	if self.texture==null:
-		self.texture=load("res://texture/unknown.png")
 
 func _on_gui_input(event: InputEvent) -> void:
 	if operation_interaction_locked or not clickable:
