@@ -1,8 +1,9 @@
 extends Control
 
-## Sprite-only compounds no longer need the spacing of full rectangular cards.
-const COLUMNS := 8
-const CELL_SPACING := 55.0
+const COLUMNS := 6
+## Center-to-center spacing in pixels, shared by columns and rows. A resting
+## item is 72px wide; leave room for its ingredient previews and hover motion.
+const CELL_SPACING := 75.0
 
 var _layout_queued := false
 

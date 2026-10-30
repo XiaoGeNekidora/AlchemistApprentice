@@ -108,20 +108,22 @@ func _run() -> void:
 	tooltip.build_tooltip(Item.n(nested))
 	_expect(tooltip.get_node("Preview").visible, "wrapped compounds also have an inspection view")
 
-	# Physical sprites use the original compact hand layout instead of card slots.
+	# Ingredient previews and hover motion must fit between hand items.
 	var hand := Control.new()
 	hand.set_script(load("res://script/ui/hand_container.gd"))
 	root.add_child(hand)
 	var hand_items: Array[ItemDisplay] = []
-	for i in range(9):
+	for i in range(hand.COLUMNS + 1):
 		var hand_item := load("res://partial/item_display.tscn").instantiate() as ItemDisplay
 		hand_item.set_item(nested)
 		hand.add_child(hand_item)
 		hand_items.append(hand_item)
 	hand._animate_layout()
 	await get_tree().create_timer(0.7).timeout
-	_expect(is_equal_approx(hand_items[1].position.x - hand_items[0].position.x, 55.0), "hand restores compact sprite spacing")
-	_expect(is_equal_approx(hand_items[8].position.y - hand_items[0].position.y, 55.0), "hand wraps after eight sprites")
+	_expect(is_equal_approx(hand_items[1].position.x - hand_items[0].position.x, hand.CELL_SPACING), "hand columns use the spacing constant")
+	_expect(is_equal_approx(hand_items[hand.COLUMNS].position.y - hand_items[0].position.y, hand.CELL_SPACING), "hand rows use the spacing constant and wrap at the column limit")
+	var hover_width := 24.0 * 3.0 * 1.09 * (cos(deg_to_rad(2.2)) + sin(deg_to_rad(2.2)))
+	_expect(hand.CELL_SPACING > hover_width, "spacing accommodates enlarged and rotated hover previews")
 	_expect(hand_items[0].clickable, "layout animation restores clicking")
 	hand.free()
 	display.free()
